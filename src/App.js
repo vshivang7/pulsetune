@@ -3,7 +3,7 @@ import Main from "./screenDiv/Main.js";
 
 function App() {
   return (
-    <div className="flex">
+    <div className="flex bg-gray-100">
       <Sidebar />
       <Main />
     </div>
