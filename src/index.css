@@ -2,9 +2,14 @@
 @tailwind components;
 @tailwind utilities;
 
-.button {
+/* .button {
   background-color: #a21caf;
-}
-.logoCol {
+} */
+/* .logoCol {
   color: blueviolet;
-}
+} */
+ a:hover{
+  color: blueviolet;
+  transform: scale(1.2);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+ }

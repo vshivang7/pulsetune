@@ -14,82 +14,47 @@ const SignUp = () => {
           </h1>
           <form className="space-y-4 md:space-y-6" action="#">
           <div>
-              <label
-                htmlFor="email"
-                className="block mb-2 text-sm font-medium"
-              >
+              <label htmlFor="email" className="block mb-2 text-sm font-medium">
                 Full Name
               </label>
-              <input
-                type="text"
-                name="name"
-                id="name"
-                className="text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+              <input type="text" name="name" id="name"
+                className="text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="abc"
-                required=""
-              />
+                required=""/>
             </div>
             <div>
-              <label
-                htmlFor="email"
-                className="block mb-2 text-sm font-medium"
-              >
+              <label htmlFor="email" className="block mb-2 text-sm font-medium">
                 Your email
               </label>
-              <input
-                type="email"
-                name="email"
-                id="email"
-                className="text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="name@company.com"
-                required=""
-              />
+              <input type="email" name="email" id="email"
+                className="text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                placeholder="name@company.com" required=""/>
             </div>
             <div>
-              <label
-                htmlFor="password"
-                className="block mb-2 text-sm font-medium"
-              >
+              <label htmlFor="password" className="block mb-2 text-sm font-medium">
                 Password
               </label>
-              <input
-                type="password"
-                name="password"
-                id="password"
-                placeholder="••••••••"
-                className="text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                required=""
-              />
+              <input type="password" name="password" id="password" placeholder="••••••••"
+                className="text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required=""/>
             </div>
             <div>
-              <label
-                htmlFor="confirm-password"
-                className="block mb-2 text-sm font-medium"
-              >
+              <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium">
                 Confirm password
               </label>
-              <input
-                type="confirm-password"
-                name="confirm-password"
-                id="confirm-password"
-                placeholder="••••••••"
+              <input type="confirm-password" name="confirm-password" id="confirm-password" placeholder="••••••••"
                 className="text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                required=""
-              />
-            </div>
-        
+                required=""/>
+            </div>    
             <button
               type="submit"
-              className="w-full text-white bg-blue-800  hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
-            >
+              className="w-full text-white bg-blue-800  hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800">
               Create an account
             </button>
             <p className="text-sm font-light text-gray-500 dark:text-black-400">
               Already have an account?{" "}
-              <Link
-                to="/login"
-                className="font-medium text-primary-600 hover:underline dark:text-primary-500"
-              >
+              <Link to="/login"
+                className="font-medium text-primary-600 hover:underline dark:text-primary-500">
                 Login here
               </Link>
             </p>
@@ -98,9 +63,7 @@ const SignUp = () => {
       </div>
     </div>
   </section>
-</>
-
-    
+</>    
   )
 }
 
