@@ -15,39 +15,25 @@ const Sidebar = () => {
         <div className='flex-col h-[80vh]'>
             <div className='h-1/3 bg-white rounded-xl p-4 shadow-md m-4'>
                 <h1 className='font-bold'>MENU</h1>
-                  
                 <div className='ml-3 m-3 '><FontAwesomeIcon icon={faWpexplorer} className="text-1xl text-black-500 mr-3" />Explore</div>
                 <div className='ml-3 m-3 '><FontAwesomeIcon icon={faCompactDisc} className="text-1xl text-black-500 mr-3" />Albums</div>
                 <div className='ml-3 m-3 '><FontAwesomeIcon icon={faSlack} className="text-1xl text-black-500 mr-3" />Genres</div>
                 <div className='ml-3 m-3 '><FontAwesomeIcon icon={faUser} className="text-1xl text-black-500 mr-3" />Artists</div>
             </div>
             <div className='h-1/3 bg-white rounded-xl p-4 shadow-md m-4'>
-                <h1 className='font-bold'>MENU</h1>
-                  
+                <h1 className='font-bold'>MY LIBRARY</h1>
                 <div className='ml-3 m-3 '><FontAwesomeIcon icon={faWpexplorer} className="text-1xl text-black-500 mr-3" />Explore</div>
-                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faCompactDisc} className="text-1xl text-black-500 mr-3" />Albums</div>
-                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faSlack} className="text-1xl text-black-500 mr-3" />Genres</div>
-                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faUser} className="text-1xl text-black-500 mr-3" />Artists</div>
+                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faCompactDisc} className="text-1xl text-black-500 mr-3" />My Albums</div>
+                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faSlack} className="text-1xl text-black-500 mr-3" />Favourites</div>
+                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faUser} className="text-1xl text-black-500 mr-3" />Local</div>
             </div>
             <div className='h-1/3 bg-white rounded-xl p-4 shadow-md m-4'>
-                <h1 className='font-bold'>MENU</h1>
-                  
-                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faWpexplorer} className="text-1xl text-black-500 mr-3" />Explore</div>
-                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faCompactDisc} className="text-1xl text-black-500 mr-3" />Albums</div>
-                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faSlack} className="text-1xl text-black-500 mr-3" />Genres</div>
-                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faUser} className="text-1xl text-black-500 mr-3" />Artists</div>
+                <h1 className='font-bold'>PLAYLISTS</h1>
+                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faWpexplorer} className="text-1xl text-black-500 mr-3" />Bollywood MashUp</div>
+                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faCompactDisc} className="text-1xl text-black-500 mr-3" />Top 100 Songs</div>
+                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faSlack} className="text-1xl text-black-500 mr-3" />Best of 2024</div>
+                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faUser} className="text-1xl text-black-500 mr-3" />Pop Songs</div>
             </div>
-            
-            {/* <div className='h-1/3'>
-                <h1 className='font-extrabold'>
-                    LIBRARY
-                </h1>
-            </div>
-            <div className='h-1/3'>
-                <h1 className='font-extrabold'>
-                  Playlists
-                  </h1>
-            </div> */}
         </div>
     </div>
   )
