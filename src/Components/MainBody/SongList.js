@@ -8,7 +8,7 @@ const SongList = ({ songs = [] }) => {
     return (
         <div className="flex flex-wrap justify-center">
             {songs.map(song => (
-                <div className="w-90 m-4 flex flex-col items-center p-4 bg-slate-200 rounded-3xl shadow-md" key={song.id}>
+                <div className="w-fit m-3 flex flex-col items-center p-2 bg-slate-200 rounded-xl shadow-md" key={song.id}>
                     {/* Album Image */}
                     {/* {song.album.images.length ? (
                         <img className='w-48 h-48 rounded-lg' src={song.album.images[0].url} alt={`${song.name} album cover`} />

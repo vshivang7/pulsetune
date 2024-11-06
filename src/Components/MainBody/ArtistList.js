@@ -7,9 +7,15 @@ const SongList = ({ artists = [] }) => {  // Set default to empty array
     }
 
     return artists.map(artist => (
-        <div className = "w-40 m-4 flex flex-col items-center" key={artist.id}>
+        <div className = "w-36 m-4 flex flex-col justify-center items-center" key={artist.id}>
             {artist.images.length ? (
-                <img className='w-64 h-40 rounded-full' src={artist.images[0].url} alt="" />
+                 <a href={artist.external_urls.spotify} target="_blank" rel="noopener noreferrer">
+                 <img
+                     className='w-20 aspect-square rounded-full hover:opacity-80 transition-opacity transition-duration:100ms'
+                     src={artist.images[0].url}
+                     alt={`${artist.name} profile`}
+                 />
+             </a>
             ) : (
                 <div>No Image</div>
             )}

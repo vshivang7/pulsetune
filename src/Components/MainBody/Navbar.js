@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
 
-const Navbar = ({searchKey, setSearchKey, songs, setSongs}) => {
+const Navbar = ({searchKey, setSearchKey, setArtists, setSongs}) => {
     const CLIENT_ID = "5f37a18dfc1c4c5faf9825c80583dcb3";
     const REDIRECT_URI = "http://localhost:3000";
     const AUTH_ENDPOINT = "https://accounts.spotify.com/authorize";
@@ -34,7 +34,7 @@ const Navbar = ({searchKey, setSearchKey, songs, setSongs}) => {
         window.localStorage.removeItem("token");
     };
 
-    const searchTracks = async (e) => {
+    const searchSpotify = async (e) => {
         e.preventDefault();
         if (!searchKey) return;  // Prevent empty search
 
@@ -45,11 +45,12 @@ const Navbar = ({searchKey, setSearchKey, songs, setSongs}) => {
                 },
                 params: {
                     q: searchKey,
-                    type: "track"
+                    type: "artist,track"
                 }
             });
-            console.log("Fetched songs:", data.tracks.items);  // Log fetched data
+            // console.log("Fetched songs:", data.tracks.items);  // Log fetched data
             setSongs(data.tracks.items);
+            setArtists(data.artists.items);
         } catch (error) {
             console.error("Error fetching songs:", error);
         }
@@ -69,7 +70,7 @@ const Navbar = ({searchKey, setSearchKey, songs, setSongs}) => {
                     </a>
                 ) : (
                     <div>
-                        <form onSubmit={searchTracks}>
+                        <form onSubmit={searchSpotify}>
                             <input
                                 onChange={e => setSearchKey(e.target.value)}
                                 name="search"
