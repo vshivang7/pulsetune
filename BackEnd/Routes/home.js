@@ -19,8 +19,10 @@ router.post("/signup", async (req, res) => {
     }
 })
 router.post("/login", passport.authenticate("local"), async (req, res) => {
-    console.log(req.user)
-    res.send(req.user)
+    let {_id, email, username} = req.user;
+    let data = {_id: _id, email: email, username:username};
+    console.log(data)
+    res.send(data)
 })
 
 module.exports = router;

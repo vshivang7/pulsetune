@@ -1,6 +1,6 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-const Navbar = ({isLoggedIn, setIsLoggedIn}) => {
+const Navbar = ({user, setUser}) => {
   return (
     <div className='h-16 flex items-center rounded-tl-xl rounded-tr-xl'>
         <div>
@@ -16,9 +16,9 @@ const Navbar = ({isLoggedIn, setIsLoggedIn}) => {
         </div>
         <div className='w-1/3 flex justify-end'>
             {
-                isLoggedIn?
+                user!=null?
                 <>
-                <a href='/' className='m-3'>Profile</a>
+                <a href='/' className='m-3'>Profile: {user.username.toString().toUpperCase()}</a>
                 <a href='/' className='m-3'>Logout</a>
                 </>
                 :

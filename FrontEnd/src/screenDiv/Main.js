@@ -6,24 +6,24 @@ import SignUp from '../Components/Assets/SignUp'
 import Home from '../Components/MainBody/Home'
 import ErrorPage from '../Components/Assets/ErrorPage'
 
-const Main = ({isLoggedIn, setIsLoggedIn}) => {
+const Main = ({user, setUser}) => {
 
   return (
     <div className='w-4/5'>
     <div className='m-1 rounded-xl'>
-      <Navbar isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn}/>
+      <Navbar user = {user} setUser = {setUser}/>
     </div>
     <div>
       <Routes>
-        {!isLoggedIn?
+        {user==null?
         <>
-        <Route path='/' element={<LoginForm isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn}/>}/>
+        <Route path='/' element={<LoginForm user = {user} setUser = {setUser}/>}/>
         </>
         :
         <>
       <Route path='/' element={<Home/>}/>
         </>}
-        <Route path='/login' element={<LoginForm isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn}/>}/>
+        <Route path='/login' element={<LoginForm user = {user} setUser = {setUser}/>}/>
         <Route path='/signup' element={<SignUp/>}/>
         <Route path='*' element={<ErrorPage/>}/>
       </Routes>

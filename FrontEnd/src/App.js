@@ -4,11 +4,12 @@ import { useState } from "react";
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null)
 
   return (
     <div className="flex bg-gray-100">
       <Sidebar />
-      <Main isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn} />
+      <Main isLoggedIn = {isLoggedIn} setIsLoggedIn = {setIsLoggedIn} user = {user} setUser = {setUser} />
     </div>
 
   );

@@ -1,8 +1,9 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
-const LoginForm = ({isLoggedIn, setIsLoggedIn}) => {
-  let [user, setUser] = useState({
+const LoginForm = ({user, setUser}) => {
+  const Navigate = useNavigate();
+  let [data, setData] = useState({
     username : "",
     password: "",
   });
@@ -10,11 +11,10 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn}) => {
   const handleChange = (e) => {
     let {name, value} = e.target;
 
-    setUser((prevUser) => ({
-      ...prevUser,
+    setData((prevData) => ({
+      ...prevData,
       [name]: value
     }))
-    console.log(user)
   }
 
   const handleSubmit = async (e) => {
@@ -25,12 +25,14 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn}) => {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify(user)
+          body: JSON.stringify(data)
         })
     response.json().then((data) => {
-      setIsLoggedIn(true);
+      setUser(data);
+      console.log(data)
+      Navigate("/")
     }).catch((err) => {
-      console.log(err);
+      console.log("Some Error Occurred");
     })
   }
 
@@ -57,7 +59,7 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn}) => {
                 name="username"
                 id="username"
                 onChange={handleChange}
-                className="text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="abc"
                 required=""
               />
@@ -75,7 +77,7 @@ const LoginForm = ({isLoggedIn, setIsLoggedIn}) => {
                 id="password"
                 onChange={handleChange}
                 placeholder="••••••••"
-                className="text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required=""
               />
             </div>
