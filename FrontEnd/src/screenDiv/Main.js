@@ -1,32 +1,23 @@
 //Main.js
-import React, { useState } from 'react'
-import Navbar from '../Components/MainBody/Navbar'
+import React from 'react'
 import {Routes, Route} from "react-router-dom"
 import LoginForm from '../Components/Assets/LoginForm'
 import SignUp from '../Components/Assets/SignUp'
 import Home from '../Components/MainBody/Home'
 import ErrorPage from '../Components/Assets/ErrorPage'
 
-const Main = () => {
-
-  const [searchKey, setSearchKey] = useState("");
-
-  const [songs, setSongs] = useState([]);
-  const [artists, setArtists] = useState([]);
+const Main = ({artists, songs}) => {
   
   return (
-    <div className='w-4/5'>
-    <div className='m-1 rounded-xl'>
-      <Navbar searchKey={searchKey} setSearchKey={setSearchKey} setArtists={setArtists} setSongs={setSongs} />
-    </div>
-    <div>
-      <Routes>
-      <Route path='/' element={<Home artists={artists} songs={songs}/>}/>
-        <Route path='/login' element={<LoginForm/>}/>
-        <Route path='/signup' element={<SignUp/>}/>
-        <Route path='*' element={<ErrorPage/>}/>
-      </Routes>
-    </div>
+    <div className='w-5/6'>
+        <div>
+          <Routes>
+          <Route path='/' element={<Home artists={artists} songs={songs}/>}/>
+            <Route path='/login' element={<LoginForm/>}/>
+            <Route path='/signup' element={<SignUp/>}/>
+            <Route path='*' element={<ErrorPage/>}/>
+          </Routes>
+        </div>
     </div>
   )
 }

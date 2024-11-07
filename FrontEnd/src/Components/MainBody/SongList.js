@@ -2,13 +2,13 @@ import React from 'react';
 
 const SongList = ({ songs = [] }) => {
     if (!songs.length) {
-        return <p>No songs found</p>;
+        return <p className='text-gray-400'>No songs found</p>;
     }
 
     return (
         <div className="flex flex-wrap justify-center">
             {songs.map(song => (
-                <div className="w-fit m-3 flex flex-col items-center p-2 bg-slate-200 rounded-xl shadow-md" key={song.id}>
+                <div className="w-min m-4 flex flex-col items-center bg-slate-200 rounded-xl shadow-md" key={song.id}>
                     {/* Album Image */}
                     {/* {song.album.images.length ? (
                         <img className='w-48 h-48 rounded-lg' src={song.album.images[0].url} alt={`${song.name} album cover`} />
@@ -32,6 +32,7 @@ const SongList = ({ songs = [] }) => {
                         allow="encrypted-media"
                         allowTransparency="true"
                         className=" p-0 rounded-fit"
+                        title='Spotify Player'
                     ></iframe>
                 </div>
             ))}

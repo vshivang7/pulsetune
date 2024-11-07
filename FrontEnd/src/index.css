@@ -2,14 +2,36 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .button {
-  background-color: #a21caf;
-} */
-/* .logoCol {
-  color: blueviolet;
-} */
  a:hover{
   color: blueviolet;
-  transform: scale(1.2);
+  transform: scale(1.);
   transition: transform 0.3s ease, box-shadow 0.3s ease;
  }
+ a, button {
+    transition: color 0.3s, background-color 0.3s;
+  }
+  /* sidebar */
+  .sidebar {
+    background-color: #141414;
+    color: #ffffff;
+    /* padding:; */
+    width:fit-content;
+  }
+  .sidebar h1 {
+    color: #f59e0b;
+    font-size: 1.1rem;
+  }
+  .sidebar a {
+    /* color: #1fb545; */
+    /* display: block; */
+    padding: 8px;
+    text-decoration:dotted;
+  }
+  .sidebar a:hover {
+    color: #4a90e2;
+    transform: scale(1.1);
+  }
+  
+  body{
+    background-color: black;
+  }
