@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const SignUp = () => {
   let [user, setUser] = useState({
-    name : "",
+    username : "",
     email: "",
     password: "",
     confirm_password: "",
@@ -19,11 +19,15 @@ const SignUp = () => {
     console.log(user)
   }
 
+  const Navigate = useNavigate();
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    let response;
     try {
       if(user.password===user.confirm_password){
-        const response = await fetch('http://localhost:8080/', {
+        response = await fetch('http://localhost:8080/signup', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -35,6 +39,9 @@ const SignUp = () => {
     catch (error) {
       console.log(error);
     }
+    console.log(response);
+    if(response && response.ok) Navigate('../login')
+    else Navigate('../')
   }
 
   return (
@@ -53,14 +60,13 @@ const SignUp = () => {
                 htmlFor="name"
                 className="block mb-2 text-sm font-medium"
               >
-                Full Name
+                Username
               </label>
               <input
                 type="text"
-                name="name"
+                name="username"
                 id="name"
                 onChange={handleChange}
-                value={user.name}
                 className="text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="abc"
                 required=""

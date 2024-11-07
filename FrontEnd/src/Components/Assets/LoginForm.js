@@ -1,7 +1,39 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
-const LoginForm = () => {
+const LoginForm = ({isLoggedIn, setIsLoggedIn}) => {
+  let [user, setUser] = useState({
+    username : "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    let {name, value} = e.target;
+
+    setUser((prevUser) => ({
+      ...prevUser,
+      [name]: value
+    }))
+    console.log(user)
+  }
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    let response = await fetch('http://localhost:8080/login', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(user)
+        })
+    response.json().then((data) => {
+      setIsLoggedIn(true);
+    }).catch((err) => {
+      console.log(err);
+    })
+  }
+
   return (
     <>
   <section>
@@ -18,14 +50,15 @@ const LoginForm = () => {
                 htmlFor="email"
                 className="block mb-2 text-sm font-medium"
               >
-                Your email
+                Username
               </label>
               <input
-                type="email"
-                name="email"
-                id="email"
+                type="text"
+                name="username"
+                id="username"
+                onChange={handleChange}
                 className="text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                placeholder="name@company.com"
+                placeholder="abc"
                 required=""
               />
             </div>
@@ -40,6 +73,7 @@ const LoginForm = () => {
                 type="password"
                 name="password"
                 id="password"
+                onChange={handleChange}
                 placeholder="••••••••"
                 className="text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required=""
@@ -48,6 +82,7 @@ const LoginForm = () => {
         
             <button
               type="submit"
+              onClick={handleSubmit}
               className="w-full text-white bg-blue-800 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             >
               Login
