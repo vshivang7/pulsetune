@@ -5,6 +5,9 @@ const cors = require('cors')
 const connectdb = require('./connectDb');
 const homeRoutes  = require('./Routes/home.js');
 const session = require('express-session')
+const passport = require('passport');
+const localStrategy = require('passport-local');
+const User = require('./Models/userSchema.js');
  
 const sessionOptions = {
     secret: 'SUPERSECRETCODE',
@@ -20,8 +23,16 @@ const corsOptions = {
 
 app.use(cors(corsOptions));
 app.use(express.json());
-app.use("/", homeRoutes);
 app.use(session(sessionOptions));
+
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new localStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+app.use("/", homeRoutes);
 
 connectdb().then(() => {
     console.log("Database Connected");
