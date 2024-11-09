@@ -1,15 +1,13 @@
-import React, { useState, useRef } from 'react';
+import React from 'react';
 
-const Card = ({ image, song_name, artist, url }) => {
-  const [isPlaying, setIsPlaying] = useState(false);
-  const audioRef = useRef(null);
+const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef}) => {
 
   const playMusic = () => {
     if (isPlaying) {
       audioRef.current.pause();
       setIsPlaying(false);
     } else {
-      audioRef.current.src = url;  // Set the music URL to the audio source
+      audioRef.current.src = url;
       audioRef.current.play();
       setIsPlaying(true);
     }

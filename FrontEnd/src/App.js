@@ -22,10 +22,8 @@ function App() {
         }
   
         let data = await res.json();
-        // console.log(data)
         if (data) setUser(data);
       } catch (error) {
-        // console.log("User haven't logged in yet!! Please Login");
       }
     };
     handlefetch();
@@ -33,10 +31,10 @@ function App() {
 
   return (
     <div className="bg-black text-white">
-    <div className='w-full mb-4'>
+    <div className='w-full mb-4 fixed bg-black top-0 left-0 z-10'>
       <Navbar user = {user} setUser = {setUser} search = {search} setSearch = {setSearch} setMusics = {setMusics} musics={musics}/>
     </div>
-    <div className="flex pl-16 pr-16">
+    <div className="flex pl-16 pr-16 w-full mt-16">
       <Sidebar />
       <Main user = {user} setUser = {setUser} musics={musics}/>
     </div>

@@ -5,7 +5,7 @@ import { faSlack, faWpexplorer } from '@fortawesome/free-brands-svg-icons';
 
 const Sidebar = () => {
   return (
-    <div className=' h-screen w-1/5'>
+    <div className=' h-screen w-1/5 fixed'>
         <div className='h-[1vh]'></div>
         <div className='flex-col h-[80vh]'>
             <div className='h-1/3 rounded-xl p-4 m-4'>

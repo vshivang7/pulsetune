@@ -31,15 +31,15 @@ const Navbar = ({user, setUser, search, setSearch, setMusics, musics}) => {
             <a href='/' className='m-5'>PODCASTS</a>
             <a href='/' className='m-5'>LIVE</a>
         </div>
-        <div className='w-2/5'>
-                <input name='search' placeholder='Search Here...' value={search} onChange={(event) => setSearch(event.target.value)} type='text' className='mr-1 h-10 w-[40vh] rounded-tl-xl rounded-bl-xl p-5 text-black'></input>
+        <div className='w-2/5 ml-auto'>
+                <input name='search' placeholder='Search Here...' value={search} onChange={(event) => setSearch(event.target.value)} type='text' className='mr-1 h-10 w-[40vh] rounded-tl-xl rounded-bl-xl p-5 text-yellow-100 bg-gray-800'></input>
                 <button className='h-10 w-[14vh] rounded-tr-xl rounded-br-xl bg-blue-800' onClick={fetchData}>Search</button>
         </div>
         <div className='w-1/5 flex justify-end'>
             {
                 user!=null?
                 <>
-                <a href='/' className='m-3'>Profile: {user.username.toString().toUpperCase()}</a>
+                <a href='/' className='m-3 font-bold'>Hello! {user.username.toString().toUpperCase()}</a>
                 <button onClick={handleLogOut} className='m-3'>Logout</button>
                 </>
                 :

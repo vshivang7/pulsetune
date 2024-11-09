@@ -46,7 +46,15 @@ const LoginForm = ({user, setUser}) => {
           <h1 className="text-xl font-bold leading-tight tracking-tight">
             Login
           </h1>
-          <form className="space-y-4 md:space-y-6" action="#">
+          <form noValidate className="space-y-4 md:space-y-6 group" onSubmit={(e) => {
+                  e.preventDefault();
+                  e.target.classList.add("validated");
+                  if (!e.target.checkValidity()) {
+                        e.target.querySelectorAll(":invalid")[0].focus();
+                        return;
+                  }
+                  handleSubmit(e);
+            }}>
             <div>
               <label
                 htmlFor="email"
@@ -59,10 +67,13 @@ const LoginForm = ({user, setUser}) => {
                 name="username"
                 id="username"
                 onChange={handleChange}
-                className="text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="peer border-2 focus:ring-2 [.validated_&]:invalid:border-pink-600 [.validated_&]:invalid:ring-2 [.validated_&]:invalid:ring-pink-200 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 placeholder="abc"
-                required=""
+                required
               />
+              <p className="mt-2 hidden [.validated_&]:peer-invalid:block text-pink-600">
+                Please provide your username.
+              </p>
             </div>
             <div>
               <label
@@ -77,14 +88,16 @@ const LoginForm = ({user, setUser}) => {
                 id="password"
                 onChange={handleChange}
                 placeholder="••••••••"
-                className="text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                required=""
+                className="peer border-2 focus:ring-2 [.validated_&]:invalid:border-pink-600 [.validated_&]:invalid:ring-2 [.validated_&]:invalid:ring-pink-200 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                required
               />
+              <p className="mt-2 hidden [.validated_&]:peer-invalid:block text-pink-600">
+                Please provide a password.
+              </p>
             </div>
         
             <button
               type="submit"
-              onClick={handleSubmit}
               className="w-full text-white bg-blue-800 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
             >
               Login
