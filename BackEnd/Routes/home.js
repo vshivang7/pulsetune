@@ -3,13 +3,14 @@ const router = express.Router();
 const User = require('../Models/userSchema');
 const passport = require('passport');
 
-router.get("/", (req, res) => res.send("Hello World"));
+router.get("/", (req, res) => console.log(req.user));
 router.post("/signup", async (req, res) => {
     let {username, email, password} = req.body;
     let user = new User({
         username: username,
         email: email,
     });
+    
     try{
         await User.register(user, password);
         res.sendStatus(200)
@@ -21,8 +22,19 @@ router.post("/signup", async (req, res) => {
 router.post("/login", passport.authenticate("local"), async (req, res) => {
     let {_id, email, username} = req.user;
     let data = {_id: _id, email: email, username:username};
-    console.log(data)
-    res.send(data)
+    res.json(data)
+})
+router.get("/userExist", (req, res) => {
+    if(req.isAuthenticated()) res.json(req.user)
+    else res.send(null)
+})
+router.get("/logout", (req, res) => {
+    if(req.isAuthenticated()){
+    req.logout((err) => {
+        if(err) return next(err)
+    });
+    }
+    res.send(null);
 })
 
 module.exports = router;

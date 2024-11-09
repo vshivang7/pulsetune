@@ -1,25 +1,46 @@
 import React from 'react'
+import PulseTuneLogo from '../PulseTune_Logo.png';
 import { Link } from 'react-router-dom';
-const Navbar = ({user, setUser}) => {
+const Navbar = ({user, setUser, search, setSearch, setMusics, musics}) => {
+
+    const fetchData = async () => {
+      if(user){
+      let response = await fetch(`https://v1.nocodeapi.com/samitsonkar0/spotify/PibIJtXsmIflxVDE/search?q=${search}&type=track`)
+      let data = await response.json();
+      setMusics([...data.tracks.items]);
+      console.log(data.tracks.items)
+      }
+    }
+    
+    const handleLogOut = async () => {
+      let response = await fetch('http://localhost:8080/logout', {
+        method: 'GET',
+        credentials: 'include',
+      })
+      if(response.ok) setUser(null);
+    }
+
   return (
     <div className='h-16 flex items-center rounded-tl-xl rounded-tr-xl'>
-        <div>
+        <div className='flex justify-center items-center w-1/5 h-[6vh]'>
+            <img src={PulseTuneLogo} alt="PulseTune Logo" className='h-12 rounded-2xl' />
+            <div className='text-3xl h-full text-red-500 font-mono p-2 '>PulseTune</div>
+        </div>
+        <div className='w-1/5'>
             <a href='/' className='m-5'>MUSIC</a>
             <a href='/' className='m-5'>PODCASTS</a>
             <a href='/' className='m-5'>LIVE</a>
         </div>
-        <div className='w-1/2 ml-10'>
-            <form>
-                <input name='search' placeholder='Search Here...' type='text' className='shadow-lg mr-1 h-[5vh] w-[20vh] rounded-tl-xl rounded-bl-xl p-2'></input>
-                <button type='submit' className='button h-[5vh] w-[10vh] rounded-tr-xl rounded-br-xl'>Search</button>
-            </form>
+        <div className='w-2/5'>
+                <input name='search' placeholder='Search Here...' value={search} onChange={(event) => setSearch(event.target.value)} type='text' className='mr-1 h-10 w-[40vh] rounded-tl-xl rounded-bl-xl p-5 text-black'></input>
+                <button className='h-10 w-[14vh] rounded-tr-xl rounded-br-xl bg-blue-800' onClick={fetchData}>Search</button>
         </div>
-        <div className='w-1/3 flex justify-end'>
+        <div className='w-1/5 flex justify-end'>
             {
                 user!=null?
                 <>
                 <a href='/' className='m-3'>Profile: {user.username.toString().toUpperCase()}</a>
-                <a href='/' className='m-3'>Logout</a>
+                <button onClick={handleLogOut} className='m-3'>Logout</button>
                 </>
                 :
                 <>

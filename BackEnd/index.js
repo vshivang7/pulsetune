@@ -8,19 +8,20 @@ const session = require('express-session')
 const passport = require('passport');
 const localStrategy = require('passport-local');
 const User = require('./Models/userSchema.js');
+const cookieParser = require('cookie-parser');
  
 const sessionOptions = {
     secret: 'SUPERSECRETCODE',
     resave: false,
-    saveUninitialized: true,
+    saveUninitialized: false,
 }
 const corsOptions = {
     origin: 'http://localhost:3000',
     method: 'GET, POST, PUT, DELETE, PATCH',
-    credentials: true
+    credentials: true,
 }
 
-
+app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(session(sessionOptions));
@@ -30,7 +31,8 @@ app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
 
 passport.serializeUser(User.serializeUser());
-passport.deserializeUser(User.deserializeUser());
+  
+  passport.deserializeUser(User.deserializeUser());
 
 app.use("/", homeRoutes);
 
