@@ -4,6 +4,7 @@ import LoginForm from '../Components/Assets/LoginForm'
 import SignUp from '../Components/Assets/SignUp'
 import Home from '../Components/MainBody/Home'
 import ErrorPage from '../Components/Assets/ErrorPage'
+import PlaylistForm from '../Components/Assets/PlaylistForm'
 
 const Main = ({user, setUser, musics}) => {
   return (
@@ -13,7 +14,8 @@ const Main = ({user, setUser, musics}) => {
       <Routes>
        {
           user?<>
-          <Route path='/' element={<Home musics = {musics}/>}/>
+          <Route path='/' element={<Home musics = {musics} user = {user}/>}/>
+          <Route path='/playlist/new' element={<PlaylistForm user = {user} setUser = {setUser}/>}/>
           <Route path='/login' element={<Navigate to="/" />}/>
           <Route path='/signup' element={<Navigate to="/" />}/>
           </>:<>

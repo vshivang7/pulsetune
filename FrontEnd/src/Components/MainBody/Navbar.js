@@ -1,11 +1,12 @@
 import React from 'react'
-import PulseTuneLogo from '../PulseTune_Logo.png';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSoundcloud } from '@fortawesome/free-brands-svg-icons';
 import { Link } from 'react-router-dom';
 const Navbar = ({user, setUser, search, setSearch, setMusics, musics}) => {
 
     const fetchData = async () => {
       if(user){
-      let response = await fetch(`https://v1.nocodeapi.com/samitsonkar0/spotify/PibIJtXsmIflxVDE/search?q=${search}&type=track`)
+      let response = await fetch(`https://v1.nocodeapi.com/vshivang/spotify/dTkOvSBZSnjjGDpb/search?q=${search}&type=track`)
       let data = await response.json();
       setMusics([...data.tracks.items]);
       console.log(data.tracks.items)
@@ -23,17 +24,17 @@ const Navbar = ({user, setUser, search, setSearch, setMusics, musics}) => {
   return (
     <div className='h-16 flex items-center rounded-tl-xl rounded-tr-xl'>
         <div className='flex justify-center items-center w-1/5 h-[6vh]'>
-            <img src={PulseTuneLogo} alt="PulseTune Logo" className='h-12 rounded-2xl' />
-            <div className='text-3xl h-full text-red-500 font-mono p-2 '>PulseTune</div>
+        <FontAwesomeIcon className='text-pink-500' icon={faSoundcloud} size='3x' />
+            <div className='text-3xl h-full text-pink-500 font-sans '>PulseTune</div>
         </div>
         <div className='w-1/5'>
             <a href='/' className='m-5'>MUSIC</a>
             <a href='/' className='m-5'>PODCASTS</a>
             <a href='/' className='m-5'>LIVE</a>
         </div>
-        <div className='w-2/5 ml-auto'>
-                <input name='search' placeholder='Search Here...' value={search} onChange={(event) => setSearch(event.target.value)} type='text' className='mr-1 h-10 w-[40vh] rounded-tl-xl rounded-bl-xl p-5 text-yellow-100 bg-gray-800'></input>
-                <button className='h-10 w-[14vh] rounded-tr-xl rounded-br-xl bg-blue-800' onClick={fetchData}>Search</button>
+        <div className='w-2/5 flex justify-end'>
+                <input name='search' placeholder='Search Here...' onChange={(event) => setSearch(event.target.value)} type='text' className='mr-1 h-10 w-[40vh] rounded-tl-xl rounded-bl-xl p-5 text-white bg-gray-800'></input>
+                <button className='h-10 w-[14vh] rounded-tr-xl rounded-br-xl bg-purple-500 text-black' onClick={fetchData}>Search</button>
         </div>
         <div className='w-1/5 flex justify-end'>
             {

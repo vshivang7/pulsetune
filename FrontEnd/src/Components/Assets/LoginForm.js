@@ -67,12 +67,13 @@ const LoginForm = ({user, setUser}) => {
                 name="username"
                 id="username"
                 onChange={handleChange}
-                className="peer border-2 focus:ring-2 [.validated_&]:invalid:border-pink-600 [.validated_&]:invalid:ring-2 [.validated_&]:invalid:ring-pink-200 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                pattern="^[a-zA-Z][a-zA-Z0-9_]{3,16}$"
+                className="hover:border-blue-400 peer border-2 focus:ring-2 [.validated_&]:invalid:border-pink-600 [.validated_&]:invalid:ring-2 [.validated_&]:invalid:ring-pink-200 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500 "
                 placeholder="abc"
                 required
               />
               <p className="mt-2 hidden [.validated_&]:peer-invalid:block text-pink-600">
-                Please provide your username.
+                Please provide a vaild username.
               </p>
             </div>
             <div>
@@ -87,12 +88,13 @@ const LoginForm = ({user, setUser}) => {
                 name="password"
                 id="password"
                 onChange={handleChange}
+                pattern='^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$'
                 placeholder="••••••••"
-                className="peer border-2 focus:ring-2 [.validated_&]:invalid:border-pink-600 [.validated_&]:invalid:ring-2 [.validated_&]:invalid:ring-pink-200 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-100 dark:border-gray-600 dark:placeholder-gray-400 dark:text-black dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                className="hover:border-blue-400 peer border-2 focus:ring-2 [.validated_&]:invalid:border-pink-600 [.validated_&]:invalid:ring-2 [.validated_&]:invalid:ring-pink-200 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                 required
               />
               <p className="mt-2 hidden [.validated_&]:peer-invalid:block text-pink-600">
-                Please provide a password.
+                Please provide a valid password.
               </p>
             </div>
         

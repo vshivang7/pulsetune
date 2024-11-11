@@ -4,6 +4,7 @@ const port = 8080;
 const cors = require('cors')
 const connectdb = require('./connectDb');
 const homeRoutes  = require('./Routes/home.js');
+const playistRoute = require('./Routes/playlist.js');
 const session = require('express-session')
 const passport = require('passport');
 const localStrategy = require('passport-local');
@@ -34,6 +35,7 @@ passport.serializeUser(User.serializeUser());
   
   passport.deserializeUser(User.deserializeUser());
 
+app.use("/playlist", playistRoute);
 app.use("/", homeRoutes);
 
 connectdb().then(() => {

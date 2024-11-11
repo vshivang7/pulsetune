@@ -1,6 +1,7 @@
 import React from 'react';
+import DropDown from './DropDown';
 
-const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef}) => {
+const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef, user}) => {
 
   const playMusic = () => {
     if (isPlaying) {
@@ -43,6 +44,9 @@ const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef
         <div className="p-5">
           <h3 className="text-white text-lg">{song_name}</h3>
           <p className="text-gray-400">{artist}</p>
+        </div>
+        <div className='mt-auto'>
+        <DropDown user = {user}/>
         </div>
       </div>
       <audio ref={audioRef} />

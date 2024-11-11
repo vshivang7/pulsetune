@@ -31,7 +31,7 @@ function App() {
 
   return (
     <div className="bg-black text-white">
-    <div className='w-full mb-4 fixed bg-black top-0 left-0 z-10'>
+    <div className='w-full mb-4 fixed bg-gray-900 top-0 left-0 z-10'>
       <Navbar user = {user} setUser = {setUser} search = {search} setSearch = {setSearch} setMusics = {setMusics} musics={musics}/>
     </div>
     <div className="flex pl-16 pr-16 w-full mt-16">
