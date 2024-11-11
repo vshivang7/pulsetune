@@ -1,5 +1,7 @@
 const express = require('express');
 const User = require('../Models/userSchema');
+const Music = require('../Models/musicSchema');
+const { default: mongoose } = require('mongoose');
 const router = express.Router();
 
 router.post("/new", async (req, res) => {
@@ -23,6 +25,24 @@ router.post("/new", async (req, res) => {
         console.log(e)
         res.status(500).json({ error: "An error occurred while creating the playlist" });
     }
+})
+router.post("/:name", async (req, res) => {
+    let {name} = req.params;
+    let {image, song_name, artist, url} = req.body;
+    let musicInfo = new Music({image, song_name, artist, url});
+    await musicInfo.save();
+    musicInfo = await Music.findOne({url:url});
+    // console.log(musicInfo)
+    let currUser = await User.findById(req.user._id)
+    currUser.playlists.map((playlist) => {
+        if(playlist.name===name) {
+            playlist.list.push(musicInfo._id)
+            return;
+        }
+    })
+    await currUser.save()
+    // console.log(currUser)
+    res.json(currUser)
 })
 
 module.exports = router;

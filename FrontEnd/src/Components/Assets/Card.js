@@ -1,8 +1,14 @@
 import React from 'react';
 import DropDown from './DropDown';
 
-const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef, user}) => {
-
+const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef, user, id}) => {
+  const musicInfo = {
+    _id: id,
+    image: image,
+    song_name: song_name,
+    artist: artist,
+    url: url
+  }
   const playMusic = () => {
     if (isPlaying) {
       audioRef.current.pause();
@@ -46,7 +52,7 @@ const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef
           <p className="text-gray-400">{artist}</p>
         </div>
         <div className='mt-auto'>
-        <DropDown user = {user}/>
+        <DropDown user = {user} musicInfo = {musicInfo}/>
         </div>
       </div>
       <audio ref={audioRef} />

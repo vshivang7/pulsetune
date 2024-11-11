@@ -20,8 +20,8 @@ router.post("/signup", async (req, res) => {
     }
 })
 router.post("/login", passport.authenticate("local"), async (req, res) => {
-    let {_id, email, username} = req.user;
-    let data = {_id: _id, email: email, username:username};
+    let {_id, email, username, playlists} = req.user;
+    let data = {_id: _id, email: email, username:username, playlists:playlists};
     res.json(data)
 })
 router.get("/userExist", (req, res) => {
