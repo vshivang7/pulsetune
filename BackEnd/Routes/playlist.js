@@ -9,15 +9,15 @@ router.post("/new", async (req, res) => {
             return res.status(400).json({ error: "Playlist name is required" });
         }
         let user = await User.findById(req.user._id);
-        console.log(user)
-        // let playlistExist = user.playlists.some((playlist) => playlist.name === req.body.name)
-        // if(playlistExist) {
-        //     return res.status(400).json({ error: "Playlist already is exist" });
-        // }
+        // console.log(user)
+        let playlistExist = user.playlists.some((playlist) => playlist.name === req.body.name)
+        if(playlistExist) {
+            return res.status(400).json({ error: "Playlist already is exist" });
+        }
         user.playlists.push({ name : req.body.name});
-        console.log(user)
+        // console.log(user)
         await user.save()
-        console.log(user)
+        // console.log(user)
         res.send(user)
     }catch (e) {
         console.log(e)

@@ -21,7 +21,7 @@ const DropDown = ({user}) => {
       >
         <div className="py-1">
           {
-            user.playlists?user.playlists.map((playlist) => {
+            user.playlists.length>0?user.playlists.map((playlist) => {
               return (
                 <div key = {playlist._id}><DropMenuItems name = {playlist.name} id = {playlist._id}/></div>
               )
