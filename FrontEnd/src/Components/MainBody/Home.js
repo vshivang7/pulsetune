@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import Card from '../Assets/Card'
+import Card from '../Assets/ArtistPage'
 
 const Home = ({musics, user}) => {
   const [isPlaying, setIsPlaying] = useState(false);

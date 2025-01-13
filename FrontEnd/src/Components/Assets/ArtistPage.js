@@ -1,7 +1,7 @@
 import React from 'react';
 import DropDown from './DropDown';
 
-const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef, user, id}) => {
+const ArtistPage = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef, user, id}) => {
   const musicInfo = {
     _id: id,
     image: image,
@@ -59,4 +59,4 @@ const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef
   );
 };
 
-export default Card;
+export default ArtistPage;

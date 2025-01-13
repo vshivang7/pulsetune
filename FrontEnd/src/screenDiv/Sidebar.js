@@ -10,7 +10,7 @@ const Sidebar = () => {
         <div className='flex-col h-[80vh]'>
             <div className='h-1/3 rounded-xl p-4 m-4'>
                 <h1 className='font-bold'>MENU</h1>
-                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faWpexplorer} className="text-1xl text-black-500 mr-3" />Explore</div>
+                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faWpexplorer} className="text-1xl text-black-500 mr-3" /><a href='/artists'>Explore</a></div>
                 <div className='ml-3 m-3 '><FontAwesomeIcon icon={faCompactDisc} className="text-1xl text-black-500 mr-3" />Albums</div>
                 <div className='ml-3 m-3 '><FontAwesomeIcon icon={faSlack} className="text-1xl text-black-500 mr-3" />Genres</div>
                 <div className='ml-3 m-3 '><FontAwesomeIcon icon={faUser} className="text-1xl text-black-500 mr-3" />Artists</div>
