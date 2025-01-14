@@ -35,7 +35,7 @@ function App() {
       <Navbar user = {user} setUser = {setUser} search = {search} setSearch = {setSearch} setMusics = {setMusics} musics={musics}/>
     </div>
     <div className="flex pl-16 pr-16 w-full mt-16">
-      <Sidebar />
+      <Sidebar user={user} />
       <Main user = {user} setUser = {setUser} musics={musics}/>
     </div>
     </div>
