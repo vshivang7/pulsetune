@@ -4,16 +4,16 @@ import PlaylistItems from './PlaylistItems'
 // import { faUser, faCompactDisc} from '@fortawesome/free-solid-svg-icons';
 // import { faSlack, faWpexplorer } from '@fortawesome/free-brands-svg-icons';
 
-const Playlist = ({user}) => {
+const Playlist = ({user, setMusics}) => {
   return (
     <div>
         <h1 className='font-bold'>PLAYLISTS</h1>
         {
             user==null?(
-            <div>abc</div>)
+            <div></div>)
             :(
             user.playlists.map((playlist)=>(
-                <PlaylistItems key = {playlist._id} playlist={playlist}/>
+                <PlaylistItems key = {playlist._id} playlist={playlist} setMusics={setMusics}/>
             ))
         )
         }

@@ -4,7 +4,7 @@ import { faUser, faCompactDisc} from '@fortawesome/free-solid-svg-icons';
 import { faSlack, faWpexplorer } from '@fortawesome/free-brands-svg-icons';
 import Playlist from '../Components/Assets/Playlist';
 
-const Sidebar = ({user}) => {
+const Sidebar = ({user, setMusics}) => {
   return (
     <div className=' h-screen w-1/5 fixed'>
         <div className='h-[1vh]'></div>
@@ -24,7 +24,7 @@ const Sidebar = ({user}) => {
                 <div className='ml-3 m-3 '><FontAwesomeIcon icon={faUser} className="text-1xl text-black-500 mr-3" />Local</div>
             </div>
             <div className='h-1/3 rounded-xl p-4 m-4'>
-                <Playlist user={user}/>
+                <Playlist user={user} setMusics = {setMusics}/>
             </div>
         </div>
     </div>
