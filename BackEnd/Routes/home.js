@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const User = require('../Models/userSchema');
 const passport = require('passport');
+const Music = require('../Models/musicSchema');
 
 router.get("/", (req, res) => console.log(req.user));
 router.post("/signup", async (req, res) => {
@@ -36,6 +37,10 @@ router.get("/logout", (req, res) => {
     }
     res.send(null);
 })
-
+router.get("/fetchData", async (req, res) => {
+    let data = await Music.find();
+    console.log(data);
+    res.send(data);
+})
 
 module.exports = router;
