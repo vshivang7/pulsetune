@@ -6,11 +6,11 @@ const Navbar = ({user, setUser, search, setSearch, setMusics, musics}) => {
 
     const fetchData = async () => {
       if(user){
-      let response = await fetch(`https://v1.nocodeapi.com/vshivang/spotify/dTkOvSBZSnjjGDpb/search?q=${search}&type=track`)
-      let data = await response.json();
-      setMusics([...data.tracks.items]);
-      console.log(data.tracks.items)
-      }
+        let response = await fetch(`http://localhost:8080/fetchData`)
+        let data = await response.json();
+        setMusics([...data]);
+        console.log(data)
+        }
     }
     const handleLogOut = async () => {
       let response = await fetch('http://localhost:8080/logout', {
