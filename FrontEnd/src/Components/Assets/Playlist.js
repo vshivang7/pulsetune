@@ -1,5 +1,7 @@
 import React from 'react'
 import PlaylistItems from './PlaylistItems'
+import { Link } from 'react-router-dom'
+
 // import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { faUser, faCompactDisc} from '@fortawesome/free-solid-svg-icons';
 // import { faSlack, faWpexplorer } from '@fortawesome/free-brands-svg-icons';
@@ -7,7 +9,7 @@ import PlaylistItems from './PlaylistItems'
 const Playlist = ({user, setMusics}) => {
   return (
     <div>
-        <h1 className='font-bold'>PLAYLISTS</h1>
+        <Link to='/playlist' className='font-bold' >PLAYLISTS</Link>
         {
             user==null?(
             <div></div>)

@@ -53,11 +53,12 @@ router.get('/:id', async (req, res) => {
             musicArr = playlist.list;
         }
     })
-    let result = [];
-    musicArr.map((music_id) => {
-        result.push(Music.findById(music_id))
-    })
-    console.log(result);
+    let result = await Promise.all(
+        musicArr.map(async (music_id) => {
+            return await Music.findById(music_id);
+        })
+    );
+    res.send(result);
 })
 
 module.exports = router;
