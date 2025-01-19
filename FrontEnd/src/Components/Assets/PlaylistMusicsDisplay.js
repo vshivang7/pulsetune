@@ -36,7 +36,7 @@ const PlaylistMusicsDisplay = () => {
 
   return (
     <div className='mt-9'>
-      <h1>Playlist Musics</h1>
+      <h1 className='text-2xl mb-5'>Playlist Musics</h1>
       {playlistMusics.length === 0 ? (
         <div>No musics found in this playlist.</div>
       ) : (

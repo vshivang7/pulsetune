@@ -28,11 +28,14 @@ const PlaylistPage = ({user, setUser}) => {
       <h1 className='text-2xl mb-5'>Your Playlists</h1>
     {
       user.playlists.length===0?<p>No Playlist Exists!</p>:
-    <div>{
-        (user.playlists.map((playlist)=>(
-            <div><PlaylistCard playlist={playlist}/></div>
-        )))}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-6 m-8">
+      {user.playlists.map((playlist) => (
+        <div key={playlist.id}>
+          <PlaylistCard playlist={playlist} />
+        </div>
+      ))}
     </div>
+    
     }
     </div>
   )
