@@ -1,18 +1,14 @@
 import { faSlack } from '@fortawesome/free-brands-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const PlaylistItems = ({playlist, setMusics}) => {
+
+  const navigate = useNavigate();
   const handleClick = async () => {
-    let response = await fetch(`http://localhost:8080/playlist/${playlist._id}`, {
-      method: 'GET',
-      credentials: 'include',
-    })
-    let data = await response.json();
-    setMusics([...data]);
+    navigate(`/playlist/${playlist._id}`)
   }
-
-
   return (
     
     <div className='ml-3 m-3'><FontAwesomeIcon icon={faSlack} className="text-1xl text-black-500 mr-3" /><button onClick={handleClick}>{playlist.name}</button></div>
