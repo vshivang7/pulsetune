@@ -1,15 +1,17 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSoundcloud } from '@fortawesome/free-brands-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 const Navbar = ({user, setUser, search, setSearch, setMusics, musics}) => {
+  const navigate = useNavigate()
 
     const fetchData = async () => {
+      
       if(user){
         let response = await fetch(`http://localhost:8080/fetchData`)
         let data = await response.json();
         setMusics([...data]);
-        console.log(data)
+        navigate('/');
         }
     }
     const handleLogOut = async () => {
