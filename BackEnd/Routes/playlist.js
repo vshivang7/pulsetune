@@ -44,5 +44,21 @@ router.post("/:name", async (req, res) => {
     // console.log(currUser)
     res.json(currUser)
 })
+router.get('/:id', async (req, res) => {
+    let {id} = req.params;
+    let user = await User.findById(req.user._id);
+    let musicArr;
+    user.playlists.map((playlist) => {
+        if(playlist._id == id) {
+            musicArr = playlist.list;
+        }
+    })
+    let result = await Promise.all(
+        musicArr.map(async (music_id) => {
+            return await Music.findById(music_id);
+        })
+    );
+    res.send(result);
+})
 
 module.exports = router;
