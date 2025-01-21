@@ -62,5 +62,17 @@ router.delete('/:id', async (req, res) => {
     await User.findByIdAndUpdate(req.user._id, user);
     res.send(user);
 })
+router.delete('/:playlistId/music/:musicId', async (req, res) => {
+    let {playlistId, musicId} = req.params;
+    let currUser = await User.findById(req.user._id);
+    currUser.playlists = currUser.playlists.map((playlist) => {
+        if (playlist._id.equals(playlistId)) {
+            playlist.list = playlist.list.filter((music) => !music.equals(musicId));
+        }
+        return playlist;
+    });
+    await User.findByIdAndUpdate(req.user._id, currUser);
+    res.send(currUser);
+})
 
 module.exports = router;

@@ -1,15 +1,19 @@
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
+import { useNavigate } from "react-router-dom";
 
 const PlaylistSongs = ({ music, playlistID, setUser }) => {
+  const navigate = useNavigate();
   const handleDelete = async () => {
     const response = await fetch(`http://localhost:8080/playlist/${playlistID}/music/${music._id}`, {
         method: 'DELETE',
         credentials: 'include',
     })
     let data = await response.json();
+    console.log(data);
     setUser(data);
+    navigate(`/playlist/${playlistID}`);
 }
   return (
     <div className="items-center justify-center max-w-md text-white bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PlaylistSongs from './PlaylistSongs';
 
-const PlaylistMusicsDisplay = ({setUser}) => {
+const PlaylistMusicsDisplay = ({user, setUser}) => {
   const { id } = useParams(); // Extract playlist ID from URL
   const [playlistMusics, setPlaylistMusics] = useState([]); // State for music array
   const [loading, setLoading] = useState(true); // State for loading indicator
@@ -28,7 +28,7 @@ const PlaylistMusicsDisplay = ({setUser}) => {
     };
 
     fetchPlaylistMusics();
-  }, [id]);
+  }, [id, user]);
 
   // Render loading, error, or playlist music
   if (loading) return <div>Loading...</div>;
