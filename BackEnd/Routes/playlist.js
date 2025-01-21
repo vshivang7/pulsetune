@@ -32,7 +32,15 @@ router.post("/:id", async (req, res) => {
     let currUser = await User.findById(req.user._id)
     let playlists = currUser.playlists.map((playlist) => {
         if(playlist._id.equals(id)){
-            playlist.list.push(_id);
+            let found = false;
+            playlist.list.some((music) => {
+                if(music.equals(_id)) {
+                    found = true;
+                }
+            })
+            if(!found){
+                playlist.list.push(_id);
+            }
         }
         return playlist;
     });
