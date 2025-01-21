@@ -35,20 +35,21 @@ const PlaylistMusicsDisplay = ({user, setUser}) => {
   if (error) return <div>Error: {error}</div>;
 
   return (
-    <div className='mt-9'>
+    <div className=' mt-9'>
       <h1 className='text-2xl mb-5'>Playlist Musics</h1>
       {playlistMusics.length === 0 ? (
         <div>No musics found in this playlist.</div>
       ) : (
-        <ul className='mt-10'>
+      
+        <div className='grid lg:grid-cols-2 md:grid-cols-1 mt-10'>
           {playlistMusics.map((music) => (
-            <li key={music._id} className="mb-4">
+            <div key={music._id} className="mb-4">
                 <PlaylistSongs music={music} playlistID={id} setUser={setUser}/>
               {/* <h3 className="text-lg font-bold">{music.song_name}</h3>
               <p className="text-sm">Artist: {music.artist}</p> */}
-            </li>
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

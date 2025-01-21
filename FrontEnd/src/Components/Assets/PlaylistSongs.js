@@ -16,7 +16,7 @@ const PlaylistSongs = ({ music, playlistID, setUser }) => {
     navigate(`/playlist/${playlistID}`);
 }
   return (
-    <div className="items-center justify-center max-w-md text-white bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div className="flex flex-col h-40 max-w-md text-white bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <div className="flex max-w-md ">
           {/* Song Details Section */}
           <div className="flex-grow flex items-center p-1">
@@ -41,10 +41,10 @@ const PlaylistSongs = ({ music, playlistID, setUser }) => {
       </div>
 
       {/* Music Player */}
-      <audio
+      <audio 
         controls
         src={music.url}
-        className="w-full rounded-lg p-2">
+        className="w-full rounded-lg p-1 invert hue-rotate-90 brightness-115">
       </audio>
 </div>
   );
