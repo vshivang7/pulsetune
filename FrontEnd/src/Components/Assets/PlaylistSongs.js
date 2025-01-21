@@ -2,7 +2,15 @@ import { faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 
-const PlaylistSongs = ({ music }) => {
+const PlaylistSongs = ({ music, playlistID, setUser }) => {
+  const handleDelete = async () => {
+    const response = await fetch(`http://localhost:8080/playlist/${playlistID}/music/${music._id}`, {
+        method: 'DELETE',
+        credentials: 'include',
+    })
+    let data = await response.json();
+    setUser(data);
+}
   return (
     <div className="items-center justify-center max-w-md text-white bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <div className="flex max-w-md ">
@@ -22,7 +30,7 @@ const PlaylistSongs = ({ music }) => {
 
             {/* Remove Button */}
             <button
-                // onClick={() => onRemove(song._id)}
+                onClick={handleDelete}
                 className="h-9 m-4 px-3 text-sm bg-gray-700 hover:bg-gray-400 text-gray-600 rounded-lg self-center">
               <FontAwesomeIcon className='text-white' icon={faTrash} />
             </button>

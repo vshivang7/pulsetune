@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PlaylistSongs from './PlaylistSongs';
 
-const PlaylistMusicsDisplay = () => {
+const PlaylistMusicsDisplay = ({setUser}) => {
   const { id } = useParams(); // Extract playlist ID from URL
   const [playlistMusics, setPlaylistMusics] = useState([]); // State for music array
   const [loading, setLoading] = useState(true); // State for loading indicator
@@ -43,7 +43,7 @@ const PlaylistMusicsDisplay = () => {
         <ul className='mt-10'>
           {playlistMusics.map((music) => (
             <li key={music._id} className="mb-4">
-                <PlaylistSongs music={music}/>
+                <PlaylistSongs music={music} playlistID={id} setUser={setUser}/>
               {/* <h3 className="text-lg font-bold">{music.song_name}</h3>
               <p className="text-sm">Artist: {music.artist}</p> */}
             </li>
