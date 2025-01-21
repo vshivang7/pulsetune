@@ -4,7 +4,7 @@ import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import DropMenuItems from './DropMenuItems'
 import { Link } from 'react-router-dom'
 
-const DropDown = ({user, musicInfo}) => {
+const DropDown = ({user, musicInfo, setUser}) => {
   return (
     <>
     <Menu as="div" className="relative w-full inline-block text-left">
@@ -23,7 +23,7 @@ const DropDown = ({user, musicInfo}) => {
           {
             (user?.playlists?.length>0)?user.playlists.map((playlist) => {
               return (
-                <div key = {playlist._id}><DropMenuItems name = {playlist.name} id = {playlist._id} musicInfo = {musicInfo}/></div>
+                <div key = {playlist._id}><DropMenuItems name = {playlist.name} id = {playlist._id} musicInfo = {musicInfo} setUser={setUser}/></div>
               )
             }):<></>
           }

@@ -1,15 +1,18 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSoundcloud } from '@fortawesome/free-brands-svg-icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { faPlusCircle} from '@fortawesome/free-solid-svg-icons';
 const Navbar = ({user, setUser, search, setSearch, setMusics, musics}) => {
+  const navigate = useNavigate()
 
     const fetchData = async () => {
+      
       if(user){
         let response = await fetch(`http://localhost:8080/fetchData`)
         let data = await response.json();
         setMusics([...data]);
-        console.log(data)
+        navigate('/');
         }
     }
     const handleLogOut = async () => {
@@ -31,16 +34,17 @@ const Navbar = ({user, setUser, search, setSearch, setMusics, musics}) => {
             <a href='/' className='m-5'>PODCASTS</a>
             <a href='/' className='m-5'>LIVE</a>
         </div>
-        <div className='w-2/5 flex justify-end'>
+        <div className='w-2/5 flex justify-center'>
                 <input name='search' placeholder='Search Here...' onChange={(event) => setSearch(event.target.value)} type='text' className='mr-1 h-10 w-[40vh] rounded-tl-2xl rounded-bl-2xl p-5 text-white bg-gray-800'></input>
                 <button className='h-10 w-[10vh] rounded-tr-2xl rounded-br-2xl bg-gray-700 hover:bg-gray-600  text-pink-500' onClick={fetchData}>Search</button>
         </div>
-        <div className='w-1/5 flex justify-end'>
+        <div className='w-2/5 flex justify-end'>
             {
                 user!=null?
                 <>
-                <a href='/' className='m-3 font-bold'>Hello! {user.username.toString().toUpperCase()}</a>
-                <button onClick={handleLogOut} className='m-3'>Logout</button>
+                <Link to='/playlist/new' className='my-auto hover:bg-gray-800 m-3 rounded-3xl px-4 border border-gray-700 p-2 w-fit'><FontAwesomeIcon className=' text-pink-500' icon={faPlusCircle}/> Playlist</Link>
+                <a href='/' className='m-3 my-auto'>Hey! {user.username.toString().toUpperCase()}</a>
+                <button onClick={handleLogOut} className='m-3 my-auto'>Logout</button>
                 </>
                 :
                 <>

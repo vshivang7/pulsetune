@@ -2,7 +2,7 @@ import React, { useRef, useState } from 'react'
 import Card from '../Assets/Card'
 import ArtistPage from '../Assets/ArtistPage';
 
-const ArtistRunner = ({user}) => {
+const ArtistRunner = ({user, setUser}) => {
 
     const [musics] = useState([]);
     const [isPlaying, setIsPlaying] = useState(false);
@@ -12,7 +12,7 @@ const ArtistRunner = ({user}) => {
         {
         musics.map((music) => {
             return (
-                <div className='w-1/4 h-1/4 m-2' key={music._id}><ArtistPage isPlaying = {isPlaying} setIsPlaying = {setIsPlaying} audioRef = {audioRef} image = {music.image} song_name = {music.song_name} artist = {music.artist} url = {music.url} user = {user} id = {music._id}/></div>
+                <div className='w-1/4 h-1/4 m-2' key={music._id}><ArtistPage setUser={setUser} isPlaying = {isPlaying} setIsPlaying = {setIsPlaying} audioRef = {audioRef} image = {music.image} song_name = {music.song_name} artist = {music.artist} url = {music.url} user = {user} id = {music._id}/></div>
             )
         })
         }

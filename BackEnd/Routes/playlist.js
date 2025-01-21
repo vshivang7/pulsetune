@@ -26,23 +26,26 @@ router.post("/new", async (req, res) => {
         res.status(500).json({ error: "An error occurred while creating the playlist" });
     }
 })
-router.post("/:name", async (req, res) => {
-    let {name} = req.params;
-    let {image, song_name, artist, url} = req.body;
-    let musicInfo = new Music({image, song_name, artist, url});
-    await musicInfo.save();
-    musicInfo = await Music.findOne({url:url});
-    // console.log(musicInfo)
+router.post("/:id", async (req, res) => {
+    let {id} = req.params;
+    let {_id, image, song_name, artist, url} = req.body;
     let currUser = await User.findById(req.user._id)
-    currUser.playlists.map((playlist) => {
-        if(playlist.name===name) {
-            playlist.list.push(musicInfo._id)
-            return;
+    let playlists = currUser.playlists.map((playlist) => {
+        if(playlist._id.equals(id)){
+            let found = false;
+            playlist.list.some((music) => {
+                if(music.equals(_id)) {
+                    found = true;
+                }
+            })
+            if(!found){
+                playlist.list.push(_id);
+            }
         }
-    })
-    await currUser.save()
-    // console.log(currUser)
-    res.json(currUser)
+        return playlist;
+    });
+    await User.findByIdAndUpdate(currUser._id, currUser);
+    res.send(currUser)
 })
 router.get('/:id', async (req, res) => {
     let {id} = req.params;
@@ -59,6 +62,25 @@ router.get('/:id', async (req, res) => {
         })
     );
     res.send(result);
+})
+router.delete('/:id', async (req, res) => {
+    let {id} = req.params;
+    let user = await User.findById(req.user._id);
+    user.playlists = user.playlists.filter(playlist => playlist._id.toString() !== id);
+    await User.findByIdAndUpdate(req.user._id, user);
+    res.send(user);
+})
+router.delete('/:playlistId/music/:musicId', async (req, res) => {
+    let {playlistId, musicId} = req.params;
+    let currUser = await User.findById(req.user._id);
+    currUser.playlists = currUser.playlists.map((playlist) => {
+        if (playlist._id.equals(playlistId)) {
+            playlist.list = playlist.list.filter((music) => !music.equals(musicId));
+        }
+        return playlist;
+    });
+    await User.findByIdAndUpdate(req.user._id, currUser);
+    res.send(currUser);
 })
 
 module.exports = router;

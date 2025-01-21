@@ -39,7 +39,6 @@ router.get("/logout", (req, res) => {
 })
 router.get("/fetchData", async (req, res) => {
     let data = await Music.find();
-    console.log(data);
     res.send(data);
 })
 
