@@ -1,7 +1,7 @@
 import React from 'react';
 import DropDown from './DropDown';
 
-const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef, user, id}) => {
+const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef, user, id, setUser}) => {
   const musicInfo = {
     _id: id,
     image: image,
@@ -51,7 +51,7 @@ const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef
           <p className="text-gray-400">{artist}</p>
         </div>
         <div className='mt-auto'>
-        <DropDown user = {user} musicInfo = {musicInfo}/>
+        <DropDown user = {user} musicInfo = {musicInfo} setUser={setUser}/>
         </div>
       </div>
       <audio ref={audioRef} />

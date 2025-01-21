@@ -17,7 +17,7 @@ const Main = ({user, setUser, musics}) => {
       <Routes>
        {
           user?<>
-          <Route path='/' element={<Home musics = {musics} user = {user}/>}/>
+          <Route path='/' element={<Home setUser={setUser} musics = {musics} user = {user}/>}/>
           <Route path='/artists' element={<ArtistRunner user = {user}/>}/>
           <Route path='/playlist' element={<PlaylistPage user={user} setUser={setUser}/>}/>
           <Route path='/playlist/new' element={<PlaylistForm user = {user} setUser = {setUser}/>}/>

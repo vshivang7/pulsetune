@@ -29,19 +29,14 @@ router.post("/new", async (req, res) => {
 router.post("/:id", async (req, res) => {
     let {id} = req.params;
     let {_id, image, song_name, artist, url} = req.body;
-    // let musicInfo = new Music({image, song_name, artist, url});
-    // await musicInfo.save();
-    // musicInfo = await Music.findOne({url:url});
-    // console.log(musicInfo)
     let currUser = await User.findById(req.user._id)
-    currUser.playlists.map((playlist) => {
-        if(playlist._id===id) {
-            playlist.list.push(_id)
-            return;
+    let playlists = currUser.playlists.map((playlist) => {
+        if(playlist._id.equals(id)){
+            playlist.list.push(_id);
         }
-    })
+        return playlist;
+    });
     await User.findByIdAndUpdate(currUser._id, currUser);
-    // console.log(currUser)
     res.send(currUser)
 })
 router.get('/:id', async (req, res) => {
