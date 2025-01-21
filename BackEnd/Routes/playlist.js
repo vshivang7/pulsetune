@@ -64,7 +64,7 @@ router.delete('/:id', async (req, res) => {
     let {id} = req.params;
     let user = await User.findById(req.user._id);
     user.playlists = user.playlists.filter(playlist => playlist._id.toString() !== id);
-    await user.save();
+    await User.findByIdAndUpdate(req.user._id, user);
     res.send(user);
 })
 
