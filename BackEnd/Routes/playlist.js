@@ -26,23 +26,23 @@ router.post("/new", async (req, res) => {
         res.status(500).json({ error: "An error occurred while creating the playlist" });
     }
 })
-router.post("/:name", async (req, res) => {
-    let {name} = req.params;
-    let {image, song_name, artist, url} = req.body;
-    let musicInfo = new Music({image, song_name, artist, url});
-    await musicInfo.save();
-    musicInfo = await Music.findOne({url:url});
+router.post("/:id", async (req, res) => {
+    let {id} = req.params;
+    let {_id, image, song_name, artist, url} = req.body;
+    // let musicInfo = new Music({image, song_name, artist, url});
+    // await musicInfo.save();
+    // musicInfo = await Music.findOne({url:url});
     // console.log(musicInfo)
     let currUser = await User.findById(req.user._id)
     currUser.playlists.map((playlist) => {
-        if(playlist.name===name) {
-            playlist.list.push(musicInfo._id)
+        if(playlist._id===id) {
+            playlist.list.push(_id)
             return;
         }
     })
-    await currUser.save()
+    await User.findByIdAndUpdate(currUser._id, currUser);
     // console.log(currUser)
-    res.json(currUser)
+    res.send(currUser)
 })
 router.get('/:id', async (req, res) => {
     let {id} = req.params;
