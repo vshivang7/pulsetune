@@ -5,7 +5,6 @@ import SignUp from '../Components/Assets/SignUp'
 import Home from '../Components/MainBody/Home'
 import ErrorPage from '../Components/Assets/ErrorPage'
 import PlaylistForm from '../Components/Assets/PlaylistForm'
-import ArtistRunner from '../Components/MainBody/ArtistDiv'
 import PlaylistPage from './PlaylistPage'
 import PlaylistMusicsDisplay from '../Components/Assets/PlaylistMusicsDisplay'
 
@@ -18,7 +17,6 @@ const Main = ({user, setUser, musics}) => {
        {
           user?<>
           <Route path='/' element={<Home setUser={setUser} musics = {musics} user = {user}/>}/>
-          <Route path='/artists' element={<ArtistRunner user = {user}/>}/>
           <Route path='/playlist' element={<PlaylistPage user={user} setUser={setUser}/>}/>
           <Route path='/playlist/new' element={<PlaylistForm user = {user} setUser = {setUser}/>}/>
           <Route path='/playlist/:id' element={<PlaylistMusicsDisplay user={user} setUser={setUser}/>}/>

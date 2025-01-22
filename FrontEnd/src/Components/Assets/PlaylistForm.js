@@ -12,7 +12,7 @@ const PlaylistForm = ({user, setUser}) => {
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({name:name})
+            body: JSON.stringify({name:name.toLowerCase()})
           })
           let res = await response.json()
           if(response.ok){

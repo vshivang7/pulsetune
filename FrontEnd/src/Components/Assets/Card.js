@@ -25,7 +25,7 @@ const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef
       <div className="bg-gray-900 h-full shadow-lg rounded p-3">
         <div className="group relative">
           <img
-            className="w-full md:w-72 block rounded"
+            className="w-full md:w-72 block rounded-md"
             src={image}
             alt={`Album cover for ${song_name} by ${artist}`}
           />
@@ -46,12 +46,14 @@ const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef
             </button>
           </div>
         </div>
-        <div className="p-2">
-          <h3 className="text-white text-lg">{song_name}</h3>
-          <p className="text-gray-400">{artist}</p>
+        <div className="mt-1">
+          <h3 className="text-white text-lg">{song_name.length > 23 ? `${song_name.slice(0, 20)}...` : song_name}</h3>
         </div>
-        <div className='mt-auto'>
-        <DropDown user = {user} musicInfo = {musicInfo} setUser={setUser}/>
+        <div className='flex justify-between'>
+          <p className="mt-1 text-gray-400">{artist}</p>
+          <div>
+              <DropDown user = {user} musicInfo = {musicInfo} setUser={setUser}/>
+          </div>
         </div>
       </div>
       <audio ref={audioRef} />

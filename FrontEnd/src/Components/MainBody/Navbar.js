@@ -25,10 +25,10 @@ const Navbar = ({user, setUser, search, setSearch, setMusics, musics}) => {
 
   return (
     <div className='h-16 flex items-center rounded-tl-xl rounded-tr-xl'>
-        <div className='flex justify-center items-center w-1/5 h-[6vh]'>
+        <Link to='/' className='flex justify-center items-center w-1/5 h-[6vh]'>
         <FontAwesomeIcon className='text-pink-500' icon={faSoundcloud} size='3x' />
             <div className='text-4xl text-pink-500 caveat-logo '>PulseTune</div>
-        </div>
+        </Link>
         <div className='w-1/5'>
             <a href='/' className='m-5'>MUSIC</a>
             <a href='/' className='m-5'>PODCASTS</a>
