@@ -16,7 +16,7 @@ const PlaylistSongs = ({ music, playlistID, setUser }) => {
     navigate(`/playlist/${playlistID}`);
 }
   return (
-    <div className="flex flex-col h-40 max-w-md text-white bg-gray-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
+    <div className="opacity-90 flex flex-col h-fit max-w-md text-white bg-slate-800 rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <div className="flex max-w-md ">
           {/* Song Details Section */}
           <div className="flex-grow flex items-center p-1">
@@ -35,17 +35,19 @@ const PlaylistSongs = ({ music, playlistID, setUser }) => {
             {/* Remove Button */}
             <button
                 onClick={handleDelete}
-                className="h-9 m-4 px-3 text-sm bg-gray-700 hover:bg-gray-400 text-gray-600 rounded-lg self-center">
+                className="h-9 m-4 px-3 text-sm bg-gray-700 bg-opacity-50 hover:bg-gray-400 text-gray-600 rounded-lg self-center">
               <FontAwesomeIcon className='text-white' icon={faTrash} />
             </button>
       </div>
 
       {/* Music Player */}
-      <audio 
-        controls
-        src={music.url}
-        className="w-full rounded-lg p-1 invert hue-rotate-90 brightness-115">
-      </audio>
+      <div className="flex justify-center">
+        <audio 
+          controls
+          src={music.url}
+          className="opacity-75 w-full rounded-lg p-2 invert hue-rotate-90 brightness-115">
+        </audio>
+      </div>
 </div>
   );
 };
