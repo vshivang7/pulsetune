@@ -4,7 +4,6 @@ import { useEffect, useState } from "react";
 import Navbar from "./Components/MainBody/Navbar.js";
 
 function App() {
-  
   const [user, setUser] = useState(null)
   const [search, setSearch] = useState("");
   const [musics, setMusics] = useState([]);
@@ -29,6 +28,18 @@ function App() {
     handlefetch();
   }, [])
 
+  useEffect(() => {
+    const fetchData = async () => {
+      
+      if(user){
+        let response = await fetch(`http://localhost:8080/fetchData`)
+        let data = await response.json();
+        setMusics([...data]);
+        }
+    }
+    fetchData();
+  }, [user])
+
   return (
     <div className="bg-black text-white">
     <div className='w-full mb-4 fixed bg-gray-900 top-0 left-0 z-10'>
@@ -36,7 +47,7 @@ function App() {
     </div>
     <div className="flex pl-16 pr-16 w-full mt-16">
       <Sidebar user={user} setMusics={setMusics}/>
-      <Main user = {user} setUser = {setUser} musics={musics}/>
+      <Main search = {search} user = {user} setUser = {setUser} musics={musics}/>
     </div>
     </div>
   );
