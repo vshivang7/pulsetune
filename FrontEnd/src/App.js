@@ -2,11 +2,13 @@ import Sidebar from "./screenDiv/Sidebar.js";
 import Main from "./screenDiv/Main.js";
 import { useEffect, useState } from "react";
 import Navbar from "./Components/MainBody/Navbar.js";
+import Player from "./screenDiv/Player.js";
 
 function App() {
-  const [user, setUser] = useState(null)
+  const [user, setUser] = useState(null);
   const [search, setSearch] = useState("");
   const [musics, setMusics] = useState([]);
+  const [currentMusic, setCurrentMusic] = useState(null);
 
   useEffect(() => {
     const handlefetch = async () => {
@@ -47,8 +49,13 @@ function App() {
     </div>
     <div className="flex pl-16 pr-16 w-full mt-16">
       <Sidebar user={user} setMusics={setMusics}/>
-      <Main search = {search} user = {user} setUser = {setUser} musics={musics}/>
+      <Main setCurrentMusic={setCurrentMusic} search = {search} user = {user} setUser = {setUser} musics={musics}/> 
     </div>
+    {currentMusic==null?<></>:
+    <div>
+        <Player currentMusic={currentMusic} />
+      </div>
+}
     </div>
   );
 }

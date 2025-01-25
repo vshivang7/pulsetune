@@ -1,7 +1,7 @@
 import React from 'react';
 import DropDown from './DropDown';
 
-const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef, user, id, setUser}) => {
+const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef, user, id, setUser, setCurrentMusic}) => {
   const musicInfo = {
     _id: id,
     image: image,
@@ -10,14 +10,7 @@ const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef
     url: url
   }
   const playMusic = () => {
-    if (isPlaying) {
-      audioRef.current.pause();
-      setIsPlaying(false);
-    } else {
-      audioRef.current.src = url;
-      audioRef.current.play();
-      setIsPlaying(true);
-    }
+    setCurrentMusic(musicInfo);
   };
 
   return (
@@ -25,7 +18,7 @@ const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef
       <div className="bg-gray-900 h-full shadow-lg rounded p-3">
         <div className="group relative">
           <img
-            className="w-full md:w-72 block rounded-md"
+            className="w-full block rounded-md"
             src={image}
             alt={`Album cover for ${song_name} by ${artist}`}
           />
