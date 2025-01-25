@@ -20,8 +20,8 @@ useEffect(() => {
       search ? (filteredMusic.length>0 ? 
         filteredMusic.map((music) => {
           return (
-            <div className='w-1/4 h-fit m-2' key={music._id}><Card setCurrentMusic={setCurrentMusic} setUser={setUser} isPlaying = {isPlaying} setIsPlaying = {setIsPlaying} audioRef = {audioRef} image = {music.image} song_name = {music.song_name} artist = {music.artist} url = {music.url} user = {user} id = {music._id}/></div>) })
-          : (<div className='w-full h-96 flex justify-center items-center'><h1 className='text-2xl'>No Song Found</h1></div>)
+            <div className='m-2' key={music._id}><Card setCurrentMusic={setCurrentMusic} setUser={setUser} isPlaying = {isPlaying} setIsPlaying = {setIsPlaying} audioRef = {audioRef} image = {music.image} song_name = {music.song_name} artist = {music.artist} url = {music.url} user = {user} id = {music._id}/></div>) })
+          : (<div className='mt-5'><h1 className='text-2xl'>No Song Found . . .</h1></div>)
           )
       : musics.map((music) => {
         return (
