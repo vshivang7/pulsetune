@@ -44,9 +44,9 @@ const Player = ({currentMusic}) => {
   }, [currentMusic]);
 
   return (
-    <div className='flex justify-between items-center h-20 w-full bottom-0 fixed bg-slate-900'>
+    <div className='flex justify-between items-center h-16 w-full bottom-0 fixed bg-slate-900'>
       <div className='w-2/6 gap-3 flex items-center'>
-          <img src={currentMusic.image} alt='music' className='rounded-lg p-1 w-20 h-20'/>
+          <img src={currentMusic.image} alt='music' className='rounded-lg p-1 w-16 h-16'/>
           <div>
             <p className='text-lg opacity-90' >{currentMusic.song_name}</p>
             <p className='text-xs opacity-60' >{currentMusic.artist}</p>
