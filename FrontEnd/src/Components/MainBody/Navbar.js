@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSoundcloud } from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { faArrowRightFromBracket, faPlus, faSearch} from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightFromBracket, faSearch} from '@fortawesome/free-solid-svg-icons';
 const Navbar = ({user, setUser, search, setSearch, setMusics, musics}) => {
     const navigate = useNavigate();
     const handleClick = () => {
