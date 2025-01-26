@@ -20,7 +20,7 @@ const DropMenuItems = ({name, id, musicInfo, setUser}) => {
     <MenuItem>
             <button
               onClick={handleButton}
-              className="block px-4 w-full py-2 text-sm text-white data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
+              className="block px-4 w-full py-2 text-sm text-gray-200 data-[focus]:bg-gray-600 data-[focus]:outline-none"
             >
               {name.charAt(0).toUpperCase() + name.slice(1)}
             </button>

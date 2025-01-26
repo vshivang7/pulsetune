@@ -3,8 +3,8 @@ import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import DropMenuItems from './DropMenuItems'
 import { Link } from 'react-router-dom'
-import { faPlusSquare } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faPlus } from '@fortawesome/free-solid-svg-icons'
 
 const DropDown = ({user, musicInfo, setUser}) => {
   return (
@@ -12,7 +12,7 @@ const DropDown = ({user, musicInfo, setUser}) => {
     <Menu as="div" className="relative gap-x-3 w-fit inline-block text-left">
       <div>
         <MenuButton className="inline-flex  justify-center gap-x-1.5 rounded-md bg-gray-900 px-2 py-1 text-sm font-semibold text-white shadow-sm ring-1 ring-inset ring-gray-600 hover:bg-black">
-          <FontAwesomeIcon className=' my-auto text-bold text-pink-400' icon={faPlusSquare}/>
+          <FontAwesomeIcon className='opacity-80 my-auto text-red-500' icon={faPlus}/>
           <ChevronDownIcon aria-hidden="true" className="-mr-1 h-5 w-5 text-gray-400" />
         </MenuButton>
       </div>
@@ -34,7 +34,7 @@ const DropDown = ({user, musicInfo, setUser}) => {
         <MenuItem>
             <Link
               to="/playlist/new"
-              className="text-center block px-4 w-full py-2 text-sm text-white data-[focus]:bg-gray-100 data-[focus]:text-gray-900 data-[focus]:outline-none"
+              className="text-center block px-4 w-full py-2 text-sm text-gray-200  data-[focus]:bg-gray-600 data-[focus]:outline-none"
             >
               + Create Playlist
             </Link>

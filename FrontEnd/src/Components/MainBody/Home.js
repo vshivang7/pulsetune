@@ -15,7 +15,7 @@ useEffect(() => {
 
 // let curr=musics;
   return (
-    <div className='grid gap-3 grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 w-full mt-5 mb-64'>
+    <div className='overflow-y-auto grid gap-3 grid-cols-1 xl:grid-cols-4 lg:grid-cols-3 md:grid-cols-2 w-full mt-5'>
     {
       search ? (filteredMusic.length>0 ? 
         filteredMusic.map((music) => {

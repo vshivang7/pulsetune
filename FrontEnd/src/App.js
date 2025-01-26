@@ -11,6 +11,10 @@ function App() {
   const [currentMusic, setCurrentMusic] = useState(null);
 
   useEffect(() => {
+    setCurrentMusic(null)
+  }, [user]);
+
+  useEffect(() => {
     const handlefetch = async () => {
       try {
         let res = await fetch("http://localhost:8080/userExist", {
@@ -43,19 +47,20 @@ function App() {
   }, [user])
 
   return (
-    <div className="bg-black text-white">
-    <div className='w-full mb-4 fixed bg-gray-900 top-0 left-0 z-10'>
-      <Navbar user = {user} setUser = {setUser} search = {search} setSearch = {setSearch} setMusics = {setMusics} musics={musics}/>
-    </div>
-    <div className="flex pl-16 pr-16 w-full mt-16">
-      <Sidebar user={user} setMusics={setMusics}/>
-      <Main setCurrentMusic={setCurrentMusic} search = {search} user = {user} setUser = {setUser} musics={musics}/> 
-    </div>
-    {currentMusic==null?<></>:
-    <div>
-        <Player currentMusic={currentMusic} />
+    <div className="bg-black font-light text-white">
+      <div className=' w-full mb-4 fixed bg-gray-950 border-b-[1px] border-gray-800 top-0 left-0 z-10'>
+        <Navbar user = {user} setUser = {setUser} search = {search} setSearch = {setSearch} setMusics = {setMusics} musics={musics}/>
       </div>
-}
+      <div className="flex mt-16">
+        
+        <Sidebar user={user} setMusics={setMusics}/>
+        <Main setCurrentMusic={setCurrentMusic} search = {search} user = {user} setUser = {setUser} musics={musics}/> 
+      </div>
+      {currentMusic==null||user==null?<></>:
+      <div>
+          <Player currentMusic={currentMusic} />
+      </div>
+      }
     </div>
   );
 }

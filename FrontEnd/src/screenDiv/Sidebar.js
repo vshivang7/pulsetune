@@ -1,32 +1,33 @@
 import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faUser, faCompactDisc} from '@fortawesome/free-solid-svg-icons';
+import {faCompactDisc, faPlus} from '@fortawesome/free-solid-svg-icons';
 import { faSlack, faWpexplorer } from '@fortawesome/free-brands-svg-icons';
 import Playlist from '../Components/Assets/Playlist';
+import { Link } from 'react-router-dom';
 
 const Sidebar = ({user, setMusics}) => {
   return (
-    <div className=' text-gray-300 text-lg h-screen w-1/5 fixed'>
-        <div className='h-[1vh]'></div>
-        <div className='flex-col h-[80vh]'>
-            <div className='h-1/3 rounded-xl p-4 m-4'>
-                <h1 className='font-bold'>MENU</h1>
-                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faWpexplorer} className="mr-3" /><a href='/artists'>Explore</a></div>
-                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faCompactDisc} className="mr-3" />Albums</div>
-                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faSlack} className="mr-3" />Genres</div>
-                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faUser} className="mr-3" />Artists</div>
+    <div className='pt-6 text-gray-300 text-[17px] h-screen w-56 fixed border-r-[1px] border-gray-800 '>
+            <div className='border-b-[1px] mb-4 border-gray-800'>
+                <h1 className='font-bold pl-2 mb-2'>MENU</h1>
+                <div className=' my-auto hover:bg-gray-800 hover:text-gray-300 hover:cursor-pointer p-3 w-full flex items-center gap-2 transition-all duration-200'><FontAwesomeIcon icon={faWpexplorer} className=" mx-4" />Explore</div>
+                <div className=' my-auto hover:bg-gray-800 hover:text-gray-300 hover:cursor-pointer p-3 w-full flex items-center gap-2 transition-all duration-200'><FontAwesomeIcon icon={faCompactDisc} className="mx-4" />Albums</div>
+                <div className=' my-auto hover:bg-gray-800 hover:text-gray-300 hover:cursor-pointer p-3 w-full flex items-center gap-2 transition-all duration-200'><FontAwesomeIcon icon={faSlack} className="mx-4" />Genres</div>
             </div>
-            <div className='h-1/3 rounded-xl p-4 m-4'>
-                <h1 className='font-bold'>MY LIBRARY</h1>
-                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faWpexplorer} className="mr-3" />Explore</div>
-                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faCompactDisc} className="mr-3" />My Albums</div>
-                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faSlack} className="mr-3" />Favourites</div>
-                <div className='ml-3 m-3 '><FontAwesomeIcon icon={faUser} className="mr-3" />Local</div>
-            </div>
-            <div className='h-1/3 rounded-xl p-4 m-4'>
+            {
+              user!=null?
+              <>
+                <div>
                 <Playlist user={user} setMusics = {setMusics}/>
-            </div>
-        </div>
+                </div>
+                <div className='mt-5 flex justify-center'>
+                <Link to="/playlist/new" className="flex my-auto w-full bg-gray-900 hover:bg-gray-800 hover:text-gray-300 m-3 rounded-3xl px-5 py-2 border border-gray-700 items-center justify-center gap-2 transition-all duration-200">
+                <FontAwesomeIcon className="opacity-70 text-red-500 text-lg" icon={faPlus} /><span className="text-sm font-light">New Playlist</span></Link>
+                </div>
+              </>
+            :
+            <></>
+            }
     </div>
   )
 }

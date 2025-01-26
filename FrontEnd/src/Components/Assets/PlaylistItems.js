@@ -11,7 +11,7 @@ const PlaylistItems = ({playlist, setMusics}) => {
   }
   return (
     
-    <div className='ml-3 m-3'><FontAwesomeIcon icon={faEarListen} className="text-1xl text-black-500 mr-3" /><button onClick={handleClick}>{playlist.name.charAt(0).toUpperCase() + playlist.name.slice(1)}</button></div>
+    <div className='p-3 hover:bg-gray-800 hover:text-gray-300 w-full transition-all duration-200 flex items-center gap-2 hover:cursor-pointer' onClick={handleClick}><FontAwesomeIcon icon={faEarListen} className="mx-4" /> {playlist.name.charAt(0).toUpperCase() + playlist.name.slice(1)}</div>
   )
 }
 

@@ -2,7 +2,7 @@ import React from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSoundcloud } from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
-import { faPlusCircle} from '@fortawesome/free-solid-svg-icons';
+import { faArrowRightFromBracket, faPlus, faSearch} from '@fortawesome/free-solid-svg-icons';
 const Navbar = ({user, setUser, search, setSearch, setMusics, musics}) => {
     const navigate = useNavigate();
     const handleClick = () => {
@@ -17,26 +17,41 @@ const Navbar = ({user, setUser, search, setSearch, setMusics, musics}) => {
     }
   return (
     <div className='h-16 flex items-center rounded-tl-xl rounded-tr-xl'>
-        <Link to='/' className='flex justify-center items-center w-1/5 h-[6vh]'>
-        <FontAwesomeIcon className='text-pink-500' icon={faSoundcloud} size='3x' />
-            <div className='text-4xl text-pink-500 caveat-logo '>PulseTune</div>
+        <Link to='/' className='flex text-red-500 justify-center items-center w-1/5 h-[6vh]'>
+        <FontAwesomeIcon className='' icon={faSoundcloud} size='3x' />
+            <div className='text-4xl caveat-logo '>PulseTune</div>
         </Link>
         <div className='w-1/5'>
             <a href='/' className='m-5'>MUSIC</a>
             <a href='/' className='m-5'>PODCASTS</a>
             <a href='/' className='m-5'>LIVE</a>
         </div>
-        <div className='w-2/5 flex justify-center'>
-                <input name='search' placeholder='Search Here...' onClick={handleClick} value={search} onChange={(event) => setSearch(event.target.value)} type='text' className='mr-1 h-10 w-[40vh] rounded-tl-2xl rounded-bl-2xl p-5 text-white bg-gray-800' autoComplete="off"></input>
-                <button className='h-10 w-[10vh] rounded-tr-2xl rounded-br-2xl bg-gray-700 hover:bg-gray-600  text-pink-500'>Search</button>
+        {
+            user!=null?
+
+        <div className="h-10 w-[35vw] ml-5 flex items-center justify-center rounded-md gap-2 px-3 bg-gray-800 hover:bg-gray-700 focus-within:w-[50vw] border-[1px] border-gray-700 transition-all duration-500">
+            <FontAwesomeIcon icon={faSearch} className="text-gray-500 text-lg" />
+            <input
+              name="search"
+              placeholder="Search songs, artists..."
+              onClick={handleClick}
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              type="text"
+              className="h-full w-full text-gray-200 bg-inherit placeholder-gray-400 focus:outline-none"
+              autoComplete="off"/>
         </div>
+            :
+            <div className='w-1/5'></div>
+        }
+
+
         <div className='w-2/5 flex justify-end'>
             {
                 user!=null?
                 <>
-                <Link to='/playlist/new' className='my-auto hover:bg-gray-800 m-3 rounded-3xl px-4 border border-gray-700 p-2 w-fit'><FontAwesomeIcon className=' text-pink-500' icon={faPlusCircle}/> Playlist</Link>
                 <a href='/' className='m-3 my-auto'>Hey! {user.username.toString().toUpperCase()}</a>
-                <button onClick={handleLogOut} className='m-3 my-auto'>Logout</button>
+                <button onClick={handleLogOut} className='text-red-200 m-3 mr-5 my-auto'><FontAwesomeIcon icon={faArrowRightFromBracket}/></button>
                 </>
                 :
                 <>

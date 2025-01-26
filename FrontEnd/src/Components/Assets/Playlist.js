@@ -8,26 +8,21 @@ import { Link } from 'react-router-dom'
 
 const Playlist = ({user, setMusics}) => {
   return (
-    <div>
-        <Link to='/playlist' className='font-bold' >PLAYLISTS</Link>
+    <div className='mt-6'>
+        <Link to='/playlist' className='font-bold ml-2' >PLAYLISTS</Link>
+        <div className='mt-3 max-h-52 overflow-y-auto'>
         {
             user==null?(
             <div></div>)
             :(
             user.playlists.map((playlist)=>(
-                <PlaylistItems key = {playlist._id} playlist={playlist} setMusics={setMusics}/>
+                  <PlaylistItems key = {playlist._id} playlist={playlist} setMusics={setMusics}/>
             ))
         )
         }
+        </div>
     </div>
   )
 }
 
 export default Playlist
-
-
-
-{/* <div className='ml-3 m-3 '><FontAwesomeIcon icon={faWpexplorer} className="text-1xl text-black-500 mr-3" />Bollywood MashUp</div>
-<div className='ml-3 m-3 '><FontAwesomeIcon icon={faCompactDisc} className="text-1xl text-black-500 mr-3" />Top 100 Songs</div>
-<div className='ml-3 m-3 '><FontAwesomeIcon icon={faSlack} className="text-1xl text-black-500 mr-3" />Best of 2024</div>
-<div className='ml-3 m-3 '><FontAwesomeIcon icon={faUser} className="text-1xl text-black-500 mr-3" />Pop Songs</div> */}
