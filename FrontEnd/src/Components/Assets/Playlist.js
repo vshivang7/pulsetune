@@ -10,7 +10,7 @@ const Playlist = ({user, setMusics}) => {
   return (
     <div className='mt-6'>
         <Link to='/playlist' className='font-bold ml-2' >PLAYLISTS</Link>
-        <div className='mt-3 max-h-52 overflow-y-auto'>
+        <div className='mt-3 max-h-52 overflow-y-auto scrollbar-hide'>
         {
             user==null?(
             <div></div>)
