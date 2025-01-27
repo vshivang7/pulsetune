@@ -1,27 +1,27 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import PlaylistCard from '../Components/Assets/PlaylistCard'
 
 const PlaylistPage = ({user, setUser}) => {
 
-  useEffect(() => {
-      const handlefetch = async () => {
-        try {
-          let res = await fetch("http://localhost:8080/userExist", {
-            method: 'GET',
-            credentials: 'include',
-          });
+  // useEffect(() => {
+  //     const handlefetch = async () => {
+  //       try {
+  //         let res = await fetch("http://localhost:8080/userExist", {
+  //           method: 'GET',
+  //           credentials: 'include',
+  //         });
     
-          if (!res.ok) {
-            throw new Error(`HTTP error! Status: ${res.status}`);
-          }
+  //         if (!res.ok) {
+  //           throw new Error(`HTTP error! Status: ${res.status}`);
+  //         }
     
-          let data = await res.json();
-          if (data) setUser(data);
-        } catch (error) {
-        }
-      };
-      handlefetch();
-    }, [])
+  //         let data = await res.json();
+  //         if (data) setUser(data);
+  //       } catch (error) {
+  //       }
+  //     };
+  //     handlefetch();
+  //   }, [])
 
   return (
     <div className='mt-8'>
