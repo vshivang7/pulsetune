@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 
 const Sidebar = ({user, setMusics}) => {
   return (
-    <div className='pt-6 text-gray-300 text-[17px] h-screen w-56 fixed border-r-[1px] border-gray-800 '>
+    <div className='pt-6 text-gray-300 text-[17px] h-screen border-r-[1px] border-gray-800 '>
             <div className='border-b-[1px] mb-4 border-gray-800'>
                 <h1 className='font-bold pl-2 mb-2'>MENU</h1>
                 <div className=' my-auto hover:bg-gray-800 hover:text-gray-300 hover:cursor-pointer p-3 w-full flex items-center gap-2 transition-all duration-200'><FontAwesomeIcon icon={faWpexplorer} className=" mx-4" />Explore</div>

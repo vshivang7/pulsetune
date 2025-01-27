@@ -11,7 +11,7 @@ import PlaylistMusicsDisplay from '../Components/Assets/PlaylistMusicsDisplay'
 const Main = ({setCurrentMusic, search, user, setUser, musics}) => {
   return (
     
-    <div className='w-5/6 mr-2 ml-auto mb-16'>
+    <div className='mx-5 mb-16'>
     <div>
       <Routes>
        {
