@@ -19,7 +19,7 @@ const Main = ({setCurrentMusic, search, user, setUser, musics}) => {
           <Route path='/' element={<Home setCurrentMusic={setCurrentMusic} search={search} setUser={setUser} musics = {musics} user = {user}/>}/>
           <Route path='/playlist' element={<PlaylistPage user={user} setUser={setUser}/>}/>
           <Route path='/playlist/new' element={<PlaylistForm user = {user} setUser = {setUser}/>}/>
-          <Route path='/playlist/:id' element={<PlaylistMusicsDisplay user={user} setUser={setUser}/>}/>
+          <Route path='/playlist/:id' element={<PlaylistMusicsDisplay user={user} setUser={setUser} setCurrentMusic={setCurrentMusic}/>}/>
           <Route path='/login' element={<Navigate to="/" />}/>
           <Route path='/signup' element={<Navigate to="/" />}/>
           </>:<>

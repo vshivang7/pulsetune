@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import PlaylistSongs from './PlaylistSongs';
 
-const PlaylistMusicsDisplay = ({user, setUser}) => {
+const PlaylistMusicsDisplay = ({user, setUser, setCurrentMusic}) => {
   const { id } = useParams(); // Extract playlist ID from URL
   const [playlistMusics, setPlaylistMusics] = useState([]); // State for music array
   const [loading, setLoading] = useState(true); // State for loading indicator
@@ -41,12 +41,10 @@ const PlaylistMusicsDisplay = ({user, setUser}) => {
         <div>No musics found in this playlist.</div>
       ) : (
       
-        <div className='grid lg:grid-cols-2 md:grid-cols-1 mt-10'>
+        <div className='grid gap-3 grid-cols-1 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 w-full mt-5'>
           {playlistMusics.map((music) => (
-            <div key={music._id} className="mb-4">
-                <PlaylistSongs music={music} playlistID={id} setUser={setUser}/>
-              {/* <h3 className="text-lg font-bold">{music.song_name}</h3>
-              <p className="text-sm">Artist: {music.artist}</p> */}
+            <div key={music._id} className="m-2">
+                <PlaylistSongs music={music} playlistID={id} setUser={setUser} setCurrentMusic={setCurrentMusic}/>
             </div>
           ))}
         </div>

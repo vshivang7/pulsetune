@@ -3,7 +3,7 @@ import DropDown from './DropDown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 
-const Card = ({ image, song_name, artist, url, isPlaying, setIsPlaying, audioRef, user, id, setUser, setCurrentMusic}) => {
+const Card = ({ image, song_name, artist, url, user, id, setUser, setCurrentMusic}) => {
   const musicInfo = {
     _id: id,
     image: image,
