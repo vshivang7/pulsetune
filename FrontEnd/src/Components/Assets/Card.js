@@ -14,9 +14,11 @@ const Card = ({queue, setQueue, currentMusic, image, song_name, artist, url, use
   const playMusic = () => {
     if(currentMusic == null || musicInfo._id!==currentMusic._id){
       if(currentMusic != null) {
-        setQueue(prevQueue => [...prevQueue.filter((music) => {
-          return music._id !== currentMusic._id
-        }), currentMusic]);
+        let prevQueue = [...queue.filter((music) => {
+          return music._id !== musicInfo._id
+        }), currentMusic]
+        if(prevQueue.length > 7) prevQueue.splice(0, prevQueue.length-7);
+        setQueue([...prevQueue]);
       }
       setCurrentMusic(musicInfo);
     }
