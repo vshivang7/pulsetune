@@ -1,10 +1,9 @@
 import React from 'react'
 import { Menu, MenuButton, MenuItem, MenuItems } from '@headlessui/react'
-import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import DropMenuItems from './DropMenuItems'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faEllipsisV, faEllipsisVertical, faPlus } from '@fortawesome/free-solid-svg-icons'
+import {faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 
 const DropDown = ({user, musicInfo, setUser}) => {
   return (

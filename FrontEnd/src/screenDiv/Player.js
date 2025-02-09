@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useRef, useState } from 'react'
 
 
-const Player = ({setQueue, currentMusic, queue, setCurrentMusic}) => {
+const Player = ({setPreQueue, currentMusic, preQueue, setCurrentMusic}) => {
   const [isPlaying, setIsPlaying] = useState(true);
 
   const handleClick = () => {
@@ -45,9 +45,9 @@ const Player = ({setQueue, currentMusic, queue, setCurrentMusic}) => {
   }, [currentMusic]);
   
   const handlePrev = () => {
-    if(queue.length !== 0){
-    setCurrentMusic(queue[queue.length-1]);
-    setQueue(queue.slice(0, queue.length-1));
+    if(preQueue.length !== 0){
+    setCurrentMusic(preQueue[preQueue.length-1]);
+    setPreQueue(preQueue.slice(0, preQueue.length-1));
     }
   }
 

@@ -3,7 +3,7 @@ import DropDown from './DropDown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 
-const Card = ({queue, setQueue, currentMusic, image, song_name, artist, url, user, id, setUser, setCurrentMusic}) => {
+const Card = ({preQueue, setPreQueue, currentMusic, image, song_name, artist, url, user, id, setUser, setCurrentMusic}) => {
   const musicInfo = {
     _id: id,
     image: image,
@@ -14,11 +14,11 @@ const Card = ({queue, setQueue, currentMusic, image, song_name, artist, url, use
   const playMusic = () => {
     if(currentMusic == null || musicInfo._id!==currentMusic._id){
       if(currentMusic != null) {
-        let prevQueue = [...queue.filter((music) => {
+        let prevQueue = [...preQueue.filter((music) => {
           return music._id !== musicInfo._id
         }), currentMusic]
         if(prevQueue.length > 7) prevQueue.splice(0, prevQueue.length-7);
-        setQueue([...prevQueue]);
+        setPreQueue([...prevQueue]);
       }
       setCurrentMusic(musicInfo);
     }

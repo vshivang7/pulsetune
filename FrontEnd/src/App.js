@@ -9,7 +9,7 @@ function App() {
   const [search, setSearch] = useState("");
   const [musics, setMusics] = useState([]);
   const [currentMusic, setCurrentMusic] = useState(null);
-  const [queue, setQueue] = useState([]);
+  const [preQueue, setPreQueue] = useState([]);
 
   useEffect(() => {
     setCurrentMusic(null)
@@ -57,12 +57,12 @@ function App() {
         <Sidebar user={user} setMusics={setMusics}/>
           </div>
           <div className="w-[84vw] ml-auto">
-        <Main queue = {queue} setQueue = {setQueue} currentMusic = {currentMusic} setCurrentMusic={setCurrentMusic} search = {search} user = {user} setUser = {setUser} musics={musics}/> 
+        <Main preQueue = {preQueue} setPreQueue = {setPreQueue} currentMusic = {currentMusic} setCurrentMusic={setCurrentMusic} search = {search} user = {user} setUser = {setUser} musics={musics}/> 
           </div>
       </div>
       {currentMusic==null||user==null?<></>:
       <div>
-          <Player setQueue={setQueue} currentMusic={currentMusic} setCurrentMusic={setCurrentMusic} queue = {queue}/>
+          <Player setPreQueue={setPreQueue} currentMusic={currentMusic} setCurrentMusic={setCurrentMusic} preQueue = {preQueue}/>
       </div>
       }
     </div>
