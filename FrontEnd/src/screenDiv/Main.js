@@ -8,7 +8,7 @@ import PlaylistForm from '../Components/Assets/PlaylistForm'
 import PlaylistPage from './PlaylistPage'
 import PlaylistMusicsDisplay from '../Components/Assets/PlaylistMusicsDisplay'
 
-const Main = ({setCurrentMusic, search, user, setUser, musics}) => {
+const Main = ({queue, setQueue, currentMusic, setCurrentMusic, search, user, setUser, musics}) => {
   return (
     
     <div className='mx-5 mb-16'>
@@ -16,7 +16,7 @@ const Main = ({setCurrentMusic, search, user, setUser, musics}) => {
       <Routes>
        {
           user?<>
-          <Route path='/' element={<Home setCurrentMusic={setCurrentMusic} search={search} setUser={setUser} musics = {musics} user = {user}/>}/>
+          <Route path='/' element={<Home queue = {queue} setQueue ={setQueue} currentMusic = {currentMusic} setCurrentMusic={setCurrentMusic} search={search} setUser={setUser} musics = {musics} user = {user}/>}/>
           <Route path='/playlist' element={<PlaylistPage user={user} setUser={setUser}/>}/>
           <Route path='/playlist/new' element={<PlaylistForm user = {user} setUser = {setUser}/>}/>
           <Route path='/playlist/:id' element={<PlaylistMusicsDisplay user={user} setUser={setUser} setCurrentMusic={setCurrentMusic}/>}/>

@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Card from '../Assets/Card.js'
 
-const Home = ({setCurrentMusic, search, user, setUser, musics}) => {
+const Home = ({queue, setQueue, currentMusic, setCurrentMusic, search, user, setUser, musics}) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
   const [filteredMusic, setFilteredMusic] = useState([]);
@@ -22,7 +22,7 @@ useEffect(() => {
         filteredMusic.map((music) => (
           <div className="m-2" key={music._id}>
             <Card
-              setCurrentMusic={setCurrentMusic} setUser={setUser} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} image={music.image} song_name={music.song_name} artist={music.artist} url={music.url} user={user} id={music._id}/>
+              queue = {queue} setQueue = {setQueue} currentMusic = {currentMusic} setCurrentMusic={setCurrentMusic} setUser={setUser} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} image={music.image} song_name={music.song_name} artist={music.artist} url={music.url} user={user} id={music._id}/>
           </div>
         ))
       ) : (
@@ -34,7 +34,7 @@ useEffect(() => {
       musics.map((music) => (
         <div className="m-2" key={music._id}>
           <Card
-            setCurrentMusic={setCurrentMusic} setUser={setUser} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} image={music.image} song_name={music.song_name} artist={music.artist} url={music.url} user={user} id={music._id}/>
+            queue = {queue} setQueue = {setQueue} currentMusic = {currentMusic} setCurrentMusic={setCurrentMusic} setUser={setUser} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} image={music.image} song_name={music.song_name} artist={music.artist} url={music.url} user={user} id={music._id}/>
         </div>
       ))
     )

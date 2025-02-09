@@ -4,7 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useEffect, useRef, useState } from 'react'
 
 
-const Player = ({currentMusic}) => {
+const Player = ({setQueue, currentMusic, queue, setCurrentMusic}) => {
   const [isPlaying, setIsPlaying] = useState(true);
 
   const handleClick = () => {
@@ -43,6 +43,13 @@ const Player = ({currentMusic}) => {
           audioRef.current = null;
     };
   }, [currentMusic]);
+  
+  const handlePrev = () => {
+    if(queue.length !== 0){
+    setCurrentMusic(queue[queue.length-1]);
+    setQueue(queue.slice(0, queue.length-1));
+    }
+  }
 
   return (
     <div className='flex justify-between border-t-[1px] border-gray-800 items-center h-16 w-full bottom-0 fixed bg-gray-900'>
@@ -54,7 +61,7 @@ const Player = ({currentMusic}) => {
           </div>
       </div>
       <div className='text-xl w-2/6 gap-12 flex justify-center items-center'>
-          <div><FontAwesomeIcon className='hover:cursor-pointer hover:scale-110 hover:opacity-90  transition duration-200' icon={faAnglesLeft}/></div>
+          <div><FontAwesomeIcon className='hover:cursor-pointer hover:scale-110 hover:opacity-90  transition duration-200' onClick={handlePrev} icon={faAnglesLeft}/></div>
           {
             isPlaying? 
             <div><FontAwesomeIcon className='text-4xl hover:cursor-pointer hover:scale-105 hover:opacity-90  transition duration-200 ' onClick={handleClick} icon={faCirclePause}/></div>
