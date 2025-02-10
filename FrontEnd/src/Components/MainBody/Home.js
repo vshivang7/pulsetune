@@ -1,7 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react'
 import Card from '../Assets/Card.js'
 
-const Home = ({preQueue, setPreQueue, currentMusic, setCurrentMusic, search, user, setUser, musics}) => {
+const Home = ({preQueue, setPreQueue, postQueue, setPostQueue, currentMusic, setCurrentMusic, search, user, setUser, musics}) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
   const [filteredMusic, setFilteredMusic] = useState([]);
@@ -22,7 +22,7 @@ useEffect(() => {
         filteredMusic.map((music) => (
           <div className="m-2" key={music._id}>
             <Card
-              preQueue = {preQueue} setPreQueue = {setPreQueue} currentMusic = {currentMusic} setCurrentMusic={setCurrentMusic} setUser={setUser} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} image={music.image} song_name={music.song_name} artist={music.artist} url={music.url} user={user} id={music._id}/>
+              preQueue = {preQueue} setPreQueue = {setPreQueue} postQueue = {postQueue} setPostQueue = {setPostQueue} currentMusic = {currentMusic} setCurrentMusic={setCurrentMusic} setUser={setUser} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} image={music.image} song_name={music.song_name} artist={music.artist} url={music.url} user={user} id={music._id}/>
           </div>
         ))
       ) : (
@@ -34,7 +34,7 @@ useEffect(() => {
       musics.map((music) => (
         <div className="m-2" key={music._id}>
           <Card
-            preQueue = {preQueue} setPreQueue = {setPreQueue} currentMusic = {currentMusic} setCurrentMusic={setCurrentMusic} setUser={setUser} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} image={music.image} song_name={music.song_name} artist={music.artist} url={music.url} user={user} id={music._id}/>
+            preQueue = {preQueue} setPreQueue = {setPreQueue} postQueue = {postQueue} setPostQueue = {setPostQueue} currentMusic = {currentMusic} setCurrentMusic={setCurrentMusic} setUser={setUser} isPlaying={isPlaying} setIsPlaying={setIsPlaying} audioRef={audioRef} image={music.image} song_name={music.song_name} artist={music.artist} url={music.url} user={user} id={music._id}/>
         </div>
       ))
     )

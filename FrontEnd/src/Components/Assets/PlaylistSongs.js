@@ -3,9 +3,23 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 
-const PlaylistSongs = ({ music, playlistID, setUser, setCurrentMusic}) => {
+const PlaylistSongs = ({playlistMusics, preQueue, setPreQueue, postQueue, setPostQueue, music, playlistID, setUser, currentMusic, setCurrentMusic}) => {
   const navigate = useNavigate();
   const handleDelete = async () => {
+    if(currentMusic){
+      if(music._id === currentMusic._id){
+        if(postQueue.length!==0) {
+          setCurrentMusic(postQueue[0]);
+          setPostQueue(prev => prev.slice(1));
+        }else{
+          setCurrentMusic(null);
+        }
+      }else{
+        let newPre = preQueue.filter((elem) => {return elem._id!==music._id})
+        let newPost = postQueue.filter((elem) => {return elem._id!==music._id})
+        setPreQueue(newPre);
+        setPostQueue(newPost);
+      }}
     const response = await fetch(`http://localhost:8080/playlist/${playlistID}/music/${music._id}`, {
         method: 'DELETE',
         credentials: 'include',
@@ -16,8 +30,25 @@ const PlaylistSongs = ({ music, playlistID, setUser, setCurrentMusic}) => {
     navigate(`/playlist/${playlistID}`);
 }
 const playMusic = () => {
-  setCurrentMusic(music);
+    let newPre = [];
+    let newPost = [];
+    let found = false;
+    for(let i = 0; i<playlistMusics.length; i++){
+      if(music === playlistMusics[i]){
+        found = true;
+        continue;
+      }
+      if(found){
+        newPost.push(playlistMusics[i]);
+      }else{
+        newPre.push(playlistMusics[i]);
+      }
+    }
+    setPreQueue([...newPre]);
+    setPostQueue([...newPost]);
+    setCurrentMusic(music);
 };
+
   return (
       <>
     

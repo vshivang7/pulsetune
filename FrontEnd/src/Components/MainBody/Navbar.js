@@ -3,12 +3,13 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSoundcloud } from '@fortawesome/free-brands-svg-icons';
 import { Link, useNavigate } from 'react-router-dom';
 import { faArrowRightFromBracket, faSearch} from '@fortawesome/free-solid-svg-icons';
-const Navbar = ({user, setUser, search, setSearch, setMusics, musics}) => {
+const Navbar = ({user, setUser, search, setSearch, setMusics, musics, setCurrentMusic}) => {
     const navigate = useNavigate();
     const handleClick = () => {
       navigate('/');
     }
     const handleLogOut = async () => {
+      setCurrentMusic(null);
       let response = await fetch('http://localhost:8080/logout', {
         method: 'GET',
         credentials: 'include',

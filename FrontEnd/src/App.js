@@ -10,10 +10,7 @@ function App() {
   const [musics, setMusics] = useState([]);
   const [currentMusic, setCurrentMusic] = useState(null);
   const [preQueue, setPreQueue] = useState([]);
-
-  useEffect(() => {
-    setCurrentMusic(null)
-  }, [user]);
+  const [postQueue, setPostQueue] = useState([]);
 
   useEffect(() => {
     const handlefetch = async () => {
@@ -50,19 +47,19 @@ function App() {
   return (
     <div className="bg-black font-light text-white overflow-y-auto max-h-[100vh] scrollbar-hide">
       <div className=' w-full mb-4 fixed bg-gray-950 border-b-[1px] border-gray-800 top-0 left-0 z-10'>
-        <Navbar user = {user} setUser = {setUser} search = {search} setSearch = {setSearch} setMusics = {setMusics} musics={musics}/>
+        <Navbar setCurrentMusic = {setCurrentMusic} user = {user} setUser = {setUser} search = {search} setSearch = {setSearch} setMusics = {setMusics} musics={musics}/>
       </div>
       <div className="flex mt-16">
           <div className="w-[16vw] fixed">
         <Sidebar user={user} setMusics={setMusics}/>
           </div>
           <div className="w-[84vw] ml-auto">
-        <Main preQueue = {preQueue} setPreQueue = {setPreQueue} currentMusic = {currentMusic} setCurrentMusic={setCurrentMusic} search = {search} user = {user} setUser = {setUser} musics={musics}/> 
+        <Main preQueue = {preQueue} setPreQueue = {setPreQueue} postQueue = {postQueue} setPostQueue = {setPostQueue} currentMusic = {currentMusic} setCurrentMusic={setCurrentMusic} search = {search} user = {user} setUser = {setUser} musics={musics}/> 
           </div>
       </div>
       {currentMusic==null||user==null?<></>:
       <div>
-          <Player setPreQueue={setPreQueue} currentMusic={currentMusic} setCurrentMusic={setCurrentMusic} preQueue = {preQueue}/>
+          <Player setPreQueue={setPreQueue} postQueue = {postQueue} setPostQueue = {setPostQueue} currentMusic={currentMusic} setCurrentMusic={setCurrentMusic} preQueue = {preQueue}/>
       </div>
       }
     </div>

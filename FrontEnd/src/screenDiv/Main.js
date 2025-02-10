@@ -8,7 +8,7 @@ import PlaylistForm from '../Components/Assets/PlaylistForm'
 import PlaylistPage from './PlaylistPage'
 import PlaylistMusicsDisplay from '../Components/Assets/PlaylistMusicsDisplay'
 
-const Main = ({preQueue, setPreQueue, currentMusic, setCurrentMusic, search, user, setUser, musics}) => {
+const Main = ({preQueue, setPreQueue, postQueue, setPostQueue, currentMusic, setCurrentMusic, search, user, setUser, musics}) => {
   return (
     
     <div className='mx-5 mb-16'>
@@ -16,10 +16,10 @@ const Main = ({preQueue, setPreQueue, currentMusic, setCurrentMusic, search, use
       <Routes>
        {
           user?<>
-          <Route path='/' element={<Home preQueue = {preQueue} setPreQueue = {setPreQueue} currentMusic = {currentMusic} setCurrentMusic={setCurrentMusic} search={search} setUser={setUser} musics = {musics} user = {user}/>}/>
+          <Route path='/' element={<Home preQueue = {preQueue} setPreQueue = {setPreQueue} postQueue = {postQueue} setPostQueue = {setPostQueue} currentMusic = {currentMusic} setCurrentMusic={setCurrentMusic} search={search} setUser={setUser} musics = {musics} user = {user}/>}/>
           <Route path='/playlist' element={<PlaylistPage user={user} setUser={setUser}/>}/>
           <Route path='/playlist/new' element={<PlaylistForm user = {user} setUser = {setUser}/>}/>
-          <Route path='/playlist/:id' element={<PlaylistMusicsDisplay user={user} setUser={setUser} setCurrentMusic={setCurrentMusic}/>}/>
+          <Route path='/playlist/:id' element={<PlaylistMusicsDisplay currentMusic={currentMusic} preQueue = {preQueue} setPreQueue = {setPreQueue} postQueue = {postQueue} setPostQueue = {setPostQueue} user={user} setUser={setUser} setCurrentMusic={setCurrentMusic}/>}/>
           <Route path='/login' element={<Navigate to="/" />}/>
           <Route path='/signup' element={<Navigate to="/" />}/>
           </>:<>
