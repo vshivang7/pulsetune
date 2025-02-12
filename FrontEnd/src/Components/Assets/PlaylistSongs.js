@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import React from 'react';
 import { useNavigate } from "react-router-dom";
 
-const PlaylistSongs = ({playlistMusics, preQueue, setPreQueue, postQueue, setPostQueue, music, playlistID, setUser, currentMusic, setCurrentMusic}) => {
+const PlaylistSongs = ({setCurrentPlaylist, playlistMusics, preQueue, setPreQueue, postQueue, setPostQueue, music, playlistID, setUser, currentMusic, setCurrentMusic}) => {
   const navigate = useNavigate();
   const handleDelete = async () => {
     if(currentMusic){
@@ -25,7 +25,7 @@ const PlaylistSongs = ({playlistMusics, preQueue, setPreQueue, postQueue, setPos
         credentials: 'include',
     })
     let data = await response.json();
-    console.log(data);
+    // console.log(data);
     setUser(data);
     navigate(`/playlist/${playlistID}`);
 }
@@ -47,13 +47,14 @@ const playMusic = () => {
     setPreQueue([...newPre]);
     setPostQueue([...newPost]);
     setCurrentMusic(music);
+    setCurrentPlaylist(playlistID);
 };
 
   return (
       <>
     
     <div className="relative bg-gray-900 h-full shadow-lg rounded p-3 group">
-    <div className="absolute cursor-pointer top-3 right-3 z-50 hover:bg-gray-400 hover:bg-opacity-45 rounded-full h-8 w-8 flex items-center justify-center transition-all gap-x-1.5 text-sm font-semibold text-white shadow-sm opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto transition-opacity duration-300">
+    <div className="absolute cursor-pointer top-3 right-3 z-50 hover:bg-gray-400 hover:bg-opacity-45 rounded-full h-8 w-8 flex items-center justify-center transition-all gap-x-1.5 text-sm font-semibold text-white shadow-sm opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto duration-300">
           <div onClick={handleDelete}><FontAwesomeIcon icon={faTrash}/></div>
         </div>
         <div className="group relative">

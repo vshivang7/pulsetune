@@ -1,7 +1,7 @@
 import { MenuItem } from '@headlessui/react'
 import React from 'react'
 
-const DropMenuItems = ({name, id, musicInfo, setUser}) => {
+const DropMenuItems = ({currentMusic, postQueue, preQueue, currentPlaylist, setPostQueue, name, id, musicInfo, setUser}) => {
   const handleButton = async () => {
     let response = await fetch(`http://localhost:8080/playlist/${id}`, {
       method: 'POST',
@@ -12,8 +12,17 @@ const DropMenuItems = ({name, id, musicInfo, setUser}) => {
       body: JSON.stringify(musicInfo)
     })
     let data = await response.json();
+    console.log(id === currentPlaylist)
+    if(id === currentPlaylist){
+      const isInQueue = postQueue.some(item => item._id === musicInfo._id) || 
+                  preQueue.some(item => item._id === musicInfo._id) || 
+                  currentMusic?._id === musicInfo._id;
+      if(!isInQueue){
+        setPostQueue(prev => [...prev, musicInfo]);
+      }
+    }
     setUser(data)
-    // console.log(await response.json)
+    // console.log(data)
   }
   return (
     <>

@@ -9,6 +9,7 @@ function App() {
   const [search, setSearch] = useState("");
   const [musics, setMusics] = useState([]);
   const [currentMusic, setCurrentMusic] = useState(null);
+  const [currentPlaylist, setCurrentPlaylist] = useState(1);
   const [preQueue, setPreQueue] = useState([]);
   const [postQueue, setPostQueue] = useState([]);
 
@@ -45,7 +46,7 @@ function App() {
   }, [user])
 
   return (
-    <div className="bg-black font-light text-white overflow-y-auto max-h-[100vh] scrollbar-hide">
+    <div className="bg-black font-light text-white overflow-y-auto max-h-[100vh] scrollbar-hide select-none">
       <div className=' w-full mb-4 fixed bg-gray-950 border-b-[1px] border-gray-800 top-0 left-0 z-10'>
         <Navbar setCurrentMusic = {setCurrentMusic} user = {user} setUser = {setUser} search = {search} setSearch = {setSearch} setMusics = {setMusics} musics={musics}/>
       </div>
@@ -54,7 +55,7 @@ function App() {
         <Sidebar user={user} setMusics={setMusics}/>
           </div>
           <div className="w-[84vw] ml-auto">
-        <Main preQueue = {preQueue} setPreQueue = {setPreQueue} postQueue = {postQueue} setPostQueue = {setPostQueue} currentMusic = {currentMusic} setCurrentMusic={setCurrentMusic} search = {search} user = {user} setUser = {setUser} musics={musics}/> 
+        <Main setCurrentPlaylist ={setCurrentPlaylist}currentPlaylist={currentPlaylist} preQueue = {preQueue} setPreQueue = {setPreQueue} postQueue = {postQueue} setPostQueue = {setPostQueue} currentMusic = {currentMusic} setCurrentMusic={setCurrentMusic} search = {search} user = {user} setUser = {setUser} musics={musics}/> 
           </div>
       </div>
       {currentMusic==null||user==null?<></>:

@@ -3,7 +3,7 @@ import DropDown from './DropDown';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlay } from '@fortawesome/free-solid-svg-icons';
 
-const Card = ({preQueue, setPreQueue, postQueue, setPostQueue, currentMusic, image, song_name, artist, url, user, id, setUser, setCurrentMusic}) => {
+const Card = ({currentPlaylist, setCurrentPlaylist, preQueue, setPreQueue, postQueue, setPostQueue, currentMusic, image, song_name, artist, url, user, id, setUser, setCurrentMusic}) => {
   const musicInfo = {
     _id: id,
     image: image,
@@ -22,6 +22,7 @@ const Card = ({preQueue, setPreQueue, postQueue, setPostQueue, currentMusic, ima
         setPreQueue([...prevQueue]);
       }
       setCurrentMusic(musicInfo);
+      setCurrentPlaylist(1)
     }
   };
 
@@ -30,7 +31,7 @@ const Card = ({preQueue, setPreQueue, postQueue, setPostQueue, currentMusic, ima
     
     <div className="relative bg-gray-900 h-full shadow-lg rounded p-3 group">
         <div className="absolute top-3 right-3 z-50 ">
-          <DropDown user={user} musicInfo={musicInfo} setUser={setUser} />
+          <DropDown currentMusic={currentMusic} postQueue={postQueue} preQueue={preQueue} currentPlaylist = {currentPlaylist} setPostQueue = {setPostQueue} user={user} musicInfo={musicInfo} setUser={setUser} />
         </div>
 
         <div className="group relative">

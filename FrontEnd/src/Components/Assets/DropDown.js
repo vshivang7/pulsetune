@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faEllipsisVertical } from '@fortawesome/free-solid-svg-icons'
 
-const DropDown = ({user, musicInfo, setUser}) => {
+const DropDown = ({currentMusic, postQueue, preQueue, currentPlaylist, setPostQueue, user, musicInfo, setUser}) => {
   return (
     <>
     <Menu as="div" className=" relative gap-x-3 w-fit inline-block text-left ">
@@ -32,7 +32,7 @@ const DropDown = ({user, musicInfo, setUser}) => {
           {
             (user?.playlists?.length>0)?user.playlists.map((playlist) => {
               return (
-                <div key = {playlist._id}><DropMenuItems name = {playlist.name} id = {playlist._id} musicInfo = {musicInfo} setUser={setUser}/></div>
+                <div key = {playlist._id}><DropMenuItems currentMusic={currentMusic} postQueue={postQueue} preQueue={preQueue} currentPlaylist = {currentPlaylist} setPostQueue = {setPostQueue} name = {playlist.name} id = {playlist._id} musicInfo = {musicInfo} setUser={setUser}/></div>
               )
             }):<></>
           }
