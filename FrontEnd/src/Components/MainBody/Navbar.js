@@ -24,7 +24,7 @@ const Navbar = ({user, setUser, search, setSearch, setMusics, musics, setCurrent
         </Link>
         <div className='w-1/5'>
             <a href='/' className='m-5'>MUSIC</a>
-            <a href='/' className='m-5'>PODCASTS</a>
+            <a href='/artists' className='m-5'>ARTISTS</a>
             <a href='/' className='m-5'>LIVE</a>
         </div>
         {

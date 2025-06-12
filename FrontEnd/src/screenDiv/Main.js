@@ -7,6 +7,8 @@ import ErrorPage from '../Components/Assets/ErrorPage'
 import PlaylistForm from '../Components/Assets/PlaylistForm'
 import PlaylistPage from './PlaylistPage'
 import PlaylistMusicsDisplay from '../Components/Assets/PlaylistMusicsDisplay'
+import ArtistMainPage from '../Components/Assets/ArtistMainPage'
+import OnlyArtist from '../Components/Assets/OnlyArtist'
 
 const Main = ({setCurrentPlaylist, currentPlaylist, preQueue, setPreQueue, postQueue, setPostQueue, currentMusic, setCurrentMusic, search, user, setUser, musics}) => {
   return (
@@ -20,6 +22,8 @@ const Main = ({setCurrentPlaylist, currentPlaylist, preQueue, setPreQueue, postQ
           <Route path='/playlist' element={<PlaylistPage user={user} setUser={setUser}/>}/>
           <Route path='/playlist/new' element={<PlaylistForm user = {user} setUser = {setUser}/>}/>
           <Route path='/playlist/:id' element={<PlaylistMusicsDisplay setCurrentPlaylist={setCurrentPlaylist} currentMusic={currentMusic} preQueue = {preQueue} setPreQueue = {setPreQueue} postQueue = {postQueue} setPostQueue = {setPostQueue} user={user} setUser={setUser} setCurrentMusic={setCurrentMusic}/>}/>
+          <Route path='/artists' element={<ArtistMainPage/>}/>
+          <Route path='/artists/:id' element={<OnlyArtist/>}/>
           <Route path='/login' element={<Navigate to="/" />}/>
           <Route path='/signup' element={<Navigate to="/" />}/>
           </>:<>
