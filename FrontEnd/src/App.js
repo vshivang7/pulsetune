@@ -17,56 +17,81 @@ function App() {
     const handlefetch = async () => {
       try {
         let res = await fetch("http://localhost:8080/userExist", {
-          method: 'GET',
-          credentials: 'include',
+          method: "GET",
+          credentials: "include",
         });
-  
-        if (!res.ok) {
-          throw new Error(`HTTP error! Status: ${res.status}`);
-        }
-  
         let data = await res.json();
-        if (data) setUser(data);
-      } catch (error) {
-      }
+        if (data.user) setUser(data.user);
+      } catch (error) {}
     };
     handlefetch();
-  }, [])
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
-      
-      if(user){
-        let response = await fetch(`http://localhost:8080/fetchData`)
-        let data = await response.json();
-        setMusics([...data]);
-        }
-    }
+      if (user) {
+        let res = await fetch("http://localhost:8080/fetchdata", {
+          method: "GET",
+          credentials: "include",
+        });
+        res = await res.json();
+        setMusics([...res.data]);
+      }
+    };
     fetchData();
-  }, [user])
+  }, [user]);
 
   return (
     <div className="bg-black font-light text-white overflow-y-auto max-h-[100vh] scrollbar-hide select-none">
-      <div className=' w-full mb-4 fixed bg-gray-950 border-b-[1px] border-gray-800 top-0 left-0 z-10'>
-        <Navbar setCurrentMusic = {setCurrentMusic} user = {user} setUser = {setUser} search = {search} setSearch = {setSearch} setMusics = {setMusics} musics={musics}/>
+      <div className=" w-full mb-4 fixed bg-gray-950 border-b-[1px] border-gray-800 top-0 left-0 z-10">
+        <Navbar
+          setCurrentMusic={setCurrentMusic}
+          user={user}
+          setUser={setUser}
+          search={search}
+          setSearch={setSearch}
+          setMusics={setMusics}
+          musics={musics}
+        />
       </div>
       <div className="flex mt-16">
-          <div className="w-[16vw] fixed">
-        <Sidebar user={user} setMusics={setMusics}/>
-          </div>
-          <div className="w-[84vw] ml-auto">
-        <Main setCurrentPlaylist ={setCurrentPlaylist}currentPlaylist={currentPlaylist} preQueue = {preQueue} setPreQueue = {setPreQueue} postQueue = {postQueue} setPostQueue = {setPostQueue} currentMusic = {currentMusic} setCurrentMusic={setCurrentMusic} search = {search} user = {user} setUser = {setUser} musics={musics}/> 
-          </div>
+        <div className="w-[16vw] fixed">
+          <Sidebar user={user} setMusics={setMusics} />
+        </div>
+        <div className="w-[84vw] ml-auto">
+          <Main
+            setCurrentPlaylist={setCurrentPlaylist}
+            currentPlaylist={currentPlaylist}
+            preQueue={preQueue}
+            setPreQueue={setPreQueue}
+            postQueue={postQueue}
+            setPostQueue={setPostQueue}
+            currentMusic={currentMusic}
+            setCurrentMusic={setCurrentMusic}
+            search={search}
+            user={user}
+            setUser={setUser}
+            musics={musics}
+          />
+        </div>
       </div>
-      {currentMusic==null||user==null?<></>:
-      <div>
-          <Player setPreQueue={setPreQueue} postQueue = {postQueue} setPostQueue = {setPostQueue} currentMusic={currentMusic} setCurrentMusic={setCurrentMusic} preQueue = {preQueue}/>
-      </div>
-      }
+      {currentMusic == null || user == null ? (
+        <></>
+      ) : (
+        <div>
+          <Player
+            setPreQueue={setPreQueue}
+            postQueue={postQueue}
+            setPostQueue={setPostQueue}
+            currentMusic={currentMusic}
+            setCurrentMusic={setCurrentMusic}
+            preQueue={preQueue}
+          />
+        </div>
+      )}
     </div>
   );
 }
 export default App;
-
 
 //samit lodddddeeee dekh bhadwe
