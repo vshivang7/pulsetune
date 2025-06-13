@@ -1,5 +1,7 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { toast } from "react-toastify";
 
 const PlaylistForm = ({ user, setUser }) => {
   const [name, setName] = useState('');
@@ -7,21 +9,17 @@ const PlaylistForm = ({ user, setUser }) => {
 
   const handleSubmit = async () => {
     try {
-      const response = await fetch('http://localhost:8080/playlist/new', {
-        method: 'POST',
-        credentials: 'include',
+      const response = await axios.post('http://localhost:8080/playlist/new', { name: name.toLowerCase() },{
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ name: name.toLowerCase() }),
+        withCredentials: true,
       });
-      const res = await response.json();
-      if (response.ok) {
-        setUser(res);
-        navigate('/');
-      }
-    } catch (e) {
-      console.log('Some error occurred');
+      setUser(response.data.user);
+      toast.success(response.data.message);
+      navigate('/');
+    } catch (err) {
+      toast.error(err.response.data.message);
     }
   };
 

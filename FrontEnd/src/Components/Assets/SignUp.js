@@ -1,5 +1,7 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import axios from "axios";
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 const SignUp = () => {
   const [user, setUser] = useState({
@@ -15,11 +17,11 @@ const SignUp = () => {
   const handleChange = (e) => {
     const { name, value } = e.target;
 
-    setUser(prevUser => ({
+    setUser((prevUser) => ({
       ...prevUser,
-      [name]: value
+      [name]: value,
     }));
-  }
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -31,32 +33,28 @@ const SignUp = () => {
     }
 
     try {
-      const response = await fetch('http://localhost:8080/signup', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
+      const response = await axios.post(
+        "http://localhost:8080/signup",
+        {
           username: user.username,
           email: user.email,
           password: user.password,
-        }),
-      });
-
-      if (response.ok) {
-        navigate('/login');
-      } else {
-        const data = await response.json();
-        setError(data.message || "Signup failed. Please try again.");
-      }
+        },
+        {
+          headers: { "Content-Type": "application/json" },
+        }
+      );
+      toast.success(response.data.message);
+      navigate("/login");
     } catch (err) {
-      console.error(err);
-      setError("Network error. Please try again.");
+      toast.error(err.response.data.message);
     }
-  }
+  };
 
   return (
     <section>
       <div className="flex flex-col items-center justify-top mt-10 mx-auto md:h-screen lg:py-0">
-        <div className="w-full rounded-lg shadow md:mt-0 sm:max-w-md xl:p-0">
+        <div className="w-full rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
             <h1 className="text-xl font-bold leading-tight tracking-tight">
               Create an account
@@ -64,8 +62,9 @@ const SignUp = () => {
             {error && <p className="text-red-600 font-semibold">{error}</p>}
             <form
               noValidate
-              className="space-y-4 md:space-y-6"
-              onSubmit={e => {
+              autoComplete="off"
+              className="space-y-4 md:space-y-6 group"
+              onSubmit={(e) => {
                 e.preventDefault();
                 e.target.classList.add("validated");
                 if (!e.target.checkValidity()) {
@@ -76,67 +75,101 @@ const SignUp = () => {
               }}
             >
               <div>
-                <label htmlFor="name" className="block mb-2 text-sm font-medium">Username</label>
+                <label
+                  htmlFor="name"
+                  className="block mb-2 text-sm font-medium"
+                >
+                  Username
+                </label>
                 <input
                   type="text"
                   name="username"
                   id="name"
+                  autoComplete="off"
                   onChange={handleChange}
                   pattern="^[a-zA-Z][a-zA-Z0-9_]{3,16}$"
-                  className="hover:border-blue-400 peer border-2 focus:ring-2 [.validated_&]:invalid:border-pink-600 [.validated_&]:invalid:ring-2 [.validated_&]:invalid:ring-pink-200 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                  className="hover:border-blue-400 peer border-2 focus:ring-2 [.validated_&]:peer-invalid:border-pink-600 [.validated_&]:peer-invalid:ring-2 [.validated_&]:peer-invalid:ring-pink-200 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="abc"
                   required
                   aria-describedby="username-error"
                 />
-                <p id="username-error" className="mt-2 hidden [.validated_&]:peer-invalid:block text-pink-600">
+                <p
+                  id="username-error"
+                  className="mt-2 hidden [.validated_&]:peer-invalid:block text-pink-600"
+                >
                   Please provide a valid username.
                 </p>
               </div>
 
               <div>
-                <label htmlFor="email" className="block mb-2 text-sm font-medium">Your email</label>
+                <label
+                  htmlFor="email"
+                  className="block mb-2 text-sm font-medium"
+                >
+                  Your email
+                </label>
                 <input
                   type="email"
-                  name="email"
+                  name="e_field"
                   id="email"
+                  autoComplete="off"
                   onChange={handleChange}
-                  className="hover:border-blue-400 peer border-2 focus:ring-2 [.validated_&]:invalid:border-pink-600 [.validated_&]:invalid:ring-2 [.validated_&]:invalid:ring-pink-200 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                  className="hover:border-blue-400 peer border-2 focus:ring-2 [.validated_&]:peer-invalid:border-pink-600 [.validated_&]:peer-invalid:ring-2 [.validated_&]:peer-invalid:ring-pink-200 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   placeholder="name@company.com"
                   required
                   aria-describedby="email-error"
                 />
-                <p id="email-error" className="mt-2 hidden [.validated_&]:peer-invalid:block text-pink-600">
+                <p
+                  id="email-error"
+                  className="mt-2 hidden [.validated_&]:peer-invalid:block text-pink-600"
+                >
                   Please enter a valid email address.
                 </p>
               </div>
 
               <div>
-                <label htmlFor="password" className="block mb-2 text-sm font-medium">Password</label>
+                <label
+                  htmlFor="password"
+                  className="block mb-2 text-sm font-medium"
+                >
+                  Password
+                </label>
                 <input
                   type="password"
                   name="password"
                   id="password"
+                  autoComplete="new-password"
                   onChange={handleChange}
                   placeholder="••••••••"
-                  pattern='^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$'
-                  className="hover:border-blue-400 peer border-2 focus:ring-2 [.validated_&]:invalid:border-pink-600 [.validated_&]:invalid:ring-2 [.validated_&]:invalid:ring-pink-200 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                  pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$"
+                  className="hover:border-blue-400 peer border-2 focus:ring-2 [.validated_&]:peer-invalid:border-pink-600 [.validated_&]:peer-invalid:ring-2 [.validated_&]:peer-invalid:ring-pink-200 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required
                   aria-describedby="password-error"
                 />
-                <p id="password-error" className="mt-2 hidden [.validated_&]:peer-invalid:block text-pink-600">
-                  Provide a password with letters, numbers, and optionally special characters (min 6 chars).
+                <p
+                  id="password-error"
+                  className="mt-2 hidden [.validated_&]:peer-invalid:block text-pink-600"
+                >
+                  Provide a password with letters, numbers, and optionally
+                  special characters (min 6 chars).
                 </p>
               </div>
 
               <div>
-                <label htmlFor="confirm-password" className="block mb-2 text-sm font-medium">Confirm password</label>
+                <label
+                  htmlFor="confirm-password"
+                  className="block mb-2 text-sm font-medium"
+                >
+                  Confirm password
+                </label>
                 <input
                   type="password"
                   name="confirm_password"
                   id="confirm-password"
+                  autoComplete="new-password"
                   onChange={handleChange}
                   placeholder="••••••••"
-                  className="hover:border-blue-400 peer border-2 focus:ring-2 [.validated_&]:invalid:border-pink-600 [.validated_&]:invalid:ring-2 [.validated_&]:invalid:ring-pink-200 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5"
+                  className="hover:border-blue-400 peer border-2 focus:ring-2 [.validated_&]:peer-invalid:border-pink-600 [.validated_&]:peer-invalid:ring-2 [.validated_&]:peer-invalid:ring-pink-200 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required
                 />
                 <p className="mt-2 hidden [.validated_&]:peer-invalid:block text-pink-600">
@@ -146,16 +179,16 @@ const SignUp = () => {
 
               <button
                 type="submit"
-                className="w-full text-white bg-blue-800 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2 text-center"
+                className="w-full text-white bg-blue-800 hover:bg-primary-700 focus:ring-4 focus:outline-none focus:ring-primary-300 font-medium rounded-lg text-sm px-5 py-2 text-center dark:bg-primary-600 dark:hover:bg-primary-700 dark:focus:ring-primary-800"
               >
                 Create an account
               </button>
 
-              <p className="text-sm font-light text-gray-500">
+              <p className="text-sm font-light text-gray-500 dark:text-black-400">
                 Already have an account?{" "}
                 <Link
                   to="/login"
-                  className="font-medium text-primary-600 hover:underline"
+                  className="font-medium text-primary-600 hover:underline dark:text-primary-500"
                 >
                   Login here
                 </Link>
@@ -165,7 +198,7 @@ const SignUp = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
 export default SignUp;

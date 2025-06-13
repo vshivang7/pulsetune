@@ -31,7 +31,7 @@ const LoginForm = ({ user, setUser }) => {
       toast.success(res.data.message);
       navigate("/");
     } catch (err) {
-      console.log(err.response)
+      console.log(err.response);
       toast.error(err.response.data.message);
     }
   };
@@ -46,6 +46,7 @@ const LoginForm = ({ user, setUser }) => {
             </h1>
             <form
               noValidate
+              autoComplete="off"
               className="space-y-4 md:space-y-6 group"
               onSubmit={handleSubmit}
             >
@@ -60,6 +61,7 @@ const LoginForm = ({ user, setUser }) => {
                   type="text"
                   name="username"
                   id="username"
+                  autoComplete="off"
                   onChange={handleChange}
                   pattern="^[a-zA-Z][a-zA-Z0-9_]{3,16}$"
                   className="hover:border-blue-400 peer border-2 focus:ring-2 [.validated_&]:invalid:border-pink-600 [.validated_&]:invalid:ring-2 [.validated_&]:invalid:ring-pink-200 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
@@ -81,6 +83,7 @@ const LoginForm = ({ user, setUser }) => {
                   type="password"
                   name="password"
                   id="password"
+                  autoComplete="new-password"
                   onChange={handleChange}
                   pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$"
                   placeholder="••••••••"

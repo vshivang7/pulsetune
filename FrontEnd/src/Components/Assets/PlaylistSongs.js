@@ -1,7 +1,9 @@
 import { faPlay, faTrash } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
 import React from 'react';
 import { useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 const PlaylistSongs = ({ setCurrentPlaylist, playlistMusics, preQueue, setPreQueue, postQueue, setPostQueue, music, playlistID, setUser, currentMusic, setCurrentMusic }) => {
   const navigate = useNavigate();
@@ -19,18 +21,14 @@ const PlaylistSongs = ({ setCurrentPlaylist, playlistMusics, preQueue, setPreQue
         setPreQueue(prev => prev.filter(elem => elem._id !== music._id));
         setPostQueue(prev => prev.filter(elem => elem._id !== music._id));
       }
-      const response = await fetch(`http://localhost:8080/playlist/${playlistID}/music/${music._id}`, {
-        method: 'DELETE',
-        credentials: 'include',
+      const response = await axios.delete(`http://localhost:8080/playlist/${playlistID}/music/${music._id}`, {
+        withCredentials: true,
       });
-      if (!response.ok) throw new Error(`Failed to delete music: ${response.status}`);
-
-      let data = await response.json();
-      setUser(data);
+      setUser(response.data.user);
+      toast.success(response.data.message);
       navigate(`/playlist/${playlistID}`);
-    } catch (error) {
-      console.error("Delete failed:", error);
-      // Optionally show some error UI or toast here
+    } catch (err) {
+      toast.error(err.response.data.message);
     }
   };
 

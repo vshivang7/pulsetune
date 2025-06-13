@@ -17,7 +17,11 @@ export const createPlaylist = catchAsyncErrors(async (req, res, next) => {
   user.playlists.push({ name });
   await user.save();
 
-  res.status(201).json(user);
+  res.status(201).json({
+    success: true,
+    user,
+    message:"Playlist Added"
+  });
 });
 
 export const addMusicToPlaylist = catchAsyncErrors(async (req, res, next) => {
@@ -72,7 +76,11 @@ export const deletePlaylist = catchAsyncErrors(async (req, res, next) => {
   user.playlists = user.playlists.filter((p) => !p._id.equals(id));
 
   await User.findByIdAndUpdate(req.user._id, user);
-  res.status(200).json(user);
+  res.status(200).json({
+    success: true,
+    user,
+    message:"PlayList Deleted"
+  });
 });
 
 export const removeMusicFromPlaylist = catchAsyncErrors(async (req, res, next) => {
@@ -88,5 +96,9 @@ export const removeMusicFromPlaylist = catchAsyncErrors(async (req, res, next) =
   });
 
   await User.findByIdAndUpdate(req.user._id, user);
-  res.status(200).json(user);
+  res.status(200).json({
+    success: true,
+    user,
+    message:"Song removed from playlist"
+  });
 });

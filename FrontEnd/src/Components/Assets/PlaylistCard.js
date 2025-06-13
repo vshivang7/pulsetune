@@ -1,22 +1,18 @@
+import axios from 'axios';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 const PlaylistCard = ({ playlist, setUser }) => {
   const handleDelete = async () => {
     try {
-      const res = await fetch(`http://localhost:8080/playlist/${playlist._id}`, {
-        method: 'DELETE',
-        credentials: 'include',
+      const response = await axios.delete(`http://localhost:8080/playlist/${playlist._id}`, {
+        withCredentials: true,
       });
-
-      if (!res.ok) {
-        throw new Error(`HTTP error! Status: ${res.status}`);
-      }
-
-      const data = await res.json();
-      if (data) setUser(data);
-    } catch (error) {
-      // optionally handle error here
+      setUser(response.data.user);
+      toast.success(response.data.message);
+    } catch (err) {
+      toast.error(err.response.data.message);
     }
   };
 

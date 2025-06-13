@@ -6,6 +6,8 @@ import {
   faArrowRightFromBracket,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
+import { toast } from "react-toastify";
 
 const Navbar = ({
   user,
@@ -23,12 +25,16 @@ const Navbar = ({
   };
 
   const handleLogOut = async () => {
-    setCurrentMusic(null);
-    let response = await fetch("http://localhost:8080/logout", {
-      method: "GET",
-      credentials: "include",
-    });
-    if (response.ok) setUser(null);
+    try {
+      let response = await axios.get("http://localhost:8080/logout", {
+        withCredentials: true,
+      });
+      setCurrentMusic(null);
+      setUser(null);
+      toast.success(response.data.message);
+    } catch (err) {
+      toast.error(err.response.data.message);
+    }
   };
 
   return (
