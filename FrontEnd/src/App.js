@@ -3,6 +3,7 @@ import Main from "./screenDiv/Main.js";
 import { useEffect, useState } from "react";
 import Navbar from "./Components/MainBody/Navbar.js";
 import Player from "./screenDiv/Player.js";
+import { ToastContainer } from "react-toastify";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -89,9 +90,8 @@ function App() {
           />
         </div>
       )}
+      <ToastContainer />
     </div>
   );
 }
 export default App;
-
-//samit lodddddeeee dekh bhadwe

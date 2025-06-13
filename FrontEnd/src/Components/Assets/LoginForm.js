@@ -1,57 +1,59 @@
-import React, { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
+import React, { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
+import axios from "axios";
 
 const LoginForm = ({ user, setUser }) => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [data, setData] = useState({
-    username: '',
-    password: '',
-  })
-  const [error, setError] = useState('')
+    username: "",
+    password: "",
+  });
+  const [error, setError] = useState("");
 
   const handleChange = (e) => {
-    const { name, value } = e.target
-    setData(prev => ({ ...prev, [name]: value }))
-  }
+    const { name, value } = e.target;
+    setData((prev) => ({ ...prev, [name]: value }));
+  };
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
-    setError('')
+    e.preventDefault();
+    setError("");
 
     try {
-      const response = await fetch('http://localhost:8080/login', {
-        method: 'POST',
-        credentials: 'include',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data),
-      })
-
-      if (!response.ok) {
-        setError('Invalid credentials')
-        return
-      }
-
-      const userData = await response.json()
-      setUser(userData)
-      navigate('/')
-    } catch {
-      setError('Some error occurred, please try again')
+      const res = await axios.post("http://localhost:8080/login", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
+      });
+      setUser(res.data.user);
+      toast.success(res.data.message);
+      navigate("/");
+    } catch (err) {
+      console.log(err.response)
+      toast.error(err.response.data.message);
     }
-  }
+  };
 
   return (
     <section>
       <div className="flex flex-col items-center justify-top mt-10 mx-auto md:h-screen lg:py-0">
         <div className="w-full rounded-lg shadow dark:border md:mt-0 sm:max-w-md xl:p-0 dark:border-gray-700">
           <div className="p-6 space-y-4 md:space-y-6 sm:p-8">
-            <h1 className="text-xl font-bold leading-tight tracking-tight">Login</h1>
+            <h1 className="text-xl font-bold leading-tight tracking-tight">
+              Login
+            </h1>
             <form
               noValidate
               className="space-y-4 md:space-y-6 group"
               onSubmit={handleSubmit}
             >
               <div>
-                <label htmlFor="username" className="block mb-2 text-sm font-medium">
+                <label
+                  htmlFor="username"
+                  className="block mb-2 text-sm font-medium"
+                >
                   Username
                 </label>
                 <input
@@ -69,7 +71,10 @@ const LoginForm = ({ user, setUser }) => {
                 </p>
               </div>
               <div>
-                <label htmlFor="password" className="block mb-2 text-sm font-medium">
+                <label
+                  htmlFor="password"
+                  className="block mb-2 text-sm font-medium"
+                >
                   Password
                 </label>
                 <input
@@ -94,7 +99,7 @@ const LoginForm = ({ user, setUser }) => {
                 Login
               </button>
               <p className="text-sm font-light text-gray-500 dark:text-black-400">
-                Don't have an account?{' '}
+                Don't have an account?{" "}
                 <Link
                   to="/signup"
                   className="font-medium text-primary-600 hover:underline dark:text-primary-500"
@@ -107,7 +112,7 @@ const LoginForm = ({ user, setUser }) => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default LoginForm
+export default LoginForm;

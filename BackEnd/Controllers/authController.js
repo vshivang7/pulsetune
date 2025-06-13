@@ -1,7 +1,8 @@
 import User from "../Models/userSchema.js";
 import Music from "../Models/musicSchema.js";
-import ErrorHandler from "../utils/errorHandler.js";
+import ErrorHandler from "../middlewares/error.js";
 import { catchAsyncErrors } from "../middlewares/catchAsyncErrors.js";
+import passport from "passport";
 
 export const signup = catchAsyncErrors(async (req, res, next) => {
   const { username, email, password } = req.body;
@@ -30,15 +31,12 @@ export const signup = catchAsyncErrors(async (req, res, next) => {
 });
 
 export const login = catchAsyncErrors((req, res, next) => {
-  if (!req.user) {
-    return next(new ErrorHandler("Invalid credentials", 401));
-  }
-
   const { _id, email, username, playlists } = req.user;
 
   res.status(200).json({
     success: true,
     user: { _id, email, username, playlists },
+    message: "User logged in Successfully",
   });
 });
 
@@ -57,7 +55,7 @@ export const userExist = catchAsyncErrors((req, res) => {
 
 export const logout = catchAsyncErrors((req, res, next) => {
   if (req.isAuthenticated()) {
-    req.logout(err => {
+    req.logout((err) => {
       if (err) return next(new ErrorHandler("Logout failed", 500));
     });
   }

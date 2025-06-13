@@ -1,4 +1,4 @@
-import ErrorHandler from "../utils/errorHandler.js";
+import ErrorHandler from "../middlewares/error.js";
 
 export const isAuthenticated = (req, res, next) => {
   if (req.isAuthenticated()) {
