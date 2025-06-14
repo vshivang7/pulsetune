@@ -4,24 +4,25 @@ import session from "express-session";
 import passport from "passport";
 import localStrategy from "passport-local";
 import cookieParser from "cookie-parser";
-
-import { connectDB } from "./connectDB.js";
-import User from './Models/userSchema.js';
+import { config } from "dotenv";
+import connectDB from "./connectDb.js";
+import User from "./Models/userSchema.js";
 import playlistRoute from "./Routes/playlist.js";
 import homeRoutes from "./Routes/authRoutes.js";
 import { errorMiddleware } from "./middlewares/error.js";
 
+config();
 const app = express();
-const port = 8080;
+const port = process.env.PORT;
 
 const sessionOptions = {
-  secret: "SUPERSECRETCODE",
+  secret: process.env.SESSION_CODE,
   resave: false,
   saveUninitialized: false,
 };
 
 const corsOptions = {
-  origin: "http://localhost:3000",
+  origin: process.env.FRONTEND_URL,
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   credentials: true,
 };
@@ -46,9 +47,7 @@ app.use("/", homeRoutes);
 app.use(errorMiddleware);
 
 // DB + Server Start
-connectDB()
-  .then(() => console.log("Database Connected"))
-  .catch((err) => console.log("DB Connection Error:", err));
+await connectDB();
 
 app.listen(port, () => {
   console.log(`Server started on port ${port}...`);

@@ -47,15 +47,15 @@ const Navbar = ({
         <div className="text-4xl caveat-logo">PulseTune</div>
       </Link>
       <div className="w-1/5">
-        <a href="/" className="m-5">
+        <Link to="/" className="m-5">
           MUSIC
-        </a>
-        <a href="/artists" className="m-5">
+        </Link>
+        <Link to="/artists" className="m-5">
           ARTISTS
-        </a>
-        <a href="/" className="m-5">
+        </Link>
+        <Link to="/" className="m-5">
           LIVE
-        </a>
+        </Link>
       </div>
       {user != null ? (
         <div className="h-10 w-[35vw] ml-5 flex items-center justify-center rounded-md gap-2 px-3 bg-gray-800 hover:bg-gray-700 focus-within:w-[50vw] border-[1px] border-gray-700 transition-all duration-500">

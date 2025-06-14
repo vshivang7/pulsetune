@@ -36,7 +36,7 @@ function App() {
           credentials: "include",
         });
         res = await res.json();
-        setMusics([...res.data]);
+        if(res.data) setMusics([...res.data]);
       }
     };
     fetchData();

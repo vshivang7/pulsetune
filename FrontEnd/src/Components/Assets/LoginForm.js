@@ -31,8 +31,8 @@ const LoginForm = ({ user, setUser }) => {
       toast.success(res.data.message);
       navigate("/");
     } catch (err) {
-      console.log(err.response);
-      toast.error(err.response.data.message);
+      if(!err.response) toast.error(err.message)
+      else toast.error(err.response.data.message);
     }
   };
 
