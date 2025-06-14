@@ -110,7 +110,7 @@ const SignUp = () => {
                 </label>
                 <input
                   type="email"
-                  name="e_field"
+                  name="email"
                   id="email"
                   autoComplete="off"
                   onChange={handleChange}

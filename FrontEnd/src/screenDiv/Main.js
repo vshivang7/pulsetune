@@ -73,7 +73,15 @@ const Main = ({
               }
             />
             <Route path="/artists" element={<ArtistMainPage />} />
-            <Route path="/artists/:id" element={<OnlyArtist />} />
+            <Route path="/artists/:id" element={<OnlyArtist
+              setCurrentMusic={setCurrentMusic}
+              currentMusic={currentMusic}
+              preQueue={preQueue}
+              setPreQueue={setPreQueue}
+              postQueue={postQueue}
+              setPostQueue={setPostQueue}
+              setCurrentPlaylist={setCurrentPlaylist}
+            />} />
             <Route path="/login" element={<Navigate to="/" />} />
             <Route path="/signup" element={<Navigate to="/" />} />
           </>

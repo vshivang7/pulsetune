@@ -1,59 +1,82 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { faPlay } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const OnlyArtist = () => {
+const OnlyArtist = ({
+  setCurrentMusic,
+  currentMusic,
+  preQueue,
+  setPreQueue,
+  postQueue,
+  setPostQueue,
+  setCurrentPlaylist
+}) => {
   const { id } = useParams();
   const [artist, setArtist] = useState(null);
-  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const fetchArtist = async () => {
-      try {
-        const response = await fetch(
-        //   `https://v1.nocodeapi.com/vshivang/spotify/dTkOvSBZSnjjGDpb/artists?id=${id}`
-        );
-        const data = await response.json();
-        // If the API returns a single artist object
-        if (data && data.id) {
-          setArtist(data);
-        } else if (data.artists && Array.isArray(data.artists) && data.artists.length > 0) {
-          setArtist(data.artists[0]);
-        }
-      } catch (error) {
-        console.error('Failed to fetch artist:', error);
-      } finally {
-        setLoading(false);
-      }
-    };
-    fetchArtist();
+    const allArtists = JSON.parse(localStorage.getItem('allArtists') || '[]');
+    const found = allArtists.find(a => a.name === id);
+    setArtist(found || null);
   }, [id]);
 
-  if (loading) {
-    return <div className="text-white p-8">Loading...</div>;
-  }
+  const playMusic = (song) => {
+    if (!artist) return;
+    const index = artist.songs.findIndex(m => m._id === song._id);
+    if (index === -1) return;
+
+    setPreQueue(artist.songs.slice(0, index));
+    setPostQueue(artist.songs.slice(index + 1));
+    setCurrentMusic(song);
+    setCurrentPlaylist && setCurrentPlaylist(null);
+  };
 
   if (!artist) {
     return <div className="text-white p-8">Artist not found.</div>;
   }
 
   return (
-    <div className="p-8 flex flex-col items-center">
-      <img
-        src={artist.images && artist.images[0] ? artist.images[0].url : ''}
-        alt={artist.name}
-        className="w-48 h-48 object-cover rounded-full mb-6 border-4 border-gray-700"
-      />
-      <h2 className="text-4xl font-bold text-white mb-2">{artist.name}</h2>
-      <p className="text-gray-400 mb-4">Popularity: {artist.popularity}</p>
-      <p className="text-gray-400 mb-4">Followers: {artist.followers ? artist.followers.total : 'N/A'}</p>
-      <a
-        href={artist.external_urls ? artist.external_urls.spotify : '#'}
-        target="_blank"
-        rel="noopener noreferrer"
-        className="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600 transition"
-      >
-        View on Spotify
-      </a>
+    <div className="relative bg-gray-900 min-h-screen p-8">
+      <div className="flex flex-col items-center mb-8">
+        <img
+          src={artist.coverImage}
+          alt={artist.name}
+          className="w-48 h-48 object-cover rounded-full mb-6 border-4 border-gray-700"
+          onError={e => { e.target.src = ""; }}
+        />
+        <h2 className="text-4xl font-bold text-white mb-2">{artist.name}</h2>
+        <p className="text-lg text-gray-300 mb-2">Songs: {artist.songs.length}</p>
+      </div>
+      <div className="grid gap-3 grid-cols-1 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 w-full mt-5">
+        {artist.songs.map((song) => (
+          <div key={song._id} className="relative bg-gray-900 h-full shadow-lg rounded p-3 group m-2">
+            <div className="group relative">
+              <img
+                className="w-full block rounded-md"
+                src={song.image}
+                alt={`Album cover for ${song.song_name} by ${song.artist}`}
+                onError={e => { e.target.src = ""; }}
+              />
+              <div className="absolute bg-black rounded bg-opacity-0 group-hover:bg-opacity-30 transition-all duration-500 w-full h-full top-0 flex items-center group-hover:opacity-100 justify-evenly">
+                <button
+                  aria-label={`Play ${song.song_name} by ${song.artist}`}
+                  onClick={() => playMusic(song)}
+                  className="hover:scale-110 text-white opacity-0 transform translate-y-3 group-hover:translate-y-0 group-hover:opacity-100 transition"
+                >
+                  <FontAwesomeIcon icon={faPlay} className="text-2xl" />
+                </button>
+              </div>
+            </div>
+            <div className="mt-1">
+              <h3 className="text-white text-lg">{song.song_name.length > 17 ? `${song.song_name.slice(0, 14)}...` : song.song_name}</h3>
+            </div>
+            <div className='flex justify-between'>
+              <p className="mt-1 text-gray-400">{song.artist}</p>
+            </div>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
