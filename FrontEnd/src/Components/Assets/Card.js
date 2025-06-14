@@ -28,7 +28,7 @@ const Card = ({ currentPlaylist, setCurrentPlaylist, preQueue, setPreQueue, post
   return (
     <>
       <div className="relative bg-gray-900 h-full shadow-lg rounded p-3 group">
-        <div className="absolute top-3 right-3 z-50 ">
+        <div className="absolute top-3 right-3 z-10 ">
           <DropDown currentMusic={currentMusic} postQueue={postQueue} preQueue={preQueue} currentPlaylist={currentPlaylist} setPostQueue={setPostQueue} user={user} musicInfo={musicInfo} setUser={setUser} />
         </div>
         <div className="group relative">

@@ -44,7 +44,7 @@ function App() {
 
   return (
     <div className="bg-black font-light text-white overflow-y-auto max-h-[100vh] scrollbar-hide select-none">
-      <div className=" w-full mb-4 fixed bg-gray-950 border-b-[1px] border-gray-800 top-0 left-0 z-10">
+      <div className=" w-full mb-4 fixed bg-gray-950 border-b-[1px] border-gray-800 top-0 left-0 z-20">
         <Navbar
           setCurrentMusic={setCurrentMusic}
           user={user}
