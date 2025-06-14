@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+import { faEye, faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-const ArtistMainPage = () => {
+const AllArtists = () => {
   const [artists, setArtists] = useState([]);
+  const [loading, setLoading] = useState(true); // loading state
 
   useEffect(() => {
     const fetchArtists = async () => {
       try {
-        const res = await fetch('http://localhost:8080/fetchdata', {
-          method: 'GET',
-          credentials: 'include',
+        const res = await axios.get('http://localhost:8080/fetchdata', {
+          withCredentials: true,
         });
-        const data = await res.json();
+        const data = res.data;
         const items = Array.isArray(data.data) ? data.data : [];
         const artistMap = {};
 
@@ -24,27 +27,39 @@ const ArtistMainPage = () => {
                 songs: [],
               };
             }
-            // Store the full song object
             artistMap[item.artist].songs.push({
               _id: item._id,
               image: item.image,
               song_name: item.song_name,
               url: item.url,
-              // add any other fields you want to keep
             });
           }
         });
 
-        setArtists(Object.values(artistMap));
-        // Save to localStorage for access in OnlyArtist
-        localStorage.setItem('allArtists', JSON.stringify(Object.values(artistMap)));
-        console.log('Fetched unique artists with cover and songs:', Object.values(artistMap));
+        // Sort artists by number of songs (descending)
+        const sortedArtists = Object.values(artistMap).sort(
+          (a, b) => b.songs.length - a.songs.length
+        );
+
+        setArtists(sortedArtists);
+        localStorage.setItem('allArtists', JSON.stringify(sortedArtists));
       } catch (error) {
         console.error('Failed to fetch artists:', error);
+      } finally {
+        setLoading(false); // stop loading after fetch
       }
     };
     fetchArtists();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col justify-center items-center min-h-[40vh]">
+        <FontAwesomeIcon icon={faSpinner} spin className="text-3xl text-white mb-3" />
+        <span className="text-white text-xl">Loading Artists...</span>
+      </div>
+    );
+  }
 
   return (
     <div className="p-8">
@@ -62,9 +77,10 @@ const ArtistMainPage = () => {
             <p className="text-gray-400 text-center mb-2">Songs: {artist.songs.length}</p>
             <Link
               to={`/artists/${encodeURIComponent(artist.name)}`}
-              className="px-4 py-2 bg-red-500 text-white rounded hover:bg-red-700 transition"
+              className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
             >
-              View Artist
+              <FontAwesomeIcon icon={faEye} className='mr-1' />
+              <span className="hidden sm:inline">Artist</span>
             </Link>
           </div>
         ))}
@@ -73,4 +89,4 @@ const ArtistMainPage = () => {
   );
 };
 
-export default ArtistMainPage;
+export default AllArtists;

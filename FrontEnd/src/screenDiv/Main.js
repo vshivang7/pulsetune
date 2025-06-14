@@ -7,7 +7,7 @@ import ErrorPage from "../Components/Assets/ErrorPage";
 import PlaylistForm from "../Components/Assets/PlaylistForm";
 import PlaylistPage from "./PlaylistPage";
 import PlaylistMusicsDisplay from "../Components/Assets/PlaylistMusicsDisplay";
-import ArtistMainPage from "../Components/Assets/ArtistMainPage";
+import AllArtists from "../Components/Assets/AllArtists";
 import OnlyArtist from "../Components/Assets/OnlyArtist";
 
 const Main = ({
@@ -72,7 +72,7 @@ const Main = ({
                 />
               }
             />
-            <Route path="/artists" element={<ArtistMainPage />} />
+            <Route path="/artists" element={<AllArtists />} />
             <Route path="/artists/:id" element={<OnlyArtist
               setCurrentMusic={setCurrentMusic}
               currentMusic={currentMusic}
