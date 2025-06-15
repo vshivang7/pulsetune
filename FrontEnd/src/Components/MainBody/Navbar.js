@@ -41,12 +41,12 @@ const Navbar = ({
     <div className="h-16 flex items-center rounded-tl-xl rounded-tr-xl">
       <Link
         to="/"
-        className="flex text-red-500 justify-center items-center w-1/5 h-[6vh]"
+        className="hidden xl:flex text-red-500 justify-center items-center w-1/5 h-[6vh]"
       >
         <FontAwesomeIcon icon={faSoundcloud} size="3x" />
         <div className="text-4xl caveat-logo">PulseTune</div>
       </Link>
-      <div className="w-1/5">
+      <div className="w-1/5 hidden xl:block">
         <Link to="/" className="m-5">
           MUSIC
         </Link>
@@ -58,7 +58,7 @@ const Navbar = ({
         </Link>
       </div>
       {user != null ? (
-        <div className="h-10 w-[35vw] ml-5 flex items-center justify-center rounded-md gap-2 px-3 bg-gray-800 hover:bg-gray-700 focus-within:w-[50vw] border-[1px] border-gray-700 transition-all duration-500">
+        <div className="h-10 w-full xl:w-[35vw] mx-5 flex items-center justify-center rounded-md gap-2 px-3 bg-gray-800 hover:bg-gray-700 xl:focus-within:w-[50vw] border-[1px] border-gray-700 transition-all duration-500">
           <FontAwesomeIcon icon={faSearch} className="text-gray-500 text-lg" />
           <input
             name="search"
@@ -72,9 +72,9 @@ const Navbar = ({
           />
         </div>
       ) : (
-        <div className="w-1/5"></div>
+        <div className="xl:w-1/5"></div>
       )}
-      <div className="w-2/5 flex justify-end">
+      <div className="xl:w-2/5 justify-end hidden xl:flex">
         {user != null ? (
           <>
             <a href="/" className="m-3 my-auto">

@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const AllArtists = () => {
   const [artists, setArtists] = useState([]);
-  const [loading, setLoading] = useState(true); // loading state
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchArtists = async () => {
@@ -36,7 +36,6 @@ const AllArtists = () => {
           }
         });
 
-        // Sort artists by number of songs (descending)
         const sortedArtists = Object.values(artistMap).sort(
           (a, b) => b.songs.length - a.songs.length
         );
@@ -46,7 +45,7 @@ const AllArtists = () => {
       } catch (error) {
         console.error('Failed to fetch artists:', error);
       } finally {
-        setLoading(false); // stop loading after fetch
+        setLoading(false);
       }
     };
     fetchArtists();

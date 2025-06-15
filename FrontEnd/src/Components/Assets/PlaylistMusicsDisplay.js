@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import PlaylistSongs from "./PlaylistSongs";
 import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 const PlaylistMusicsDisplay = ({
   setCurrentPlaylist,
@@ -44,12 +46,18 @@ const PlaylistMusicsDisplay = ({
     fetchPlaylistMusics();
   }, [id, user]);
 
-  if (loading)
+  if (loading) {
     return (
-      <div aria-live="polite" className="text-white p-4">
-        Loading...
+      <div className="flex flex-col justify-center items-center min-h-[40vh]">
+        <FontAwesomeIcon
+          icon={faSpinner}
+          spin
+          className="text-3xl text-white mb-3"
+        />
+        <span className="text-white text-xl">Loading Musics...</span>
       </div>
     );
+  }
   if (error)
     return (
       <div aria-live="assertive" className="text-red-500 p-4">

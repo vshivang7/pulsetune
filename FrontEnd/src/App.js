@@ -56,10 +56,10 @@ function App() {
         />
       </div>
       <div className="flex mt-16">
-        <div className="w-[16vw] fixed">
+        <div className="w-[16vw] fixed hidden xl:block">
           <Sidebar user={user} setMusics={setMusics} />
         </div>
-        <div className="w-[84vw] ml-auto">
+        <div className="w-[100vw] xl:w-[84vw] ml-auto">
           <Main
             setCurrentPlaylist={setCurrentPlaylist}
             currentPlaylist={currentPlaylist}

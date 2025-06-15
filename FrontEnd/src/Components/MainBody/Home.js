@@ -1,5 +1,7 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Card from '../Assets/Card.js';
+import React, { useEffect, useRef, useState } from "react";
+import Card from "../Assets/Card.js";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Home = ({
   setCurrentPlaylist,
@@ -13,19 +15,41 @@ const Home = ({
   search,
   user,
   setUser,
-  musics
+  musics,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
   const [filteredMusic, setFilteredMusic] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const filtered = musics.filter((music) =>
-      music.song_name.toLowerCase().includes(search.toLowerCase()) ||
-      music.artist.toLowerCase().includes(search.toLowerCase())
-    );
-    setFilteredMusic(filtered);
+    setLoading(true);
+
+    const timeout = setTimeout(() => {
+      const filtered = musics.filter(
+        (music) =>
+          music.song_name.toLowerCase().includes(search.toLowerCase()) ||
+          music.artist.toLowerCase().includes(search.toLowerCase())
+      );
+      setFilteredMusic(filtered);
+      setLoading(false);
+    }, 300);
+
+    return () => clearTimeout(timeout);
   }, [search, musics]);
+
+  if (loading) {
+    return (
+      <div className="flex flex-col justify-center items-center min-h-[40vh]">
+        <FontAwesomeIcon
+          icon={faSpinner}
+          spin
+          className="text-3xl text-white mb-3"
+        />
+        <span className="text-white text-xl">Loading Music...</span>
+      </div>
+    );
+  }
 
   return (
     <div className="grid gap-3 grid-cols-1 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 w-full mt-5">
