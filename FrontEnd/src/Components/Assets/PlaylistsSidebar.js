@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faArrowRight } from '@fortawesome/free-solid-svg-icons';
 
-const Playlist = ({ user, setMusics }) => {
+const PlaylistsSidebar = ({ user, setMusics }) => {
   return (
     <div className="mt-6">
       <div className="font-bold ml-2 flex justify-between items-center">
@@ -29,4 +29,4 @@ const Playlist = ({ user, setMusics }) => {
   );
 };
 
-export default Playlist;
+export default PlaylistsSidebar;

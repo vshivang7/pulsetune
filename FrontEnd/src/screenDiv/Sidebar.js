@@ -2,7 +2,7 @@ import React from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCompactDisc, faPlus } from '@fortawesome/free-solid-svg-icons';
 import { faSlack, faWpexplorer } from '@fortawesome/free-brands-svg-icons';
-import Playlist from '../Components/Assets/Playlist';
+import PlaylistsSidebar from '../Components/Assets/PlaylistsSidebar';
 import { Link } from 'react-router-dom';
 
 const Sidebar = ({ user, setMusics }) => {
@@ -26,7 +26,7 @@ const Sidebar = ({ user, setMusics }) => {
       {user && (
         <>
           <div>
-            <Playlist user={user} setMusics={setMusics} />
+            <PlaylistsSidebar user={user} setMusics={setMusics} />
           </div>
           <div className="mt-5 flex justify-center">
             <Link

@@ -1,13 +1,16 @@
-import React from "react";
+import React, { useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSoundcloud } from "@fortawesome/free-brands-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
 import {
   faArrowRightFromBracket,
+  faBars,
   faSearch,
 } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { toast } from "react-toastify";
+import MobileDropdown from "./MobileDropdown";
+import MobileSidebar from "../../screenDiv/MobileSidebar";
 
 const Navbar = ({
   user,
@@ -17,7 +20,9 @@ const Navbar = ({
   setMusics,
   musics,
   setCurrentMusic,
+  playlists,
 }) => {
+  const [sidebarOpen, setSidebarOpen] = useState(false);
   const navigate = useNavigate();
 
   const handleClick = () => {
@@ -39,12 +44,30 @@ const Navbar = ({
 
   return (
     <div className="h-16 flex items-center rounded-tl-xl rounded-tr-xl">
+      {/* mobile sidebar division */}
+      <div className="flex xl:hidden">
+        <MobileSidebar
+          open={sidebarOpen}
+          setOpen={setSidebarOpen}
+          playlists={playlists}
+          user={user}
+          setMusics={setMusics}
+        />
+        <button
+          className="p-2 text-white"
+          onClick={() => setSidebarOpen(true)}
+          aria-label="Open sidebar"
+        >
+          <FontAwesomeIcon icon={faBars} size="lg" />
+        </button>
+      </div>
+
       <Link
         to="/"
-        className="hidden xl:flex text-red-500 justify-center items-center w-1/5 h-[6vh]"
+        className="text-xs xl:text-sm flex text-red-500 justify-center items-center w-1/5 h-[6vh]"
       >
         <FontAwesomeIcon icon={faSoundcloud} size="3x" />
-        <div className="text-4xl caveat-logo">PulseTune</div>
+        <div className="hidden xl:flex text-4xl caveat-logo">PulseTune</div>
       </Link>
       <div className="w-1/5 hidden xl:block">
         <Link to="/" className="m-5">
@@ -98,6 +121,9 @@ const Navbar = ({
             </Link>
           </>
         )}
+      </div>
+      <div className="flex-1 flex justify-end xl:hidden">
+        <MobileDropdown user={user} handleLogOut={handleLogOut} />
       </div>
     </div>
   );
