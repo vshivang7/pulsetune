@@ -35,6 +35,20 @@ function App() {
     handlefetch();
   }, []);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      if (user) {
+        let res = await fetch("http://localhost:8080/fetchdata", {
+          method: "GET",
+          credentials: "include",
+        });
+        res = await res.json();
+        if (res.data) setMusics([...res.data]);
+      }
+    };
+    fetchData();
+  }, [user]);
+
   return (
     <div className="bg-black font-light text-white overflow-y-auto max-h-[100vh] scrollbar-hide select-none">
       <div className=" w-full mb-4 fixed bg-gray-900 border-b-[1px] border-gray-800 top-0 left-0 z-20">

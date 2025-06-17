@@ -16,26 +16,11 @@ const Home = ({
   user,
   setUser,
   musics,
-  setMusics,
 }) => {
   const [isPlaying, setIsPlaying] = useState(false);
   const audioRef = useRef(null);
   const [filteredMusic, setFilteredMusic] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (user) {
-        let res = await fetch("http://localhost:8080/fetchdata", {
-          method: "GET",
-          credentials: "include",
-        });
-        res = await res.json();
-        if (res.data) setMusics([...res.data]);
-      }
-    };
-    fetchData();
-  }, []);
 
   useEffect(() => {
     setLoading(true);
@@ -68,9 +53,45 @@ const Home = ({
 
   return (
     <>
-      {filteredMusic.length > 0 ? (
+      {search ? (
+        filteredMusic.length > 0 ? (
+          <div className="grid gap-3 grid-cols-1 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 w-full mt-5">
+            {filteredMusic.map((music) => (
+              <div className="m-2" key={music._id}>
+                <Card
+                  currentPlaylist={currentPlaylist}
+                  setCurrentPlaylist={setCurrentPlaylist}
+                  preQueue={preQueue}
+                  setPreQueue={setPreQueue}
+                  postQueue={postQueue}
+                  setPostQueue={setPostQueue}
+                  currentMusic={currentMusic}
+                  setCurrentMusic={setCurrentMusic}
+                  setUser={setUser}
+                  isPlaying={isPlaying}
+                  setIsPlaying={setIsPlaying}
+                  audioRef={audioRef}
+                  image={music.image}
+                  song_name={music.song_name}
+                  artist={music.artist}
+                  url={music.url}
+                  user={user}
+                  id={music._id}
+                />
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="flex items-center justify-center mt-5">
+            <div className="text-2xl flex items-center gap-2">
+              <FontAwesomeIcon icon={faSearch} />
+              No Song Found...
+            </div>
+          </div>
+        )
+      ) : (
         <div className="grid gap-3 grid-cols-1 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 w-full mt-5">
-          {filteredMusic.map((music) => (
+          {musics.map((music) => (
             <div className="m-2" key={music._id}>
               <Card
                 currentPlaylist={currentPlaylist}
@@ -94,13 +115,6 @@ const Home = ({
               />
             </div>
           ))}
-        </div>
-      ) : (
-        <div className="flex items-center justify-center mt-5">
-          <div className="text-2xl flex items-center gap-2">
-            <FontAwesomeIcon icon={faSearch} />
-            No Song Found...
-          </div>
         </div>
       )}
     </>

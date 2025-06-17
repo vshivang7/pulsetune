@@ -18,7 +18,6 @@ const Navbar = ({
   search,
   setSearch,
   setMusics,
-  musics,
   setCurrentMusic,
   playlists,
 }) => {
