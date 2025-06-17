@@ -28,7 +28,7 @@ const SignUp = () => {
     setError(null);
 
     if (user.password !== user.confirm_password) {
-      setError("Passwords do not match.");
+      setError("Password and confirm password are different.");
       return;
     }
 
@@ -89,7 +89,7 @@ const SignUp = () => {
                   onChange={handleChange}
                   pattern="^[a-zA-Z][a-zA-Z0-9_]{3,16}$"
                   className="hover:border-blue-400 peer border-2 focus:ring-2 [.validated_&]:peer-invalid:border-pink-600 [.validated_&]:peer-invalid:ring-2 [.validated_&]:peer-invalid:ring-pink-200 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                  placeholder="abc"
+                  placeholder="username"
                   required
                   aria-describedby="username-error"
                 />
@@ -141,7 +141,7 @@ const SignUp = () => {
                   autoComplete="new-password"
                   onChange={handleChange}
                   placeholder="••••••••"
-                  pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{6,}$"
+                  pattern="^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$"
                   className="hover:border-blue-400 peer border-2 focus:ring-2 [.validated_&]:peer-invalid:border-pink-600 [.validated_&]:peer-invalid:ring-2 [.validated_&]:peer-invalid:ring-pink-200 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-900 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                   required
                   aria-describedby="password-error"
@@ -151,7 +151,7 @@ const SignUp = () => {
                   className="mt-2 hidden [.validated_&]:peer-invalid:block text-pink-600"
                 >
                   Provide a password with letters, numbers, and optionally
-                  special characters (min 6 chars).
+                  special characters (min 8 chars).
                 </p>
               </div>
 

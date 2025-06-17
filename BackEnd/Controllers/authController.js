@@ -16,6 +16,10 @@ export const signup = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Email is already registered", 400));
   }
 
+  if(password.length<8) {
+    return next(new ErrorHandler("Password must be of 8 digits", 404));
+  }
+
   const user = new User({ username, email });
 
   try {

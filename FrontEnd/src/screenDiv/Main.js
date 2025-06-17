@@ -23,6 +23,7 @@ const Main = ({
   user,
   setUser,
   musics,
+  setMusics
 }) => {
   return (
     <div className="mx-5 mb-16">
@@ -45,6 +46,7 @@ const Main = ({
                   setUser={setUser}
                   musics={musics}
                   user={user}
+                  setMusics={setMusics}
                 />
               }
             />

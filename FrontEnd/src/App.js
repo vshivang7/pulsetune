@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import Navbar from "./Components/MainBody/Navbar.js";
 import Player from "./screenDiv/Player.js";
 import { ToastContainer } from "react-toastify";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -13,8 +15,10 @@ function App() {
   const [currentPlaylist, setCurrentPlaylist] = useState(1);
   const [preQueue, setPreQueue] = useState([]);
   const [postQueue, setPostQueue] = useState([]);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
+    setLoading(true);
     const handlefetch = async () => {
       try {
         let res = await fetch("http://localhost:8080/userExist", {
@@ -23,24 +27,13 @@ function App() {
         });
         let data = await res.json();
         if (data.user) setUser(data.user);
-      } catch (error) {}
+      } catch (error) {
+      } finally {
+        setLoading(false);
+      }
     };
     handlefetch();
   }, []);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      if (user) {
-        let res = await fetch("http://localhost:8080/fetchdata", {
-          method: "GET",
-          credentials: "include",
-        });
-        res = await res.json();
-        if(res.data) setMusics([...res.data]);
-      }
-    };
-    fetchData();
-  }, [user]);
 
   return (
     <div className="bg-black font-light text-white overflow-y-auto max-h-[100vh] scrollbar-hide select-none">
@@ -60,20 +53,32 @@ function App() {
           <Sidebar user={user} setMusics={setMusics} />
         </div>
         <div className="w-[100vw] xl:w-[84vw] ml-auto">
-          <Main
-            setCurrentPlaylist={setCurrentPlaylist}
-            currentPlaylist={currentPlaylist}
-            preQueue={preQueue}
-            setPreQueue={setPreQueue}
-            postQueue={postQueue}
-            setPostQueue={setPostQueue}
-            currentMusic={currentMusic}
-            setCurrentMusic={setCurrentMusic}
-            search={search}
-            user={user}
-            setUser={setUser}
-            musics={musics}
-          />
+          {loading ? (
+            <div className="flex flex-col justify-center items-center min-h-[40vh]">
+              <FontAwesomeIcon
+                icon={faSpinner}
+                spin
+                className="text-3xl text-white mb-3"
+              />
+              <span className="text-white text-xl">Loading...</span>
+            </div>
+          ) : (
+            <Main
+              setCurrentPlaylist={setCurrentPlaylist}
+              currentPlaylist={currentPlaylist}
+              preQueue={preQueue}
+              setPreQueue={setPreQueue}
+              postQueue={postQueue}
+              setPostQueue={setPostQueue}
+              currentMusic={currentMusic}
+              setCurrentMusic={setCurrentMusic}
+              search={search}
+              user={user}
+              setUser={setUser}
+              musics={musics}
+              setMusics={setMusics}
+            />
+          )}
         </div>
       </div>
       {currentMusic == null || user == null ? (

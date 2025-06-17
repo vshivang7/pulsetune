@@ -36,7 +36,9 @@ const Navbar = ({
       });
       setCurrentMusic(null);
       setUser(null);
+      setSearch("");
       toast.success(response.data.message);
+      navigate("/login")
     } catch (err) {
       toast.error(err.response.data.message);
     }
@@ -70,7 +72,7 @@ const Navbar = ({
         <div className="hidden xl:flex text-4xl caveat-logo">PulseTune</div>
       </Link>
       <div className="w-1/5 hidden xl:block">
-        <Link to="/" className="m-5">
+        <Link to="/" className="m-5" onClick={() => setSearch("")}>
           MUSIC
         </Link>
         <Link to="/artists" className="m-5">
