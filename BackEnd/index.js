@@ -52,6 +52,10 @@ passport.use(new localStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
 
+app.get("/", (req, res) => {
+  res.send("✅ Backend is running and accessible!");
+});
+
 // Routes
 app.use("/playlist", playlistRoute);
 app.use("/", homeRoutes);

@@ -45,7 +45,6 @@ export const login = catchAsyncErrors((req, res, next) => {
 });
 
 export const userExist = catchAsyncErrors((req, res) => {
-  console.log("Request came for userExist");
   if (req.isAuthenticated()) {
     return res.status(200).json({
       success: true,
