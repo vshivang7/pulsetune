@@ -36,7 +36,7 @@ const sessionOptions = {
     httpOnly: true,
     secure: true,
     sameSite: "none",
-    domain: "pulsetune-backend.onrender.com"
+    domain: "pulsetune.onrender.com"
   },
 };
 
