@@ -36,10 +36,9 @@ const sessionOptions = {
     httpOnly: true,
     secure: true,
     sameSite: "none",
-    domain: "pulsetune.onrender.com"
+    domain: ".onrender.com",
   },
 };
-
 
 // Middlewares
 app.use(cookieParser());
