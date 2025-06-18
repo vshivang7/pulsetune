@@ -16,7 +16,7 @@ export const signup = catchAsyncErrors(async (req, res, next) => {
     return next(new ErrorHandler("Email is already registered", 400));
   }
 
-  if(password.length<8) {
+  if (password.length < 8) {
     return next(new ErrorHandler("Password must be of 8 digits", 404));
   }
 
@@ -45,6 +45,7 @@ export const login = catchAsyncErrors((req, res, next) => {
 });
 
 export const userExist = catchAsyncErrors((req, res) => {
+  console.log("Request came for userExist");
   if (req.isAuthenticated()) {
     return res.status(200).json({
       success: true,
