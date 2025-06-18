@@ -14,7 +14,7 @@ import MongoStore from "connect-mongo";
 
 config();
 const app = express();
-const port = process.env.PORT;
+const port = process.env.PORT||8080;
 
 const sessionOptions = {
   secret: process.env.SESSION_CODE,
