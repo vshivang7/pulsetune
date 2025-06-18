@@ -12,7 +12,6 @@ import ErrorHandler from "../middlewares/error.js";
 
 const router = express.Router();
 
-router.get("/", (req, res) => console.log(req.user));
 router.post("/signup", signup);
 router.post("/login", (req, res, next) => {
   passport.authenticate("local", (err, user, info) => {

@@ -14,7 +14,7 @@ import MongoStore from "connect-mongo";
 
 config();
 const app = express();
-const port = process.env.PORT||8080;
+const port = process.env.PORT || 8080;
 
 const sessionOptions = {
   secret: process.env.SESSION_CODE,
@@ -23,13 +23,13 @@ const sessionOptions = {
   store: MongoStore.create({
     mongoUrl: process.env.MONGO_URL, // same URL as your connectDB
     ttl: 14 * 24 * 60 * 60, // session expiry (optional)
-    autoRemove: 'native', // auto-remove expired sessions
+    autoRemove: "native", // auto-remove expired sessions
   }),
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
     httpOnly: true,
     secure: process.env.NODE_ENV === "production",
-    sameSite: "lax",
+    sameSite: "none",
   },
 };
 
