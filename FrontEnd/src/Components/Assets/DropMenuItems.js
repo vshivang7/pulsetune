@@ -21,7 +21,7 @@ const DropMenuItems = ({
     setLoading(true);
     try {
       const res = await axios.post(
-        `http://localhost:8080/playlist/${id}`,
+        `https://pulsetune-backend.onrender.com/playlist/${id}`,
         musicInfo,
         {
           headers: {

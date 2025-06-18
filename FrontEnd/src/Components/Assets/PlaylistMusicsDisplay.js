@@ -27,7 +27,7 @@ const PlaylistMusicsDisplay = ({
       setError(null);
       try {
         const response = await axios.get(
-          `http://localhost:8080/playlist/${id}`,
+          `https://pulsetune-backend.onrender.com/${id}`,
           {
             headers: {
               "Content-Type": "application/json",

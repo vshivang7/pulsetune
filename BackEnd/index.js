@@ -10,6 +10,7 @@ import User from "./Models/userSchema.js";
 import playlistRoute from "./Routes/playlist.js";
 import homeRoutes from "./Routes/authRoutes.js";
 import { errorMiddleware } from "./middlewares/error.js";
+import MongoStore from "connect-mongo";
 
 config();
 const app = express();
@@ -19,6 +20,17 @@ const sessionOptions = {
   secret: process.env.SESSION_CODE,
   resave: false,
   saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URL, // same URL as your connectDB
+    ttl: 14 * 24 * 60 * 60, // session expiry (optional)
+    autoRemove: 'native', // auto-remove expired sessions
+  }),
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "lax",
+  },
 };
 
 const corsOptions = {

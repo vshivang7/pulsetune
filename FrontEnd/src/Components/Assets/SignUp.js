@@ -34,7 +34,7 @@ const SignUp = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:8080/signup",
+        "https://pulsetune-backend.onrender.com/signup",
         {
           username: user.username,
           email: user.email,

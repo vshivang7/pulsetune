@@ -21,7 +21,7 @@ const PlaylistSongs = ({ setCurrentPlaylist, playlistMusics, preQueue, setPreQue
         setPreQueue(prev => prev.filter(elem => elem._id !== music._id));
         setPostQueue(prev => prev.filter(elem => elem._id !== music._id));
       }
-      const response = await axios.delete(`http://localhost:8080/playlist/${playlistID}/music/${music._id}`, {
+      const response = await axios.delete(`https://pulsetune-backend.onrender.com/playlist/${playlistID}/music/${music._id}`, {
         withCredentials: true,
       });
       setUser(response.data.user);

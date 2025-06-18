@@ -30,7 +30,7 @@ const Navbar = ({
 
   const handleLogOut = async () => {
     try {
-      let response = await axios.get("http://localhost:8080/logout", {
+      let response = await axios.get("https://pulsetune-backend.onrender.com/logout", {
         withCredentials: true,
       });
       setCurrentMusic(null);

@@ -21,7 +21,7 @@ const LoginForm = ({ user, setUser }) => {
     setError("");
 
     try {
-      const res = await axios.post("http://localhost:8080/login", data, {
+      const res = await axios.post("https://pulsetune-backend.onrender.com/login", data, {
         headers: {
           "Content-Type": "application/json",
         },

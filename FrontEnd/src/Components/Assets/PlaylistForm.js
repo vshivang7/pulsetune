@@ -9,7 +9,7 @@ const PlaylistForm = ({ user, setUser }) => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/playlist/new', { name: name.toLowerCase() },{
+      const response = await axios.post('https://pulsetune-backend.onrender.com/playlist/new', { name: name.toLowerCase() },{
         headers: {
           'Content-Type': 'application/json',
         },
