@@ -16,6 +16,12 @@ config();
 const app = express();
 const port = process.env.PORT || 8080;
 
+const corsOptions = {
+  origin: process.env.FRONTEND_URL,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  credentials: true,
+};
+
 const sessionOptions = {
   secret: process.env.SESSION_CODE,
   resave: false,
@@ -27,17 +33,13 @@ const sessionOptions = {
   }),
   cookie: {
     maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
-    // httpOnly: true,
+    httpOnly: true,
     secure: true,
     sameSite: "none",
+    domain: "pulsetune-backend.onrender.com"
   },
 };
 
-const corsOptions = {
-  origin: process.env.FRONTEND_URL,
-  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
-  credentials: true,
-};
 
 // Middlewares
 app.use(cookieParser());
