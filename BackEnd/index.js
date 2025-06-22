@@ -19,6 +19,10 @@ const sessionOptions = {
   secret: process.env.SESSION_CODE,
   resave: false,
   saveUninitialized: false,
+  cookie: {
+    sameSite: "none",
+    secure: true,
+  },
 };
 
 const corsOptions = {

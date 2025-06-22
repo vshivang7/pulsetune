@@ -42,6 +42,7 @@ const SignUp = () => {
         },
         {
           headers: { "Content-Type": "application/json" },
+          withCredentials: true,
         }
       );
       toast.success(response.data.message);
