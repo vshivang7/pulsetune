@@ -26,7 +26,7 @@ const sessionOptions = {
 };
 
 const corsOptions = {
-  origin: process.env.FRONTEND_URL,
+  origin: "https://pulsetune-ayn4.onrender.com",
   methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
   credentials: true,
 };
