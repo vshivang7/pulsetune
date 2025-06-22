@@ -21,7 +21,7 @@ function App() {
     setLoading(true);
     const handlefetch = async () => {
       try {
-        let res = await fetch("http://localhost:8080/userExist", {
+        let res = await fetch(`${process.env.REACT_APP_API_URL}/userExist`, {
           method: "GET",
           credentials: "include",
         });
@@ -38,7 +38,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       if (user) {
-        let res = await fetch("http://localhost:8080/fetchdata", {
+        let res = await fetch(`${process.env.REACT_APP_API_URL}/fetchdata`, {
           method: "GET",
           credentials: "include",
         });

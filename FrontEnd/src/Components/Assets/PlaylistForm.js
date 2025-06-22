@@ -9,7 +9,7 @@ const PlaylistForm = ({ user, setUser }) => {
 
   const handleSubmit = async () => {
     try {
-      const response = await axios.post('http://localhost:8080/playlist/new', { name: name.toLowerCase() },{
+      const response = await axios.post(`${process.env.REACT_APP_API_URL}/playlist/new`, { name: name.toLowerCase() },{
         headers: {
           'Content-Type': 'application/json',
         },

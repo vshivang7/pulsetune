@@ -11,7 +11,7 @@ const AllArtists = () => {
   useEffect(() => {
     const fetchArtists = async () => {
       try {
-        const res = await axios.get('http://localhost:8080/fetchdata', {
+        const res = await axios.get(`${process.env.REACT_APP_API_URL}/fetchdata`, {
           withCredentials: true,
         });
         const data = res.data;

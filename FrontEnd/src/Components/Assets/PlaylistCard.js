@@ -8,7 +8,7 @@ import { faTrash, faEye } from '@fortawesome/free-solid-svg-icons';
 const PlaylistCard = ({ playlist, setUser }) => {
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(`http://localhost:8080/playlist/${playlist._id}`, {
+      const response = await axios.delete(`${process.env.REACT_APP_API_URL}/playlist/${playlist._id}`, {
         withCredentials: true,
       });
       setUser(response.data.user);

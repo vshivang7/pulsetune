@@ -27,7 +27,7 @@ const PlaylistMusicsDisplay = ({
       setError(null);
       try {
         const response = await axios.get(
-          `http://localhost:8080/playlist/${id}`,
+          `${process.env.REACT_APP_API_URL}/playlist/${id}`,
           {
             headers: {
               "Content-Type": "application/json",

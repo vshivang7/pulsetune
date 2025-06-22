@@ -21,7 +21,7 @@ const DropMenuItems = ({
     setLoading(true);
     try {
       const res = await axios.post(
-        `http://localhost:8080/playlist/${id}`,
+        `${process.env.REACT_APP_API_URL}/playlist/${id}`,
         musicInfo,
         {
           headers: {
