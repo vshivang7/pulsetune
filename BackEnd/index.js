@@ -37,6 +37,7 @@ const corsOptions = {
 app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use(express.json());
+app.set('trust proxy', 1);
 app.use(session(sessionOptions));
 
 // Passport Config
