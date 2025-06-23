@@ -21,7 +21,7 @@ const LoginForm = ({ user, setUser }) => {
     setError("");
 
     try {
-      const res = await axios.post("https://pulsetune-backend.onrender.com/login", data, {
+      const res = await axios.post("https://pulsetune-backend.vercel.app/login", data, {
         headers: {
           "Content-Type": "application/json",
         },

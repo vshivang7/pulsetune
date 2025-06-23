@@ -21,7 +21,7 @@ function App() {
     setLoading(true);
     const handlefetch = async () => {
       try {
-        let res = await fetch("https://pulsetune-backend.onrender.com/userExist", {
+        let res = await fetch("https://pulsetune-backend.vercel.app/userExist", {
           method: "GET",
           credentials: "include",
         });
@@ -38,7 +38,7 @@ function App() {
   useEffect(() => {
     const fetchData = async () => {
       if (user) {
-        let res = await fetch("https://pulsetune-backend.onrender.com/fetchdata", {
+        let res = await fetch("https://pulsetune-backend.vercel.app/fetchdata", {
           method: "GET",
           credentials: "include",
         });
