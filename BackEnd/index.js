@@ -27,12 +27,12 @@ const sessionOptions = {
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: process.env.MONGO_URL, // same URL as your connectDB
-    ttl: 14 * 24 * 60 * 60, // session expiry (optional)
-    autoRemove: "native", // auto-remove expired sessions
+    mongoUrl: process.env.MONGO_URL,
+    ttl: 14 * 24 * 60 * 60,
+    autoRemove: "native", 
   }),
   cookie: {
-    maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
+    maxAge: 1000 * 60 * 60 * 24 * 7, 
     httpOnly: true,
     secure: true,
     sameSite: 'none',
