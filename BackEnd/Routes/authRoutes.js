@@ -29,5 +29,9 @@ router.post("/login", (req, res, next) => {
 router.get("/userExist", isAuthenticated, userExist);
 router.get("/logout", isAuthenticated, logout);
 router.get("/fetchData", isAuthenticated, fetchMusicData);
+router.get("/test-session", (req, res) => {
+  req.session.test = "hello";
+  res.send("Session set");
+});
 
 export default router;
