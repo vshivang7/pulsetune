@@ -10,6 +10,7 @@ import User from "./Models/userSchema.js";
 import playlistRoute from "./Routes/playlist.js";
 import homeRoutes from "./Routes/authRoutes.js";
 import { errorMiddleware } from "./middlewares/error.js";
+import MongoStore from "connect-mongo";
 
 config();
 const app = express();
@@ -23,6 +24,7 @@ const sessionOptions = {
     sameSite: "none",
     secure: true,
   },
+  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
 };
 
 const corsOptions = {
