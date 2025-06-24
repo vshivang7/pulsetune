@@ -21,7 +21,7 @@ const sessionOptions = {
   resave: false,
   saveUninitialized: false,
   store: MongoStore.create({
-    mongoUrl: process.env.MONGO_URL,
+    mongoUrl: process.env.MONGO_URI,
     ttl: 14 * 24 * 60 * 60,
     autoRemove: "native", 
   }),
