@@ -20,11 +20,17 @@ const sessionOptions = {
   secret: process.env.SESSION_CODE,
   resave: false,
   saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URL,
+    ttl: 14 * 24 * 60 * 60,
+    autoRemove: "native", 
+  }),
   cookie: {
-    sameSite: "none",
+    maxAge: 1000 * 60 * 60 * 24 * 7, 
+    httpOnly: true,
     secure: true,
+    sameSite: 'none',
   },
-  store: MongoStore.create({ mongoUrl: process.env.MONGO_URI }),
 };
 
 const corsOptions = {
