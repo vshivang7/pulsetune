@@ -115,7 +115,7 @@ const Player = ({
   }
 
   return (
-    <div className="flex flex-col border-t-[1px] border-gray-800 w-full bottom-0 fixed bg-gray-900">
+    <div className="flex flex-col border-t-[1px] border-gray-800 w-full bottom-0 fixed bg-gray-900 z-20">
       {/* Slider */}
       <div className="w-full flex flex-col items-center px-2">
         <input
