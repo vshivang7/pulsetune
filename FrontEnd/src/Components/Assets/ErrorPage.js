@@ -5,7 +5,7 @@ const ErrorPage = () => {
   const navigate = useNavigate()
 
   return (
-    <div className="w-[75vw] h-[75vh] flex items-center justify-center bg-black px-4">
+    <div className="w-full mt-20 flex items-center justify-center bg-black px-4">
       <div className="text-center">
         <h1 className="text-5xl md:text-6xl font-bold text-gray-300">404</h1>
         <p className="text-lg md:text-xl mt-4 text-gray-200 font-medium">
