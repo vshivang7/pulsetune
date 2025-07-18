@@ -1,5 +1,7 @@
 import connectDb from "./connectDb.js"
 import Music from "./Models/musicSchema.js"
+import { config } from "dotenv";
+config();
 const fetchData = async () => {
     let response = await fetch(`https://v1.nocodeapi.com/indiangamer/spotify/WqXUvcbvmwFtILiI/search?q=billie&type=track`)
     let data = await response.json();
@@ -18,8 +20,8 @@ const saveMusic = async() => {
             artist: data.artists[0].name,
             url: data.preview_url,
         })
-        console.log(m);
         await m.save();
+        console.log("Saved: ", m.song_name);
     }
 }
 
