@@ -1,24 +1,24 @@
-const mongoose = require('mongoose');
-const passportLocalMongoose = require('passport-local-mongoose');
-const Music = require('./musicSchema');
+import mongoose from "mongoose";
+import passportLocalMongoose from "passport-local-mongoose";
 
 const userSchema = new mongoose.Schema({
-    email: {
-      type: String,
-      required: true,
-      unique: true,
-    },
-    playlists: [{
-      name : {
+  email: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  playlists: [
+    {
+      name: {
         type: String,
         required: true,
       },
-      list: [{type: mongoose.Schema.Types.ObjectId, ref: 'Music'}]
-    }],
-  });
+      list: [{ type: mongoose.Schema.Types.ObjectId, ref: "Music" }],
+    },
+  ],
+});
 
-  userSchema.plugin(passportLocalMongoose);
+userSchema.plugin(passportLocalMongoose);
 
-  const User = mongoose.model('User', userSchema);
-
-  module.exports = User;
+const User = mongoose.model("User", userSchema);
+export default User;

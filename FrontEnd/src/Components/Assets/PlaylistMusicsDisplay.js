@@ -1,54 +1,95 @@
-import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
-import PlaylistSongs from './PlaylistSongs';
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import PlaylistSongs from "./PlaylistSongs";
+import axios from "axios";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
-const PlaylistMusicsDisplay = () => {
-  const { id } = useParams(); // Extract playlist ID from URL
-  const [playlistMusics, setPlaylistMusics] = useState([]); // State for music array
-  const [loading, setLoading] = useState(true); // State for loading indicator
-  const [error, setError] = useState(null); // State for errors
+const PlaylistMusicsDisplay = ({
+  setCurrentPlaylist,
+  preQueue,
+  setPreQueue,
+  postQueue,
+  setPostQueue,
+  user,
+  setUser,
+  currentMusic,
+  setCurrentMusic,
+}) => {
+  const { id } = useParams();
+  const [playlistMusics, setPlaylistMusics] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  // Fetch playlist musics from backend
   useEffect(() => {
     const fetchPlaylistMusics = async () => {
+      setLoading(true);
+      setError(null);
       try {
-        const response = await fetch(`http://localhost:8080/playlist/${id}`, {
-            credentials:'include'
-        });
-        if (!response.ok) {
-          throw new Error(`Failed to fetch playlist musics: ${response.status}`);
-        }
-        const data = await response.json();
-        setPlaylistMusics(data); // Update state with fetched data
-        setLoading(false); // Set loading to false
+        const response = await axios.get(
+          `https://pulsetune-backend.onrender.com/${id}`,
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            withCredentials: true,
+          }
+        );
+        setPlaylistMusics(response.data.result);
       } catch (err) {
-        setError(err.message);
-        setLoading(false); // Ensure loading stops even on error
+        setError(err.response.data.message);
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchPlaylistMusics();
-  }, [id]);
+  }, [id, user]);
 
-  // Render loading, error, or playlist music
-  if (loading) return <div>Loading...</div>;
-  if (error) return <div>Error: {error}</div>;
+  if (loading) {
+    return (
+      <div className="flex flex-col justify-center items-center min-h-[40vh]">
+        <FontAwesomeIcon
+          icon={faSpinner}
+          spin
+          className="text-3xl text-white mb-3"
+        />
+        <span className="text-white text-xl">Loading Musics...</span>
+      </div>
+    );
+  }
+  if (error)
+    return (
+      <div aria-live="assertive" className="text-red-500 p-4">
+        Error: {error}
+      </div>
+    );
 
   return (
-    <div className='mt-9'>
-      <h1>Playlist Musics</h1>
+    <div className="mt-9">
+      <h1 className="text-2xl mb-5">Playlist Songs</h1>
       {playlistMusics.length === 0 ? (
         <div>No musics found in this playlist.</div>
       ) : (
-        <ul className='mt-10'>
+        <div className="grid gap-3 grid-cols-1 xl:grid-cols-6 lg:grid-cols-5 md:grid-cols-4 sm:grid-cols-3 xs:grid-cols-2 w-full mt-5">
           {playlistMusics.map((music) => (
-            <li key={music._id} className="mb-4">
-                <PlaylistSongs music={music}/>
-              {/* <h3 className="text-lg font-bold">{music.song_name}</h3>
-              <p className="text-sm">Artist: {music.artist}</p> */}
-            </li>
+            <div key={music._id} className="m-2">
+              <PlaylistSongs
+                setCurrentPlaylist={setCurrentPlaylist}
+                playlistMusics={playlistMusics}
+                preQueue={preQueue}
+                setPreQueue={setPreQueue}
+                postQueue={postQueue}
+                setPostQueue={setPostQueue}
+                music={music}
+                playlistID={id}
+                setUser={setUser}
+                currentMusic={currentMusic}
+                setCurrentMusic={setCurrentMusic}
+              />
+            </div>
           ))}
-        </ul>
+        </div>
       )}
     </div>
   );

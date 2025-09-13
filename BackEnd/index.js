@@ -1,50 +1,70 @@
-const express = require('express');
-const app = express();
-const port = 8080;
-const cors = require('cors')
-const connectdb = require('./connectDb');
-const homeRoutes  = require('./Routes/home.js');
-const playistRoute = require('./Routes/playlist.js');
-const session = require('express-session')
-const passport = require('passport');
-const localStrategy = require('passport-local');
-const User = require('./Models/userSchema.js');
-const cookieParser = require('cookie-parser');
- 
-const sessionOptions = {
-    secret: 'SUPERSECRETCODE',
-    resave: false,
-    saveUninitialized: false,
-}
-const corsOptions = {
-    origin: 'http://localhost:3000',
-    method: 'GET, POST, PUT, DELETE, PATCH',
-    credentials: true,
-}
+import express from "express";
+import cors from "cors";
+import session from "express-session";
+import passport from "passport";
+import localStrategy from "passport-local";
+import cookieParser from "cookie-parser";
+import { config } from "dotenv";
+import connectDB from "./connectDb.js";
+import User from "./Models/userSchema.js";
+import playlistRoute from "./Routes/playlist.js";
+import homeRoutes from "./Routes/authRoutes.js";
+import { errorMiddleware } from "./middlewares/error.js";
+import MongoStore from "connect-mongo";
 
+config();
+const app = express();
+const port = process.env.PORT || 8080;
+
+const corsOptions = {
+  origin: process.env.FRONTEND_URL,
+  methods: ["GET", "POST", "PUT", "DELETE", "PATCH"],
+  credentials: true,
+};
+
+const sessionOptions = {
+  secret: process.env.SESSION_CODE,
+  resave: false,
+  saveUninitialized: false,
+  store: MongoStore.create({
+    mongoUrl: process.env.MONGO_URL,
+    ttl: 14 * 24 * 60 * 60,
+    autoRemove: "native", 
+  }),
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24 * 7, 
+    httpOnly: true,
+    secure: true,
+    sameSite: 'none',
+  },
+};
+
+// Middlewares
 app.use(cookieParser());
 app.use(cors(corsOptions));
 app.use(express.json());
 app.use(session(sessionOptions));
 
+// Passport Config
 app.use(passport.initialize());
 app.use(passport.session());
 passport.use(new localStrategy(User.authenticate()));
-
 passport.serializeUser(User.serializeUser());
-  
-  passport.deserializeUser(User.deserializeUser());
+passport.deserializeUser(User.deserializeUser());
 
-app.use("/playlist", playistRoute);
+app.get("/", (req, res) => {
+  res.send("✅ Backend is running and accessible!");
+});
+
+// Routes
+app.use("/playlist", playlistRoute);
 app.use("/", homeRoutes);
 
-connectdb().then(() => {
-    console.log("Database Connected");
-}).catch((err) => {
-    console.log(err);
-})
+app.use(errorMiddleware);
 
+// DB + Server Start
+await connectDB();
 
 app.listen(port, () => {
-    console.log("Server started......");
-})
+  console.log(`Server started on port ${port}...`);
+});

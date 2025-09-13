@@ -1,16 +1,15 @@
-const connectdb = require('./connectDb');
-const Music = require('./Models/musicSchema');
+import connectDb from "./connectDb.js"
+import Music from "./Models/musicSchema.js"
 const fetchData = async () => {
-    let response = await fetch(`https://v1.nocodeapi.com/vshivang/spotify/dTkOvSBZSnjjGDpb/search?q=sunny&type=track`)
+    let response = await fetch(`https://v1.nocodeapi.com/indiangamer/spotify/WqXUvcbvmwFtILiI/search?q=billie&type=track`)
     let data = await response.json();
     return data;
 }
 
 const saveMusic = async() => {
-    await connectdb();
+    await connectDb();
     let datas = await fetchData();
     datas = datas.tracks.items;
-    // console.log(datas);
     for(let data of datas) {
         if(data.preview_url==null) continue;
         let m = new Music({
